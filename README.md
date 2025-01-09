@@ -1,22 +1,35 @@
-# Project Title
+# Walk South West
 
 ## Overview
 
-[Briefly describe the purpose of the project, the problem it solves, and its value to users.]
+An app to keep track of how much of the South West coastal path the user has walked.
 
 ## UX Design Process
 
-- **Link to User Stories in GitHub Projects:**
-  - [Add a link to the GitHub Projects kanban board.]
+- **User Stories:**
+  - [Trello Kanban Board](https://trello.com/invite/b/6745eaca0a76ea45ef8826d6/ATTId728c7a61a787b417503eafe40cf68feC19FDF22/wsw)
 - **Wireframes:**
   - [Attach or link to accessible wireframes used in the design process, ensuring high colour contrast and alt text for visual elements.]
   - [Explain the rationale behind the layout and design choices, focusing on usability and accessibility for all users, including those using assistive technologies.]
 - **Design Rationale:**
-  - [Explain key design decisions, such as layout, colour scheme, typography, and how accessibility guidelines (e.g., WCAG) were integrated.]
-  - [Highlight any considerations made for users with disabilities, such as screen reader support.]
-- **Reasoning For Any Final Changes:**
-  - [Summarise significant changes made to the design during development and the reasons behind them.]
-  - [Reflect on how these changes enhance inclusivity and accessibility.]
+  #### Colour Pallete
+  The inital colour scheme from an image of the SoutWest coastal path using [coolors.co](https://coolors.co/e84610-009fe3-4a4a4f-445261-d63649-e6ecf0-000000) to generate my colour palette:
+
+![screenshot](assets/images/palette.png)
+
+Tints and shades generated using a [generator](https://maketintsandshades.com/)
+
+It became apparent that an accent/complemetory colour was necessary that would stand out for some elements - I choose a yellow to reflect the gorse that grows along the path (#ffd60a)
+
+#### Typography
+
+Fonts are from google and hosted locally for performance gains;
+
+- Headings/accent - [Forum](https://fonts.google.com/specimen/Forum) a classic serif font
+
+- Base text - [Lato](https://fonts.google.com/specimen/Lato) a text that is easy to read and
+
+I used [FontSquirrel](https://www.fontsquirrel.com/) to convert to web fonts.
 
 ## Key Features
 
@@ -27,7 +40,7 @@
 
 ## Deployment
 
-- **Platform:** [Platform used, e.g., Heroku, AWS, etc.]
+- **Platform:** Heroku
 - **High-Level Deployment Steps:**
   1. [Step 1]
   2. [Step 2]
@@ -46,8 +59,8 @@
 (Highlight how prompts, such as reverse, question-and-answer or multi-step, were used to support learners with SEND or ALN where relevant.)
 
 - **Aministration/Repetitive tasks:**
-- Reflection: Strategic use of AI allowed for rapid prototyping, with minor adjustments for alignment with project goals.
-- Examples: Reverse prompts for alternative code solutions and question-answer prompts for resolving specific challenges.
+- Reflection: Strategic use of AI allowed me to perform admin tasks quicky and efficiently
+- Examples: I used AI to assist with creation of user stories and then to convert them to a CSV file. AI assisted with writing a python script using Trello's Rest API that created a populated a trello card with description and checklist for each user story
 - **Code Creation:**
   - Reflection: Strategic use of AI allowed for rapid prototyping, with minor adjustments for alignment with project goals.
   - Examples: Reverse prompts for alternative code solutions and question-answer prompts for resolving specific challenges.

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 class Route(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="user_routes")
     date = models.DateField()
     start_point = models.CharField(max_length=100)
     end_point = models.CharField(max_length=100)
@@ -13,4 +15,5 @@ class Route(models.Model):
     time_taken = models.TimeField()
     route_img = models.ImageField(upload_to="static/images/")
     comments = models.TextField()
-   
+
+

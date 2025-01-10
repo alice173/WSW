@@ -1,5 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from walks.models import Walk
+from routes.models import Route
 
-
-# Create your views here.
+def index(request):
+    walks = Walk.objects.all()
+    routes = Route.objects.all()
+    context = {
+        'walks': walks,
+        'routes': routes,
+    }
+    return render(request, 'index.html', context)

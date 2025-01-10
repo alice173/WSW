@@ -1,4 +1,5 @@
-from django.db import models
+
+from django.contrib.gis.db import models
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -18,7 +19,6 @@ class Walk(models.Model):
   related_name="walk_difficulty_level", null=True, blank=True)
   elevation_gain = models.IntegerField()
   distance = models.FloatField(default=0)
-  map_img = models.ImageField(upload_to="static/images/", null=True, blank=True)
   content = models.TextField()
   status = models.IntegerField(choices=STATUS, default=0)
 

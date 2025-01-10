@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Views Part 1</title>
-  </head>
+<!--prettier-ignore-->
+{% extends 'base.html' %} 
 
-  <body>
-    <h1>Posts list</h1>
-    {% for item in walks %}
-    <h2>{{item.title}}</h2>
-    <p>{{item.content}}</p>
-    <p>Author: {{item.distance}}</p>
-    {% endfor %}
-  </body>
-</html>
+{% block content %}
+
+<h1>Posts list</h1>
+{% for item in walks %}
+<h2>{{item.title}}</h2>
+<p>{{item.content}}</p>
+<p>Author: {{item.distance}}</p>
+{% endfor %} {% endblock %}

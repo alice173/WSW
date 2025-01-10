@@ -1,17 +1,16 @@
+.wrapper {
+  min-width: 1280px;
+  padding-inline: 2rem;
+}
+
 .flex {
   display: flex;
-
   gap: var(--gap, 1rem);
 }
 
 .grid {
   display: grid;
   gap: var(--gap, 1rem);
-}
-
-.wrapper {
-  margin-inline: auto;
-  width: min(1280px, 100% - 4rem);
 }
 
 .sr-only {

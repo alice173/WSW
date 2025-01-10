@@ -16,4 +16,5 @@ class Route(models.Model):
     route_img = models.ImageField(upload_to="static/images/")
     comments = models.TextField()
 
-
+    def __str__(self):
+        return self.title

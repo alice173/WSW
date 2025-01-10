@@ -1,0 +1,76 @@
+{
+  "walks": [
+    {
+      "title": "Hartland Quay to Bude",
+      "distance": 15,
+      "elevation_gain": 4000,
+      "content": "This dramatic section of North Devon coastline features constant steep ascents and descents. Walkers traverse deep, wooded valleys and high cliffs, passing the remote church at Morwenstow and several shipwreck sites. The path's severe undulations and exposed nature make this a challenging route best attempted by experienced hikers."
+    },
+    {
+      "title": "Lulworth Cove to Weymouth",
+      "distance": 11,
+      "elevation_gain": 1800,
+      "content": "This spectacular stretch of the Jurassic Coast takes in the iconic Durdle Door limestone arch, the abandoned village of Tyneham (when army ranges are open), and the sweeping arc of Weymouth Bay. The path alternates between challenging clifftop sections and easier valley walking."
+    },
+    {
+      "title": "Padstow to Newquay",
+      "distance": 14,
+      "elevation_gain": 1200,
+      "content": "This gentler route along North Cornwall's coastline passes through Porthcothan, Mawgan Porth, and Watergate Bay, offering plenty of swimming opportunities in summer. The path mainly follows low cliffs and crosses several beautiful beaches, making it ideal for less experienced hikers."
+    },
+    {
+      "title": "St Ives to Zennor",
+      "distance": 7,
+      "elevation_gain": 1900,
+      "content": "This deceptively short section features granite cliffs and a boulder-strewn path demanding careful attention. The profound isolation and spectacular views of the Atlantic make this one of the most memorable sections, requiring good fitness and careful timing to avoid being caught out by weather changes."
+    },
+    {
+      "title": "Beer to Sidmouth",
+      "distance": 12,
+      "elevation_gain": 2200,
+      "content": "This stretch passes through the historic fishing village of Branscombe, crosses several landslips, and traverses the distinctive red cliffs of East Devon. The path offers a mix of woodland, open clifftop, and beach walking, with several steep sections providing excellent viewpoints across Lyme Bay."
+    },
+    {
+      "title": "Axmouth to Lyme Regis",
+      "distance": 7.5,
+      "elevation_gain": 1400,
+      "content": "This unique section takes you through the Undercliffs National Nature Reserve, created by one of the largest landslips in British history. The path winds through what feels like a tropical jungle, with dense vegetation, twisted trees, and glimpses of the sea through the canopy. This wild and atmospheric route requires careful navigation as the terrain can be muddy and slippery, especially after rain. The isolation and unusual landscape make this one of the most distinctive sections of the entire Coast Path."
+    },
+    {
+      "title": "Port Isaac to Tintagel",
+      "distance": 9,
+      "elevation_gain": 2300,
+      "content": "This dramatic section of North Cornwall takes you past ancient slate quarries and the rocky headland of The Rumps. The path offers stunning views of Lundy Island on clear days. After passing through the picturesque Port Quin, you'll encounter several steep ascents before reaching the mythical Tintagel Castle, legendary birthplace of King Arthur."
+    },
+    {
+      "title": "Salcombe to Hope Cove",
+      "distance": 6,
+      "elevation_gain": 1600,
+      "content": "This beautiful stretch of South Devon coastline takes you around Bolt Head and along dramatic cliffs. The path offers excellent views of the Salcombe Estuary before heading out to more exposed coastline. You'll pass secluded beaches and dramatic rocky outcrops before descending into the charming fishing village of Hope Cove."
+    },
+    {
+      "title": "Minehead to Porlock Weir",
+      "distance": 8,
+      "elevation_gain": 1500,
+      "content": "The first (or last) section of the SWCP starts with a steep climb up North Hill, offering panoramic views across the Bristol Channel to Wales. The path continues through woodland and across heathland before descending to the medieval settlement of Porlock Weir, with its historic harbor and distinctive pebble beach."
+    },
+    {
+      "title": "Penzance to Lamorna",
+      "distance": 5,
+      "elevation_gain": 950,
+      "content": "This shorter section offers a mix of urban and wild coastal walking. Starting from Penzance's promenade, the path passes the fishing village of Mousehole (pronounced 'Mowzel'), before continuing along rugged cliffs to the artistic community of Lamorna Cove. The final stretch features subtropical plants and old granite quarries."
+    },
+    {
+      "title": "Woolacombe to Croyde",
+      "distance": 6,
+      "elevation_gain": 800,
+      "content": "One of North Devon's most popular sections, this route takes you past some of Britain's finest surfing beaches. From Woolacombe's three-mile sandy beach, the path climbs over Baggy Point, offering excellent views of Lundy Island and the chance to spot seals, before descending into the surfing village of Croyde."
+    },
+    {
+      "title": "Polperro to Polruan",
+      "distance": 7,
+      "elevation_gain": 2100,
+      "content": "Starting in the picturesque fishing village of Polperro, this challenging section features several sharp ascents and descents. The path passes through Lansallos with its secluded cove, then continues past dramatic cliff formations and medieval field systems. The walk ends at Polruan, overlooking the Fowey estuary, where you can take a ferry to the town of Fowey."
+    }
+  ]
+}

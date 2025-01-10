@@ -4,8 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Walk South West</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <!--prettier-ignore-->
+
+    {% load compress %} 
+    {% load static %} 
+    {% compress css %}
+    <link
+      type="text/x-scss"
+      href="{% static 'scss/styles.scss' %}"
+      rel="stylesheet"
+    />
+    {% endcompress %}
   </head>
   <body>
     <nav>

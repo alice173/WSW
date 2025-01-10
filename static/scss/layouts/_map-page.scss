@@ -1,0 +1,30 @@
+/*logged in map page */
+@use "../abstracts/colours" as *;
+
+body {
+  height: 100vh;
+}
+.main-map {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 6fr;
+}
+
+.stats {
+  background-color: $color-primary-700;
+}
+
+.nav-logged-in {
+  background-color: $color-secondary-300;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}

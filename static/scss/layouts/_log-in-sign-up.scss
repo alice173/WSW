@@ -1,0 +1,73 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/colours" as *;
+
+.log-in {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(var(--clr-primary));
+
+  & > * {
+    height: 100vh;
+  }
+
+  main {
+    background-color: color-mix(in hsl, hsl(var(--clr-secondary)), black 40%);
+    flex: 1;
+    display: grid;
+    place-content: center;
+  }
+
+  .logo {
+    position: fixed;
+    top: 0;
+    margin: var(--space-md);
+    width: 42px;
+    svg {
+      fill: hsl(var(--clr-light));
+    }
+  }
+
+  a {
+    color: color-mix(in hsl, hsl(var(--clr-primary)), white 50%);
+
+    padding-block-end: 5px;
+    transition: all ease 0.3s;
+    &:hover,
+    &:focus {
+      color: hsl(var(--clr-gray));
+      border-bottom: 1px solid hsl(var(--clr-gray));
+    }
+  }
+
+  aside {
+    width: 50%;
+    background-image: url("/images/cliff-view.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      color: var(--clr-light);
+    }
+    input {
+      margin-block-start: 0.2rem;
+      margin-block-end: var(--space-md);
+      background-color: color-mix(in hsl, hsl(var(--clr-secondary)), black 40%);
+    }
+  }
+  .log-in--wrapper {
+    color: var(--clr-light);
+    font-size: var(--fs-sm);
+    padding-inline: 6rem;
+    transform: translateY(-2%);
+    .btn {
+      margin-block-start: var(--space-sm);
+    }
+  }
+}

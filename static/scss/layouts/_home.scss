@@ -1,0 +1,32 @@
+@use "sass:color";
+@use "../abstracts" as *;
+
+.hero {
+  background: linear-gradient(
+      to right,
+      $color-primary-trans-300,
+      $color-primary-trans-300
+    ),
+    url("/images/coastal-path.jpg") no-repeat center center;
+  background-size: cover;
+  height: 90vh;
+  place-content: center;
+  color: $color-neutral-200;
+  text-align: center;
+
+  & > * {
+    max-width: 40ch;
+    padding: var(--space-md);
+    margin-inline: auto;
+  }
+}
+
+.stats-section {
+  &--wrapper {
+    @include grid-columns;
+  }
+
+  &--stat {
+    text-align: center;
+  }
+}

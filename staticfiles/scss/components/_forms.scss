@@ -1,0 +1,18 @@
+input {
+  --input-border-color: var(--clr-accent);
+  border: 1px solid hsl(var(--input-border-color));
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 30px 8px 35px -5px hsla(var(--clr-primary), 0.6),
+      -30px -8px 35px -5px hsla(var(--clr-primary), 0.6);
+  }
+}
+
+label {
+  margin-block-end: 4px;
+  font-size: 12px;
+}

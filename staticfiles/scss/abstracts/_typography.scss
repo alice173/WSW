@@ -1,0 +1,29 @@
+$-ff-sans: "Lato", sans-serif;
+$-ff-serif: "Forum", serif;
+
+$ff-base: $-ff-sans;
+$ff-accent: $-ff-serif;
+
+$font-sizes: (
+  xxl: clamp(2.5rem, 0.5rem + 10vw, 5rem),
+  xl: clamp(2.5rem, 0.5rem + 7vw, 3.75rem),
+  lg: clamp(1.4rem, 0.5rem + 3vw, 1.6875rem),
+  md: 1.3125rem,
+  base: 1.125rem,
+  sm: 1rem,
+  xs: 0.8rem,
+);
+
+$-fw-400: 400;
+$-fw-300: 300;
+
+$fw-default: $-fw-400;
+$fw-light: $-fw-300;
+
+$fs-xxl: var(--fs-xxl);
+$fs-xl: var(--fs-xl);
+$fs-lg: var(--fs-lg);
+$fs-md: var(--fs-md);
+$fs-base: var(--fs-base);
+$fs-sm: var(--fs-sm);
+$fs-xs: var(--fs-xs);

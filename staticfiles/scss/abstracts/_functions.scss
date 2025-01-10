@@ -1,0 +1,19 @@
+@use "sass:map";
+@use "colours" as *;
+@use "typography" as *;
+
+@function clr($color, $shade) {
+  @if map.has-key($colors, $color, $shade) {
+    @return map.get($colors, $color, $shade);
+  } @else {
+    @error '$colors does not have that color!';
+  }
+}
+
+@function fs($sizes, $size) {
+  @if map.has-key($fs, $sizes, $size) {
+    @return map.get($fs, $sizes, $size);
+  } @else {
+    @error '$colors does not have that color!';
+  }
+}

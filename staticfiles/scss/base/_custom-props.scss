@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+/* create custom properties from color map */
+
+:root {
+  @each $color, $shade-map in $colors {
+    @each $shade, $value in $shade-map {
+      --#{$color}-#{$shade}: #{$value};
+    }
+  }
+}
+
+/* create custom properties from font-size map */
+
+:root {
+  @each $size-name, $size-value in $font-sizes {
+    --fs-#{$size-name}: #{$size-value};
+  }
+}
+
+/* create custom properties from size map */
+
+:root {
+  @each $size-name, $size-value in $sizes {
+    --space-#{$size-name}: #{$size-value};
+  }
+}

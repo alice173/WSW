@@ -1,0 +1,42 @@
+@use "../abstracts" as *;
+
+/* generate spacing utility classes */
+
+@each $size-name, $size-value in $sizes {
+  .mb-#{$size-name} {
+    margin-block-end: #{$size-value};
+  }
+  .mt-#{$size-name} {
+    margin-block-start: #{$size-value};
+  }
+  .ml-#{$size-name} {
+    margin-inline-start: #{$size-value};
+  }
+  .mr-#{$size-name} {
+    margin-inline-end: #{$size-value};
+  }
+  .margin-block-#{$size-name} {
+    margin-block: #{$size-value};
+  }
+  .margin-inline-#{$size-name} {
+    margin-inline: #{$size-value};
+  }
+  .pb-#{$size-name} {
+    padding-block-end: #{$size-value};
+  }
+  .pt-#{$size-name} {
+    padding-block-start: #{$size-value};
+  }
+  .pl-#{$size-name} {
+    padding-inline-start: #{$size-value};
+  }
+  .pr-#{$size-name} {
+    padding-inline-end: #{$size-value};
+  }
+  .padding-block-#{$size-name} {
+    padding-block: #{$size-value};
+  }
+  .padding-inline-#{$size-name} {
+    padding-inline: #{$size-value};
+  }
+}

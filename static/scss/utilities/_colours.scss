@@ -1,0 +1,13 @@
+@use "../abstracts" as *;
+
+/* generate colour utility classes */
+@each $color, $shade-map in $colors {
+  @each $shade, $value in $shade-map {
+    .text-#{$color}-#{$shade} {
+      color: clr($color, $shade);
+    }
+    .bg-#{$color}-#{$shade} {
+      background-color: clr($color, $shade);
+    }
+  }
+}

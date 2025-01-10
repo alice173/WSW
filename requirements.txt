@@ -3,10 +3,15 @@ dj-database-url==0.5.0
 Django==5.1.4
 django-appconf==1.0.6
 django-compressor==4.5.1
+django-geojson==4.1.0
+django-leaflet==0.31.0
+django-libsass==0.9
+geojson==3.2.0
 gunicorn==23.0.0
 libsass==0.23.0
 pillow==11.1.0
 psycopg2==2.9.10
+psycopg2-binary==2.9.10
 rcssmin==1.1.2
 rjsmin==1.2.2
 sqlparse==0.5.3

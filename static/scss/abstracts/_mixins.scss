@@ -1,0 +1,5 @@
+@mixin grid-columns($max-width: 250px, $gap: $space-sm) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($max-width, 1fr));
+  gap: $gap;
+}

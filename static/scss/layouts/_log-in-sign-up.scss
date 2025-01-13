@@ -51,23 +51,24 @@
     display: flex;
     flex-direction: column;
 
-    // label {
-    //   color: var(--clr-light);
-    // }
+    label:not(:last-child) {
+      display: block;
+      margin-block-end: var(--space-xs);
+    }
     input {
       margin-block-start: 0.2rem;
       margin-block-end: var(--space-md);
-      //   background-color: color-mix(in hsl, hsl(var(--clr-secondary)), black 40%);
-      // }
+      background-color: $color-secondary-700 !important;
     }
-    .log-in--wrapper {
-      // color: var(--clr-light);
-      font-size: var(--fs-sm);
-      padding-inline: 6rem;
-      transform: translateY(-2%);
-      .btn {
-        margin-block-start: var(--space-sm);
-      }
+  }
+
+  .log-in--wrapper {
+    // color: var(--clr-light);
+    font-size: var(--fs-sm);
+    padding-inline: 6rem;
+    transform: translateY(-2%);
+    .btn {
+      margin-block-start: var(--space-sm);
     }
   }
 }

@@ -1,6 +1,6 @@
-@forward "home";
-@forward "log-in-sign-up";
-@forward "map-page";
+@import "home";
+@import "log-in-sign-up";
+@import "map-page";
 
-@forward "nav";
-@forward "container";
+@import "nav";
+@import "container";

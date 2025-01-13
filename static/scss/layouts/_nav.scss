@@ -1,19 +1,16 @@
 @use "../abstracts/colours" as *;
 
-.nav-logged-in {
+.main-nav {
   background-color: $color-primary-100;
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: $space-md;
 }
 
 .nav__item {
-  --nav-link-color: clr(primary, light);
   transition: background-color 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  color: var(--nav-link-color);
-  font-size: var(--fs-sm);
+  color: $color-primary-300;
+  font-size: var(--fs-xs);
 }

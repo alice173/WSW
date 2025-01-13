@@ -1,12 +1,9 @@
 @use "../abstracts/colours" as *;
 
-.nav-logged-in {
+.main-nav {
   background-color: $color-primary-100;
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav__item {

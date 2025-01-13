@@ -5,13 +5,12 @@ $ff-base: $-ff-sans;
 $ff-accent: $-ff-serif;
 
 $font-sizes: (
-  xxl: clamp(2.5rem, 0.5rem + 10vw, 5rem),
-  xl: clamp(2.5rem, 0.5rem + 7vw, 3.75rem),
-  lg: clamp(1.4rem, 0.5rem + 3vw, 1.6875rem),
-  md: 1.3125rem,
-  base: 1.125rem,
-  sm: 1rem,
-  xs: 0.8rem,
+  xxl: clamp(2.5rem, 3rem, 5rem),
+  xl: clamp(2rem, 2.5rem, 4rem),
+  lg: clamp(1.5rem, 2rem, 3rem),
+  md: clamp(1rem, 1.5rem, 2rem),
+  sm: clamp(0.75rem, 1rem, 1.5rem),
+  xs: clamp(0.5rem, 0.75rem, 1rem),
 );
 
 $-fw-400: 400;

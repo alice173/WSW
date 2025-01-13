@@ -3,17 +3,19 @@
 @use "typography" as *;
 
 @function clr($color, $shade) {
-  @if map.has-key($colors, $color, $shade) {
-    @return map.get($colors, $color, $shade);
+  @if map-has-key($colors, $color) and
+    map-has-key(map-get($colors, $color), $shade)
+  {
+    @return map-get(map-get($colors, $color), $shade);
   } @else {
     @error '$colors does not have that color!';
   }
 }
 
 @function fs($sizes, $size) {
-  @if map.has-key($fs, $sizes, $size) {
-    @return map.get($fs, $sizes, $size);
+  @if map-has-key($fs, $sizes) and map-has-key(map-get($fs, $sizes), $size) {
+    @return map-get(map-get($fs, $sizes), $size);
   } @else {
-    @error '$colors does not have that color!';
+    @error '$fs does not have that size!';
   }
 }

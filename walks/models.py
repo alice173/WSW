@@ -18,8 +18,10 @@ class Walk(models.Model):
   related_name="walk_difficulty_level", null=True, blank=True)
   elevation_gain = models.IntegerField()
   distance = models.FloatField(default=0)
+  featured_img = models.ImageField(upload_to="static/images/")
   map_img = models.ImageField(upload_to="static/images/", null=True, blank=True)
   content = models.TextField()
+  featured = models.BooleanField(default=False)
   status = models.IntegerField(choices=STATUS, default=0)
 
   def __str__(self):

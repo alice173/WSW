@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+<header class="hero">
+  <h1>Walk South West</h1>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque voluptatum
+    ipsam unde vero beatae iure rem quod alias veniam libero! Ipsa odio
+    repudiandae libero? Nobis nesciunt expedita necessitatibus ex est.
+  </p>
+</header>
+<main>
+  <section class="section">
+    <div class="container stats-section">
+      <h2 class="mb-xxl">Stats</h2>
+      <div class="stats-section--wrapper flex">
+        <div class="stats-section--stat">
+          <h3>Distance</h3>
+          <p>630 Miles</p>
+        </div>
+        <div class="stats-section--stat">
+          <h3>Total Elevation</h3>
+          <p>115,000 Feet</p>
+        </div>
+        <div class="stats-section--stat">
+          <h3>No of Gates</h3>
+          <p>880</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="featured-walks">
+    <h2 class="featured-walks--heading mb-xxxl">Featured Walks</h2>
+    <!-- Loop through the featured walks -->
+    {% for walk in walks %}
+    <div class="featured-walks--walk">
+      <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" />
+      <div class="featured-walks--walk--content">
+        <h3>{{ walk.title }}</h3>
+        <p>{{ walk.content }}</p>
+        <a href="{{ walk.get_absolute_url }}" class="btn">View Walk</a>
+      </div>
+      {% endfor %}
+  </section>
+</main>
+{% endblock %}

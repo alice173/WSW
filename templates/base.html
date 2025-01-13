@@ -18,10 +18,14 @@
   </head>
   <body>
     <nav class="main-nav flex">
-      <p class="logo{% if request.path == home_url %}active{% endif %}">WSW</a>">WSW</p>
+      <a class="logo" href="{% url 'home' %}">WSW</a>
       <ul class="nav__list flex">
         <li class="nav__item">
-          <a href="#" class="nav__link {% if request.path == walks_url %}active{% endif %}">WSW</a>">Walks</a>
+          <a
+            href="#"
+            class="nav__link {% if request.path == walks_url %}active{% endif %}"
+            >Walks</a
+          >
         </li>
         <li class="nav__item">
           <a href="#" class="nav__link">Map</a>

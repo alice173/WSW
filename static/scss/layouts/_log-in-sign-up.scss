@@ -6,17 +6,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-color: hsl(var(--clr-primary));
 
   & > * {
     height: 100vh;
   }
 
   main {
-    // background-color: color-mix(in hsl, hsl(var(--clr-secondary)), black 40%);
+    background-color: $color-secondary-700;
     flex: 1;
     display: grid;
     place-content: center;
+    color: $color-secondary-100;
+    font-weight: 400;
   }
 
   .logo {
@@ -24,9 +25,7 @@
     top: 0;
     margin: var(--space-md);
     width: 42px;
-    svg {
-      // fill: hsl(var(--clr-light));
-    }
+    color: $color-secondary-200;
   }
 
   a {
@@ -43,7 +42,7 @@
 
   aside {
     width: 50%;
-    background-image: url("/images/cliff-view.jpg");
+    background-image: url("../images/cliff-view.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }

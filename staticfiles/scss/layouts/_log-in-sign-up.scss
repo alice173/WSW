@@ -24,9 +24,6 @@
     top: 0;
     margin: var(--space-md);
     width: 42px;
-    svg {
-      // fill: hsl(var(--clr-light));
-    }
   }
 
   a {
@@ -43,7 +40,7 @@
 
   aside {
     width: 50%;
-    background-image: url("/images/cliff-view.jpg");
+    background-image: url(".../images/cliff-view.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }

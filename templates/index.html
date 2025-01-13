@@ -36,7 +36,7 @@
       <div class="featured-walks--walk--content">
         <h3>{{ walk.title }}</h3>
         <p>{{ walk.content }}</p>
-        <a href="{{ walk.get_absolute_url }}" class="btn">View Walk</a>
+        <a href="{% url 'walk_detail' walk.slug %}"class="btn">View Walk</a>
       </div>
       {% endfor %}
   </section>

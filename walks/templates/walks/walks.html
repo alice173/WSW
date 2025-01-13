@@ -7,5 +7,5 @@
 {% for item in walks %}
 <h2>{{item.title}}</h2>
 <p>{{item.content}}</p>
-<p>Author: {{item.distance}}</p>
+<a href="{% url 'walk_detail' item.slug %}" class="btn">View Walk</a>
 {% endfor %} {% endblock %}

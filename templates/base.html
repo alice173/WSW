@@ -9,6 +9,10 @@
     {% load compress %} 
     {% load static %} 
     {% compress css %}
+
+    {% url 'account_login' as login_url %}
+    {% url 'account_signup' as signup_url %}
+    {% url 'account_logout' as logout_url %}
     <link
       type="text/x-scss"
       href="{% static 'scss/styles.scss' %}"
@@ -20,22 +24,43 @@
     <nav class="main-nav flex">
       <a class="logo" href="{% url 'home' %}">WSW</a>
       <ul class="nav__list flex">
-        <li class="nav__item">
+        <li class="nav-item">
           <a
             href="#"
             class="nav__link {% if request.path == walks_url %}active{% endif %}"
             >Walks</a
           >
         </li>
-        <li class="nav__item">
+        <li class="nav-item">
           <a href="#" class="nav__link">Map</a>
         </li>
-        <li class="nav__item">
-          <a href="#">Log-in</a>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.path == logout_url %}active{% endif %}"
+            aria-current="page"
+            href="{% url 'account_logout' %}"
+            >Logout</a
+          >
         </li>
-        <li class="nav__item">
-          <a href="#" class="nav__link">Contact</a>
+        {% else %}
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.path == signup_url %}active{% endif %}"
+            aria-current="page"
+            href="{% url 'account_signup' %}"
+            >Register</a
+          >
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.path == login_url %}active{% endif %}"
+            aria-current="page"
+            href="{% url 'account_login' %}"
+            >Login</a
+          >
+        </li>
+        {% endif %}
       </ul>
     </nav>
     <main>{% block content %}{% endblock %}</main>

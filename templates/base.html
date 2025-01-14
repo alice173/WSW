@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Walk South West</title>
+    <title>{% block head_title %}Walk South West{% endblock %}</title>
+
     <!--prettier-ignore-->
 
     {% load compress %} 
     {% load static %} 
     {% compress css %}
-
+    {% url 'walks' as walks_url %}
+    {url 'home' as home_url %}
     {% url 'account_login' as login_url %}
     {% url 'account_signup' as signup_url %}
     {% url 'account_logout' as logout_url %}

@@ -4,6 +4,7 @@ Django==5.1.4
 django-allauth==65.3.1
 django-appconf==1.0.6
 django-compressor==4.5.1
+django-crispy-forms==2.3
 django-geojson==4.1.0
 django-leaflet==0.31.0
 django-libsass==0.9

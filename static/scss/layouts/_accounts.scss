@@ -51,13 +51,41 @@
     display: flex;
     flex-direction: column;
 
-    label:not(:last-child) {
+    label {
       display: block;
-      margin-block-end: var(--space-xs);
+      margin-block-end: 4px;
+    }
+    label[for="id_remember"] {
+      display: inline-block;
+      margin: 0;
     }
     input {
       margin-block-start: 0.2rem;
       margin-block-end: var(--space-md);
+      background-color: $color-secondary-700 !important;
+      color: $color-secondary-200;
+      caret-color: $color-secondary-200;
+      &:focus {
+        outline: $color-primary-400;
+        box-shadow: 30px 8px 35px -5px $color-primary-500,
+          -30px -8px 35px -5px $color-primary-500;
+      }
+    }
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      background-color: $color-secondary-700 !important;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    textarea:focus {
+      background-color: $color-secondary-700 !important;
+    }
+
+    input[type="text"]:active,
+    input[type="password"]:active,
+    textarea:active {
       background-color: $color-secondary-700 !important;
     }
   }
@@ -69,6 +97,14 @@
     transform: translateY(-2%);
     .btn {
       margin-block-start: var(--space-sm);
+      background-color: $color-secondary-200;
+      align-self: flex-start;
+      font-weight: 600;
+      color: $color-secondary-700;
     }
+  }
+  ul {
+    padding: 0;
+    margin-top: 0;
   }
 }

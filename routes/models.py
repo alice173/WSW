@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class Route(models.Model):
     distance = models.FloatField()
     elevation = models.FloatField()
     time_taken = models.TimeField()
-    route_img = models.ImageField(upload_to="static/images/")
+    route_img = CloudinaryField('image')
     comments = models.TextField()
 
     def __str__(self):

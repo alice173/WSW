@@ -20,10 +20,24 @@
 
 <main class="main-map">
   <div class="stats">
-    <button id="toggle-polylines">Toggle Polylines</button>
+    <!-- <button id="toggle-polylines">Toggle Polylines</button> -->
     <h2>Create a New Route</h2>
     <form method="post" enctype="multipart/form-data">
-      {% csrf_token %} {{ form|crispy }}
+      {% csrf_token %}
+      <details open>
+        <summary>Start and End Points</summary>
+        <!--prettier-ignore-->
+        {{ form.start_point|as_crispy_field }} {{ form.end_point|as_crispy_field }}
+      </details>
+      <details>
+        <summary>Other Details</summary>
+        <!--prettier-ignore-->
+        {{ form.title|as_crispy_field }} 
+        {{ form.date|as_crispy_field }} 
+        {{form.time_taken|as_crispy_field }} 
+        {{ form.route_img|as_crispy_field }}
+        {{ form.comments|as_crispy_field }}
+      </details>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

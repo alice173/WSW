@@ -162,6 +162,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_ENABLED = False
+COMPRESS_OFFLINE = True
 COMPRESS_URL = STATIC_URL
 
 
@@ -179,7 +180,11 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.rCSSMinFilter',
 ]
-COMPRESS_OFFLINE = True
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+
+
 LIBSASS_OUTPUT_STYLE = 'compressed'
 LIBSASS_SOURCE_COMMENTS = False
 

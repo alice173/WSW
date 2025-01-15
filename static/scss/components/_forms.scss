@@ -3,7 +3,6 @@ input {
   border-radius: $border-radius;
   padding: 0.5rem;
   transition: all 0.3s ease;
-  background-color: $color-secondary-700 !important;
 
   &:focus {
     outline: $color-primary-400;

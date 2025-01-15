@@ -1,1 +1,12 @@
-{% extends base %} {% block head_title %}Map{% endblock %} {% block content %}
+<!--prettier-ignore-->
+{% extends 'base.html' %}
+{% block head_title %}Map{% endblock %} 
+{% block content %}
+{% load crispy_forms_tags %}
+
+<h2>Create a New Route</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form|crispy }}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

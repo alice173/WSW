@@ -6,7 +6,7 @@ from .models import Route
 class RouteForm(forms.ModelForm):
     class Meta:
         model = Route
-        fields = ['title', 'date', 'start_point', 'end_point',  'time_taken',  'route_img', 'time_taken', 'comments']
+        fields = ['title', 'date', 'start_point', 'end_point',  'time_taken',  'route_img', 'time_taken', 'comments', 'distance', 'elevation']
         widgets = { 'date': forms.DateInput(attrs={'type': 'date'}), }
 
     def __init__(self, *args, **kwargs):
@@ -23,6 +23,8 @@ class RouteForm(forms.ModelForm):
                 'route_img',
                 'time_taken',
                 'comments'
+                 'distance',  # Hidden field
+                'elevation'  # Hidden field
             ),
             ButtonHolder(
                 Submit('submit', 'Submit', css_class='btn-primary')

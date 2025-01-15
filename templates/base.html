@@ -12,7 +12,10 @@
     {% compress css %}
 
     {% url 'walks' as walks_url %}
-    {url 'home' as home_url %}
+    {% url 'home' as home_url %}
+    {% url 'map' as map_url %}
+    {% url 'my_walks' as my_walks_url %}
+
     {% url 'account_login' as login_url %}
     {% url 'account_signup' as signup_url %}
     {% url 'account_logout' as logout_url %}

@@ -7,6 +7,7 @@ class RouteForm(forms.ModelForm):
     class Meta:
         model = Route
         fields = ['title', 'date', 'start_point', 'end_point', 'distance', 'time_taken', 'elevation', 'route_img', 'time_taken', 'comments']
+        widgets = { 'date': forms.DateInput(attrs={'type': 'date'}), }
 
     def __init__(self, *args, **kwargs):
         super(RouteForm, self).__init__(*args, **kwargs)

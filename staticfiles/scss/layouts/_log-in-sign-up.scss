@@ -6,14 +6,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-color: hsl(var(--clr-primary));
 
   & > * {
     height: 100vh;
   }
 
   main {
-    // background-color: color-mix(in hsl, hsl(var(--clr-secondary)), black 40%);
+    background-color: $color-secondary-700;
     flex: 1;
     display: grid;
     place-content: center;
@@ -55,11 +54,10 @@
     input {
       margin-block-start: 0.2rem;
       margin-block-end: var(--space-md);
-      //   background-color: color-mix(in hsl, hsl(var(--clr-secondary)), black 40%);
-      // }
+      background-color: $color-secondary-700;
     }
     .log-in--wrapper {
-      // color: var(--clr-light);
+      color: $color-secondary-100;
       font-size: var(--fs-sm);
       padding-inline: 6rem;
       transform: translateY(-2%);

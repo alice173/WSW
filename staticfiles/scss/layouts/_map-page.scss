@@ -1,4 +1,3 @@
-/*logged in map page */
 @use "../abstracts/colours" as *;
 
 body {
@@ -12,16 +11,7 @@ body {
 }
 
 .stats {
-  background-color: $color-primary-700;
-}
-
-.nav-logged-in {
-  background-color: $color-secondary-300;
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  background-color: white;
 }
 
 #map {

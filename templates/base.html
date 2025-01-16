@@ -19,12 +19,18 @@
     {% url 'account_login' as login_url %}
     {% url 'account_signup' as signup_url %}
     {% url 'account_logout' as logout_url %}
+
     <link
       type="text/x-scss"
       href="{% static 'scss/styles.scss' %}"
       rel="stylesheet"
     />
-    {% endcompress %} {% block extra_head %}{% endblock %}
+    {% endcompress %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    {% block extra_head %}{% endblock %}
   </head>
   <body>
     <nav class="main-nav flex">

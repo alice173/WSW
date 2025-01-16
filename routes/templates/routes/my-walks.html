@@ -33,12 +33,30 @@
       <td><a href="/route/{{ route.id }}">View</a></td>
       <td>
         <a href="{% url 'route_edit' route.pk %}">Edit</a>
-        <!-- <button onclick="editRoute({{ route.id }})">Edit</button>
-        <button onclick="deleteRoute({{ route.id }})">Delete</button> -->
+        <a href="#delete-modal">Delete</a>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+<div id="delete-modal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <header>
+        <h2>Delete Route?</h2>
+        <a href="#" class="closebtn">×</a>
+      </header>
+
+      <p>
+        Are you sure you want to delete this route? This action can't be undone.
+      </p>
+
+      <footer>
+        <button class="btn btn-secondary">Close</button>
+        <button class="btn btn-danger">Delete</button>
+      </footer>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

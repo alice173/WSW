@@ -1,18 +1,17 @@
-// input {
-//   --input-border-color: var(--clr-accent-100);
-//   border: 1px solid $color-accent-100;
-//   border-radius: var(--border-radius);
-//   padding: 0.5rem;
-//   transition: all 0.3s ease;
+input {
+  border: 1px solid $color-primary-400;
+  border-radius: $border-radius;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
 
-//   &:focus {
-//     outline: none;
-//     box-shadow: 30px 8px 35px -5px hsla(var(--clr-primary), 0.6),
-//       -30px -8px 35px -5px hsla(var(--clr-primary), 0.6);
-//   }
-// }
+  &:focus {
+    outline: $color-primary-400;
+    box-shadow: 30px 8px 35px -5px $color-primary-500,
+      -30px -8px 35px -5px $color-primary-500;
+  }
+}
 
-// label {
-//   margin-block-end: 4px;
-//   font-size: 12px;
-// }
+label {
+  margin-block-end: 4px;
+  font-size: 12px;
+}

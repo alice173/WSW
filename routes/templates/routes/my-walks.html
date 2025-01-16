@@ -32,6 +32,7 @@
       <td>{{ route.comments }}</td>
       <td><a href="/route/{{ route.id }}">View</a></td>
       <td>
+        <a href="{% url 'route_edit' route.pk %}">Edit</a>
         <!-- <button onclick="editRoute({{ route.id }})">Edit</button>
         <button onclick="deleteRoute({{ route.id }})">Delete</button> -->
       </td>

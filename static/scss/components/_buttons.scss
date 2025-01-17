@@ -1,9 +1,7 @@
 @use "../abstracts" as *;
 
 .btn {
-  --btn-bg-color: $color-neutral-200;
-  --btn-color: $color-primary-800;
-  background-color: var(--btn-bg-color);
+  background-color: $color-secondary-200;
   // color: hsl(var(--clr-dark));
   padding: 0.5rem 1rem;
   border: 0;
@@ -14,8 +12,8 @@
   letter-spacing: 1.4px;
 
   // &--primary {
-  //   background-color: $button-primary-background;
-  //   color: $button-primary-color;
+  //   background-color: $color-primary-400;
+  //   color: $color-secondary-100;
 
   //   &:is(:hover, :focus) {
   //     background-color: $button-primary-background-hover;
@@ -31,14 +29,14 @@
   //     color: $button-accent-color-hover;
   //   }
   // }
-  // &--outline {
-  //   background-color: transparent;
-  //   color: $color-secondary-700;
-  //   border: 1px solid $color-secondary-700;
+  &--outline {
+    background-color: transparent;
+    color: $color-secondary-200;
+    border: 1px solid $color-secondary-200;
 
-  //   &:is(:hover, :focus) {
-  //     background-color: $color-secondary-700;
-  //     color: $color-primary-100;
-  //   }
-  // }
+    &:is(:hover, :focus) {
+      background-color: $color-secondary-200;
+      color: $color-secondary-700;
+    }
+  }
 }

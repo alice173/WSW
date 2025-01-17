@@ -5,7 +5,7 @@ body {
   font-size: $fs-base;
   line-height: 1.5;
   font-weight: $fw-default;
-  background-color: $color-secondary-200;
+  background-color: $color-secondary-100;
   color: $color-secondary-800;
 }
 
@@ -16,18 +16,47 @@ h4,
 h5 {
   font-family: $ff-accent;
   color: $color-secondary-800;
+  text-align: center;
 }
 
-// a {
-//   color: $link-color;
-// }
-// a:is(:hover, :focus) {
-//   color: $link-color-hover;
-// }
+h1 {
+  font-size: $fs-xxl;
+}
+
+h2 {
+  font-size: $fs-xl;
+}
+
+h3 {
+  font-size: $fs-lg;
+}
+
+h4 {
+  font-size: $fs-md;
+}
+
+a {
+  color: $color-secondary-700;
+}
+
+a:is(:hover, :focus) {
+  color: $color-primary-400;
+}
 // a:visited {
-//   color: $link-color-visited;
+//   color: $color-primary-400;
 // }
+
+.active {
+  color: $color-primary-400;
+}
 
 .section {
   padding-block: $section-padding-block;
+}
+
+.logo {
+  font-size: $fs-lg;
+  color: $color-secondary-800;
+  font-family: $ff-accent;
+  letter-spacing: 4.5px;
 }

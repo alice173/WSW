@@ -14,8 +14,8 @@ class RouteForm(forms.ModelForm):
         'time_taken': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Add time in hours'}),
         'route_img': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter comments'}),
-        'distance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter distance in miles'}),
-        'elevation': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter elevation gain in meters'}),
+        'distance': forms.HiddenInput(attrs={'class': 'form-control', 'placeholder': 'Enter distance in miles'}),
+        'elevation': forms.HiddenInput(attrs={'class': 'form-control', 'placeholder': 'Enter elevation gain in meters'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -32,7 +32,7 @@ class RouteForm(forms.ModelForm):
                 'route_img',
                 'time_taken',
                 'comments'
-                 'distance',  # Hidden field
+                'distance',  # Hidden field
                 'elevation'  # Hidden field
             ),
             ButtonHolder(

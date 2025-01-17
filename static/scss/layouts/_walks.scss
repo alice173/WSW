@@ -1,0 +1,25 @@
+.walks {
+  &--grid {
+    @include grid-columns(350px, $space-md);
+  }
+
+  &--walk {
+    border-radius: $border-radius;
+    border: 1px solid $color-neutral-200;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 7fr 5fr;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &--content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $space-sm;
+  }
+}

@@ -2,10 +2,22 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-
-<h1>Posts list</h1>
-{% for item in walks %}
-<h2>{{item.title}}</h2>
-<p>{{item.content}}</p>
-<a href="{% url 'walk_detail' item.slug %}" class="btn">View Walk</a>
-{% endfor %} {% endblock %}
+<main>
+  <section class="section walks">
+    <h1 class="walks--heading mb-xxxl">Coastal Path Walks</h1>
+    <div class="walks--grid container container-wide">
+      <!-- Loop through the featured walks -->
+      {% for walk in walks %}
+      <div class="walks--walk">
+        <img src="{{ walk.featured_img.url }}" alt="{{ walk.title }}" />
+        <div class="walks--content">
+          <h3>{{ walk.title }}</h3>
+          <p>{{ walk.content_excerpt }}</p>
+          <a href="{% url 'walk_detail' walk.slug %}">View Walk</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

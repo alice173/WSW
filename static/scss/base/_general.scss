@@ -5,8 +5,8 @@ body {
   font-size: $fs-base;
   line-height: 1.5;
   font-weight: $fw-default;
-  // $body-text-color: $color-text-default;
-  // $body-background-color: $color-background-default;
+  background-color: $color-secondary-200;
+  color: $color-secondary-800;
 }
 
 h1,

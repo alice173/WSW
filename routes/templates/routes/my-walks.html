@@ -6,6 +6,13 @@
 {% block content %}
 {% if routes %}
 <h2>Saved Routes</h2>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <table>
   <thead>
     <tr>
@@ -28,7 +35,7 @@
       <td>{{ route.start_point }}</td>
       <td>{{ route.end_point }}</td>
       <td>{{ route.date }}</td>
-      <td>{{ route.time_taken }}</td>
+      <td>{{ route.time_taken }} hrs</td>
       <td>{{ route.distance }}</td>
       <td>{{ route.elevation }}</td>
       <td>{{ route.comments }}</td>

@@ -33,7 +33,10 @@ class RouteFormPage(generic.View):
             route = form.save(commit=False)
             route.user = request.user  # Set the user
             route.save()
-            return render(request, 'routes/map.html', {'form': RouteForm()})
+            from django.urls import reverse
+            my_walks_url = reverse('my_walks')
+            messages.success(request, f'Route saved successfully! Visit <a href="{my_walks_url}"> My Walks</a> to see or edit your routes.')
+            return HttpResponseRedirect(reverse('route_create')) 
         else:
             logger.warning('Form submission failed. Errors: %s', form.errors)
         return render(request, 'routes/map.html', {'form': form})
@@ -71,8 +74,8 @@ def route_delete(request, route_id):
         if route.user == request.user:
             route.delete()
             messages.add_message(request, messages.SUCCESS, 'Route deleted successfully!')
-            return HttpResponseRedirect(reverse('my_walks'))
+            return redirect('my_walks')
         else:
             messages.add_message(request, messages.ERROR, 'Error deleting route!')
-
+            return redirect('my_walks')
     return redirect('my_walks')

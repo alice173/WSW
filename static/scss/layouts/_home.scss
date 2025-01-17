@@ -1,5 +1,12 @@
 @use "sass:color";
 @use "../abstracts" as *;
+.home-page {
+  background-color: $color-secondary-100;
+  h2,
+  h3 {
+    text-align: center;
+  }
+}
 
 .hero {
   background: linear-gradient(
@@ -13,7 +20,9 @@
   place-content: center;
   color: $color-neutral-200;
   text-align: center;
-
+  & h1 {
+    color: $color-neutral-200;
+  }
   & > * {
     max-width: 40ch;
     padding: var(--space-md);
@@ -28,5 +37,31 @@
 
   &--stat {
     text-align: center;
+  }
+}
+
+.featured-walks {
+  &--grid {
+    @include grid-columns(350px, $space-md);
+  }
+
+  &--walk {
+    border-radius: $border-radius;
+    border: 1px solid $color-neutral-200;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 7fr 5fr;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &--content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $space-sm;
   }
 }

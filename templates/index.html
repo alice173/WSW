@@ -7,7 +7,7 @@
     repudiandae libero? Nobis nesciunt expedita necessitatibus ex est.
   </p>
 </header>
-<main>
+<main class="home-page">
   <section class="section">
     <div class="container stats-section">
       <h2 class="mb-xxl">Stats</h2>
@@ -27,18 +27,21 @@
       </div>
     </div>
   </section>
-  <section class="featured-walks">
+  <section class="section featured-walks">
     <h2 class="featured-walks--heading mb-xxxl">Featured Walks</h2>
-    <!-- Loop through the featured walks -->
-    {% for walk in walks %}
-    <div class="featured-walks--walk">
-      <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" />
-      <div class="featured-walks--walk--content">
-        <h3>{{ walk.title }}</h3>
-        <p>{{ walk.content }}</p>
-        <a href="{% url 'walk_detail' walk.slug %}"class="btn">View Walk</a>
+    <div class="featured-walks--grid container container-wide">
+      <!-- Loop through the featured walks -->
+      {% for walk in walks %}
+      <div class="featured-walks--walk">
+        <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" />
+        <div class="featured-walks--content">
+          <h3>{{ walk.title }}</h3>
+          <p>{{ walk.content_excerpt }}</p>
+          <a href="{% url 'walk_detail' walk.slug %}">View Walk</a>
+        </div>
       </div>
       {% endfor %}
+    </div>
   </section>
 </main>
 {% endblock %}

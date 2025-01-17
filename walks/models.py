@@ -26,3 +26,8 @@ class Walk(models.Model):
 
   def __str__(self):
         return self.title
+  
+  def content_excerpt(self, char_limit=100):
+        if len(self.content) > char_limit:
+            return self.content[:char_limit] + '...'
+        return self.content

@@ -11,8 +11,8 @@
 .hero {
   background: linear-gradient(
       to right,
-      $color-primary-trans-300,
-      $color-primary-trans-300
+      $color-primary-trans-800,
+      $color-primary-trans-800
     ),
     url("../images/coastal-path.jpg") no-repeat center center;
   background-size: cover;
@@ -23,7 +23,9 @@
   & h1 {
     color: $color-neutral-200;
   }
-  & > * {
+
+  & p {
+    font-size: $fs-md;
     max-width: 40ch;
     padding: var(--space-md);
     margin-inline: auto;
@@ -31,12 +33,40 @@
 }
 
 .stats-section {
+  color: $color-secondary-500;
   &--wrapper {
     @include grid-columns;
   }
 
+  & h3 {
+    color: $color-secondary-700;
+    margin-block-end: $space-md;
+  }
+
   &--stat {
     text-align: center;
+    position: relative;
+    & p {
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    & span {
+      font-family: $ff-accent;
+      font-size: $fs-lg;
+      display: block;
+    }
+
+    &:not(:first-child)::after {
+      content: "";
+      display: block;
+      height: 70%;
+      width: 1px;
+      background-color: $color-secondary-500;
+      position: absolute;
+      top: 0;
+      transform: translateY(20%);
+    }
   }
 }
 

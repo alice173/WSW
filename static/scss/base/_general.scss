@@ -60,3 +60,10 @@ a:is(:hover, :focus) {
   font-family: $ff-accent;
   letter-spacing: 4.5px;
 }
+
+.button-wrapper {
+  display: flex;
+
+  gap: $space-md;
+  justify-self: center;
+}

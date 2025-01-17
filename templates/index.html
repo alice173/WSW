@@ -2,27 +2,38 @@
 <header class="hero">
   <h1>Walk South West</h1>
   <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque voluptatum
-    ipsam unde vero beatae iure rem quod alias veniam libero! Ipsa odio
-    repudiandae libero? Nobis nesciunt expedita necessitatibus ex est.
+    Explore the South West Coast Path your way. Perfect for weekend wanderers
+    and day-trippers, track your progress as you gradually discover all 630
+    miles of Britain's most breathtaking coastal trail. Every mile is an
+    achievement worth celebrating.
   </p>
+  {% if user.is_authenticated %}
+  <div class="button-wrapper">
+    <a href="{% url 'my_walks' %}" class="btn">My Walks</a>
+    <a href="{% url 'route_create' %}" class="btn btn--outline">Add Route</a>
+  </div>
+  {% else %}
+  <div class="button-wrapper">
+    <a href="{% url 'account_login' %}" class="btn">Log In</a>
+    <a href="{% url 'account_signup' %}" class="btn btn--outline">Sign Up</a>
+  </div>
+  {% endif %}
 </header>
 <main class="home-page">
   <section class="section">
     <div class="container stats-section">
-      <h2 class="mb-xxl">Stats</h2>
       <div class="stats-section--wrapper flex">
         <div class="stats-section--stat">
           <h3>Distance</h3>
-          <p>630 Miles</p>
+          <p><span>630</span>Miles</p>
         </div>
         <div class="stats-section--stat">
           <h3>Total Elevation</h3>
-          <p>115,000 Feet</p>
+          <p><span>115,000</span> Feet</p>
         </div>
         <div class="stats-section--stat">
           <h3>No of Gates</h3>
-          <p>880</p>
+          <p><span>880</span></p>
         </div>
       </div>
     </div>

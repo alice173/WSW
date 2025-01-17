@@ -27,6 +27,9 @@ urlpatterns = [
     path('my-walks/', include("routes.urls"), name="my-walks"),
     path('map/', RouteFormPage.as_view(), name='route_create'),
     path('route/<int:pk>/', RouteDetail.as_view(), name='route_detail'),
+    path('route/<int:route_id>/delete/', route_delete, name='route_delete'),
+  
+  
     
   
 ]

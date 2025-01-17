@@ -4,9 +4,8 @@
 {% load static %}
 {% block extra_head %}{% endblock %}
 {% block content %}
+{% if routes %}
 <h2>Saved Routes</h2>
-
-{% if route %}
 <table>
   <thead>
     <tr>
@@ -36,16 +35,18 @@
       <td><a href="/route/{{ route.id }}">View</a></td>
       <td>
         <a href="{% url 'route_edit' route.pk %}">Edit</a>
-        <a href="{% url 'route_delete' route.pk %};" class="btn btn-danger"
-          >Delete</a
-        >
         <a href="#delete-modal">Delete</a>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-{% for route in routes %}
+{% else %}
+<p>
+  You have no saved routes.
+  <a href="{% url 'route_create' %}">Click here to add one.</a>
+</p>
+{% endif %} {% for route in routes %}
 
 <div id="delete-modal" class="modal">
   <div class="modal-content">
@@ -67,9 +68,6 @@
     </footer>
   </div>
 </div>
-{% endfor %} {% else %}
-<p>
-  You have no saved routes.
-  <a href="{% url 'route_create' %}">Click here to add one.</a>
-</p>
-{% endif %} {% endblock %}
+<!--prettier-ignore-->
+{% endfor %} 
+{% endblock %}

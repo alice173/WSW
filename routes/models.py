@@ -20,3 +20,11 @@ class Route(models.Model):
 
     def __str__(self):
         return self.title
+    
+    @staticmethod
+    def total_distance():
+        return Route.objects.aggregate(total_distance=Sum('distance'))['total_distance'] or 0
+    
+    @staticmethod
+    def total_elevation():
+        return Route.objects.aggregate(total_elevation=Sum('elevation'))['total_elevation'] or 0

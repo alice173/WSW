@@ -1,0 +1,12 @@
+.saved-routes {
+  background-color: $color-neutral-100;
+
+  & table {
+    width: 100%;
+
+    & td,
+    th {
+      padding: 20px;
+    }
+  }
+}

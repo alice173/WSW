@@ -4,8 +4,9 @@
 {% load static %}
 {% block extra_head %}{% endblock %}
 {% block content %}
+<main class="saved-routes container container-wide">
 {% if routes %}
-<h2>Saved Routes</h2>
+<h2 class="mb-lg">Saved Routes</h2>
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -41,8 +42,8 @@
       <td>{{ route.comments }}</td>
       <td><a href="/route/{{ route.id }}">View</a></td>
       <td>
-        <a href="{% url 'route_edit' route.pk %}">Edit</a>
-        <a href="#delete-modal">Delete</a>
+        <a href="{% url 'route_edit' route.pk %}"><i class="fa fa-edit"></i></a>
+        <a href="#delete-modal"><i class="fa fa-trash"></i> </a>
       </td>
     </tr>
     {% endfor %}
@@ -54,7 +55,7 @@
   <a href="{% url 'route_create' %}">Click here to add one.</a>
 </p>
 {% endif %} {% for route in routes %}
-
+</main>
 <div id="delete-modal" class="modal">
   <div class="modal-content">
     <header>

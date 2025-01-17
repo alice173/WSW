@@ -1,6 +1,7 @@
 // global color tokens (private)
 $-clr-white: hsl(0, 0%, 100%);
-$-clr-beige: hsl(40, 13%, 77%);
+$-clr-beige-100: hsl(40, 13%, 95%);
+$-clr-beige-200: hsl(40, 13%, 85%);
 $-clr-green-100: hsl(197, 11%, 87%);
 $-clr-green-200: hsl(191, 11%, 60%);
 $-clr-green-300: hsl(191, 11%, 48%);
@@ -24,8 +25,9 @@ $-clr-yellow-400: hsl(50, 100%, 52%);
 
 $colors: (
   neutral: (
-    100: $-clr-white,
-    200: $-clr-beige,
+    white: $-clr-white,
+    100: $-clr-beige-100,
+    200: $-clr-beige-200,
   ),
   primary: (
     100: $-clr-green-100,
@@ -56,6 +58,7 @@ $colors: (
   ),
 );
 
+$color-neutral-white: var(--neutral-white);
 $color-neutral-100: var(--neutral-100);
 $color-neutral-200: var(--neutral-200);
 $color-accent-100: var(--accent-100);

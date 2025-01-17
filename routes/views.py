@@ -1,5 +1,6 @@
 import logging
-from django.shortcuts import render, redirect
+from django.shortcuts import render, reverse, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.contrib import messages
 from .models import Route
@@ -37,3 +38,41 @@ class RouteFormPage(generic.View):
             logger.warning('Form submission failed. Errors: %s', form.errors)
         return render(request, 'routes/map.html', {'form': form})
  
+
+def route_edit(request, route_id):
+    """
+    View to edit a route
+    """
+    route = get_object_or_404(Route, pk=route_id)
+
+    if request.method == "POST":
+        route_form = RouteForm(data=request.POST, instance=route)
+
+        if route_form.is_valid() and route.user == request.user:
+            route = route_form.save(commit=False)
+            route.save()
+            messages.add_message(request, messages.SUCCESS, 'Route updated successfully!')
+            return HttpResponseRedirect(reverse('route_detail', args=[route_id]))
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating route!')
+
+    else:
+        route_form = RouteForm(instance=route)
+
+    return render(request, 'routes/map.html', {'form': route_form, 'route': route})
+
+def route_delete(request, route_id):
+    """
+    View to delete a route
+    """
+    route = get_object_or_404(Route, pk=route_id)
+
+    if request.method == "POST":
+        if route.user == request.user:
+            route.delete()
+            messages.add_message(request, messages.SUCCESS, 'Route deleted successfully!')
+            return HttpResponseRedirect(reverse('my_walks'))
+        else:
+            messages.add_message(request, messages.ERROR, 'Error deleting route!')
+
+    return redirect('my_walks')

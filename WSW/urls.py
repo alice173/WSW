@@ -17,16 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
-from routes.views import  RouteFormPage, RouteDetail
+from routes.views import  RouteList, RouteFormPage, RouteDetail, route_edit, route_delete
 
 urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
-    path('walks/', include("walks.urls"), name="walk-urls"),
-    path('my-walks/', include("routes.urls"), name="route-urls"),
+    path('walks/', include("walks.urls"), name="walks"),
+    path('my-walks/', include("routes.urls"), name="my-walks"),
     path('map/', RouteFormPage.as_view(), name='route_create'),
     path('route/<int:pk>/', RouteDetail.as_view(), name='route_detail'),
+    path('route/<int:route_id>/delete/', route_delete, name='route_delete'),
+  
+  
     
   
 ]

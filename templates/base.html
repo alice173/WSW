@@ -13,18 +13,23 @@
 
     {% url 'walks' as walks_url %}
     {% url 'home' as home_url %}
-    {% url 'map' as map_url %}
-    {% url 'my_walks' as my_walks_url %}
+    {% url 'my_walks' as my-walks_url %}
 
     {% url 'account_login' as login_url %}
     {% url 'account_signup' as signup_url %}
     {% url 'account_logout' as logout_url %}
+
     <link
       type="text/x-scss"
       href="{% static 'scss/styles.scss' %}"
       rel="stylesheet"
     />
-    {% endcompress %} {% block extra_head %}{% endblock %}
+    {% endcompress %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    {% block extra_head %}{% endblock %}
   </head>
   <body>
     <nav class="main-nav flex">
@@ -32,15 +37,28 @@
       <ul class="nav__list flex">
         <li class="nav-item">
           <a
-            href="#"
+            href="{% url 'walks' %}"
             class="nav__link {% if request.path == walks_url %}active{% endif %}"
             >Walks</a
           >
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav__link">Map</a>
-        </li>
+
         {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a
+            href="{% url 'route_create' %}"
+            class="nav-link {% if request.path == route_create_url %}active{% endif %}"
+            >Map</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href="{% url 'my_walks' %}"
+            class="nav-link {% if request.path == my_walks_url %}active{% endif %}"
+            >My Walks</a
+          >
+        </li>
+
         <li class="nav-item">
           <a
             class="nav-link {% if request.path == logout_url %}active{% endif %}"

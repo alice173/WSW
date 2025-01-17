@@ -21,7 +21,7 @@
 <main class="main-map">
   <div class="stats">
     <!-- <button id="toggle-polylines">Toggle Polylines</button> -->
-    <h2>Create a New Route</h2>
+    <h2>{% if route %}Edit{% else %}Create{% endif %} Route</h2>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -47,6 +47,9 @@
       </details>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    {% if route %}
+    <a href="{% url 'route_detail' route.pk %}">Cancel</a>
+  {% endif %}
   </div>
   <div id="map"></div>
 </main>

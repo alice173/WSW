@@ -1,0 +1,66 @@
+/* Delete Modal */
+
+/* The modal's background */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 30%;
+  overflow: auto;
+}
+
+/* Display the modal when targeted */
+.modal:target {
+  display: block;
+  position: absolute;
+}
+
+/* The modal's content */
+.modal-content {
+  margin: auto;
+  color: $color-secondary-200;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $color-secondary-400;
+  text-align: justify;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: modal;
+  animation-duration: 0.5s;
+
+  & > * {
+    padding: 1rem;
+  }
+
+  & header {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/* The button used to close the modal */
+.closebtn {
+  color: $color-secondary-200;
+}
+
+.closebtn:hover,
+.closebtn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes modal {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 0px;
+    opacity: 1;
+  }
+}

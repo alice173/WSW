@@ -11,7 +11,7 @@ class RouteForm(forms.ModelForm):
         'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add a name for your walk'}),
         'start_point': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter start point or use the map'}),
         'end_point': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter end point or use the map'}),
-        'time_taken': forms.NumberInput(format='%H:%M', attrs={'class': 'form-control', 'placeholder': 'Add time in hours'}),
+        'time_taken': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Add time in hours'}),
         'route_img': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter comments'}),
         'distance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter distance in miles'}),

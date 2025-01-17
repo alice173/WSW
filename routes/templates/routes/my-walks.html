@@ -6,6 +6,7 @@
 {% block content %}
 <h2>Saved Routes</h2>
 
+{% if route %}
 <table>
   <thead>
     <tr>
@@ -66,4 +67,9 @@
     </footer>
   </div>
 </div>
-{% endfor %} {% endblock %}
+{% endfor %} {% else %}
+<p>
+  You have no saved routes.
+  <a href="{% url 'route_create' %}">Click here to add one.</a>
+</p>
+{% endif %} {% endblock %}

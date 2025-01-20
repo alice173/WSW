@@ -19,9 +19,9 @@
 {% load crispy_forms_tags %}
 
 <main class="main-map">
-  <div class="stats">
+  <div class="stats scroller">
     <!-- <button id="toggle-polylines">Toggle Polylines</button> -->
-    <h2>{% if route %}Edit{% else %}Create{% endif %} Route</h2>
+    <h2 class="mb-lg">{% if route %}Edit{% else %}Create{% endif %} Route</h2>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}

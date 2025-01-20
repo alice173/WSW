@@ -11,7 +11,72 @@ body {
 }
 
 .stats {
-  background-color: white;
+  padding-block: $space-xl;
+  border-inline-end: $border-primary;
+  overflow-x: auto;
+
+  details {
+    margin-block-end: $space-lg;
+    margin-inline: $space-md;
+    border-bottom: $border-primary;
+    padding-block-end: $space-lg;
+
+    &[open] > summary::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  summary {
+    margin-block-end: $space-md;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "";
+      width: 32px;
+      height: 32px;
+      background: url("../icons/chevron-down.svg");
+      background-size: cover;
+      margin-left: 0.75em;
+      transition: 0.2s;
+    }
+  }
+
+  label {
+    display: block;
+    margin-block-end: 0.5rem;
+  }
+
+  input,
+  textarea {
+    margin-block-end: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: $border-radius-lg;
+    background-color: transparent;
+    padding: 0.6rem;
+
+    &:focus {
+      box-shadow: 0 0 10px $color-primary-trans-300;
+    }
+  }
+  button[type="submit"] {
+    display: block;
+    margin-inline: auto;
+    background-color: $color-primary-400;
+    color: $color-neutral-200;
+    &:hover {
+      background-color: $color-secondary-200;
+      color: $color-secondary-700;
+    }
+  }
 }
 
 #map {

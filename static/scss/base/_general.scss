@@ -67,3 +67,11 @@ a:is(:hover, :focus) {
   gap: $space-md;
   justify-self: center;
 }
+
+/* style the scrollbar */
+
+/* Modern browsers with `scrollbar-*` support */
+
+.scroller {
+  scrollbar-color: $color-primary-300 $color-accent-400;
+}

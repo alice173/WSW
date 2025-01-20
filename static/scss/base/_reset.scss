@@ -47,7 +47,8 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input[type="submit"] {
   border: 0;
   margin: 0;
 }

@@ -1,3 +1,110 @@
+.saved-routes {
+  background-color: $color-neutral-100;
+  padding-block: $section-padding-block;
+  text-align: center;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td,
+    th {
+      padding-block: $space-xl;
+      padding-inline: $space-sm;
+      border-bottom: 1px solid $color-primary-400;
+      white-space: nowrap;
+    }
+    th {
+      color: $color-primary-500;
+      font-family: $ff-accent;
+      font-size: $fs-md;
+    }
+
+    i {
+      padding-inline: 0.5rem;
+    }
+  }
+  .no-routes {
+    text-align: center;
+    font-family: $ff-accent;
+    font-size: $fs-md;
+    background-color: $color-secondary-600;
+    color: $color-neutral-200;
+    border-radius: $border-radius;
+    padding: $space-md;
+    display: inline;
+
+    a {
+      color: $color-neutral-100;
+      &:hover {
+        color: $color-primary-200;
+      }
+    }
+  }
+}
+
+.icon-cell {
+  text-align: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.route {
+  &-tooltip {
+    color: $color-primary-400;
+    &:hover,
+    &:focus {
+      color: $color-secondary-500;
+    }
+  }
+  &-view {
+    anchor-name: --view-route;
+    &:hover .tooltip--view {
+      display: block;
+      opacity: 1;
+    }
+  }
+  &-delete {
+    anchor-name: --delete-route;
+    &:hover .tooltip--delete {
+      display: block;
+      opacity: 1;
+    }
+  }
+  &-edit {
+    anchor-name: --edit-route;
+    &:hover .tooltip--edit {
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+.tooltip {
+  background-color: $color-secondary-600;
+  color: $color-neutral-100;
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius;
+  top: anchor(left);
+  justify-self: anchor-center;
+  margin-left: 10px;
+  position: absolute;
+  display: none;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+
+  &--view {
+    position-anchor: --view-route;
+  }
+  &--delete {
+    position-anchor: --delete-route;
+  }
+  &--edit {
+    position-anchor: --edit-route;
+  }
+}
+
 /* Delete Modal */
 
 /* The modal's background */
@@ -6,6 +113,7 @@
   position: fixed;
   inset: 30%;
   overflow: auto;
+  border-radius: $border-radius;
 }
 
 /* Display the modal when targeted */
@@ -18,6 +126,7 @@
 .modal-content {
   margin: auto;
   color: $color-secondary-200;
+  font-size: larger;
   position: relative;
   height: 100%;
   width: 100%;
@@ -25,20 +134,32 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: $color-secondary-400;
+  background-color: $color-primary-400;
   text-align: justify;
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation-name: modal;
   animation-duration: 0.5s;
 
+  h2 {
+    color: $color-secondary-200;
+  }
+
   & > * {
-    padding: 1rem;
+    padding-block: 1.5rem;
+    margin-inline: 2rem;
   }
 
   & header {
     display: flex;
     justify-content: space-between;
+  }
+  & p {
+    border-block: 1px solid $color-secondary-200;
+  }
+
+  .button-wrapper {
+    justify-self: flex-start;
   }
 }
 

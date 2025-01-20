@@ -100,8 +100,9 @@
     <footer>
       <form method="post" action="{% url 'route_delete' route.pk %}">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="#" class="btn btn-secondary closebtn">Cancel</a>
+        <div class="button-wrapper">
+        <button type="submit" class="btn ">Delete</button>
+        <a href="#" class="btn btn--outline ">Cancel</a></div>
       </form>
     </footer>
   </div>

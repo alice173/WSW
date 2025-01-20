@@ -4,55 +4,83 @@
 {% load static %}
 {% block extra_head %}{% endblock %}
 {% block content %}
-<main class="saved-routes container container-wide">
-{% if routes %}
-<h2 class="mb-lg">Saved Routes</h2>
+<main class="saved-routes">
+  <div class="container container-wide">
+
+  {% if routes %}
+    <h2 class="mb-lg">Saved Routes</h2>
 {% if messages %}
-<ul class="messages">
+    <ul class="messages">
     {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
-</ul>
+    </ul>
 {% endif %}
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Start Point</th>
-      <th>End Point</th>
-      <th>Date</th>
-      <th>Time Taken</th>
-      <th>Distance</th>
-      <th>Elevation</th>
-      <th>Comments</th>
-      <th></th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+          <tr>
+          <th>Title</th>
+          <th>Start Point</th>
+          <th>End Point</th>
+          <th>Date</th>
+          <th>Time Taken</th>
+          <th>Distance</th>
+          <th>Elevation</th>
+          <th>Comments</th>
+        
+          <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for route in routes %}
-    <tr>
-      <td>{{ route.title }}</td>
-      <td>{{ route.start_point }}</td>
-      <td>{{ route.end_point }}</td>
-      <td>{{ route.date }}</td>
-      <td>{{ route.time_taken }} hrs</td>
-      <td>{{ route.distance }}</td>
-      <td>{{ route.elevation }}</td>
-      <td>{{ route.comments }}</td>
-      <td><a href="/route/{{ route.id }}">View</a></td>
-      <td>
-        <a href="{% url 'route_edit' route.pk %}"><i class="fa fa-edit"></i></a>
-        <a href="#delete-modal"><i class="fa fa-trash"></i> </a>
-      </td>
-    </tr>
+      <tr>
+        <td>{{ route.title }}</td>
+        <td>{{ route.start_point }}</td>
+        <td>{{ route.end_point }}</td>
+        <td>{{ route.date }}</td>
+        <td>{{ route.time_taken }} hrs</td>
+        <td>{{ route.distance }}</td>
+        <td>{{ route.elevation }}</td>
+        <td>{{ route.comments }}</td>
+        
+        <td class="icon-cell">
+         
+              
+          <a class="route-tooltip route-view" href="/route/{{ route.id }}" aria-label="click to view route">
+            <i class="fa fa-eye"></i>
+            <div class="tooltip tooltip--view">
+              <p>View Route</p>
+            </div>
+          </a>
+              
+         
+          <a class="route-tooltip route-edit" href="{% url 'route_edit' route.pk %}" aria-label="click to edit route">
+            <i class="fa fa-edit"></i>
+            <div class="tooltip tooltip--edit">
+              <p>Edit Route</p>
+            </div>
+          </a>
+             
+              
+          <a class="route-tooltip route-delete" href="#delete-modal" aria-label="click to delete route">
+            <i class="fa fa-trash"></i>
+            <div class="tooltip tooltip--delete">
+              <p>Delete Route</p>
+            </div>
+          </a>
+          
+          
+        </td>
+      </tr>
     {% endfor %}
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  </div>
 {% else %}
-<p>
+<p class = "no-routes">
   You have no saved routes.
-  <a href="{% url 'route_create' %}">Click here to add one.</a>
+  <a href="{% url 'route_create' %}"> Click here to add one.</a>
 </p>
 {% endif %} {% for route in routes %}
 </main>
@@ -76,6 +104,8 @@
     </footer>
   </div>
 </div>
+</div>
+</main>
 <!--prettier-ignore-->
 {% endfor %} 
 {% endblock %}

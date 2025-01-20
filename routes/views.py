@@ -10,10 +10,19 @@ from .forms import RouteForm
 logger = logging.getLogger(__name__)
 
 # List view for displaying routes
+
 class RouteList(generic.ListView):
     queryset = Route.objects.all()
     template_name = 'routes/my-walks.html'
     context_object_name = 'routes'
+    
+    def get_queryset(self):
+        return Route.objects.filter(user=self.request.user)
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.info(request, 'You must be registered to view this page.')
+        return super().dispatch(request, *args, **kwargs)
 
 # Detail view for displaying a single walk
 class RouteDetail(generic.DetailView):

@@ -17,7 +17,10 @@
     url("../images/coastal-path.jpg") no-repeat center center;
   background-size: cover;
   height: 90vh;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: $color-neutral-200;
   text-align: center;
   & h1 {
@@ -73,7 +76,7 @@
 
 .featured-walks {
   &--grid {
-    @include grid-columns(350px, $space-md);
+    @include grid-columns(350px, $space-xl);
   }
 
   &--walk {
@@ -81,15 +84,16 @@
     border: 1px solid $color-neutral-200;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 7fr 5fr;
+    // grid-template-rows: fit-content fit-content;
     img {
-      height: 100%;
       object-fit: cover;
+      aspect-ratio: 3/2;
     }
   }
 
   &--content {
-    padding: var(--space-md);
+    padding-inline: $space-md;
+    padding-block: $space-xl;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

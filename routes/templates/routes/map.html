@@ -37,7 +37,7 @@
         {{ form.start_point|as_crispy_field }} {{ form.end_point|as_crispy_field }}
       <div class="distance-wrapper flex mt-md">
         <p class="distance" id="distance">Distance: <span></span></p>
-        <p class="Elevation" id="Elevation">Elevation: <span></span></p>
+        <p class="elevation" id="elevation">Elevation: <span></span></p>
       </div>
       </details>
       <details>
@@ -48,6 +48,8 @@
         {{form.time_taken|as_crispy_field }} 
         {{ form.route_img|as_crispy_field }}
         {{ form.comments|as_crispy_field }}
+        {{ form.distance|as_crispy_field }}
+        {{ form.elevation|as_crispy_field }}
       </details>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

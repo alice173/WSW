@@ -20,7 +20,7 @@
 
 <main class="main-map">
   <div class="stats scroller">
-    <!-- <button id="toggle-polylines">Toggle Polylines</button> -->
+
     <h2 class="mb-lg">{% if route %}Edit{% else %}Create{% endif %} Route</h2>
     {% if messages %}
     <ul class="messages">
@@ -35,6 +35,10 @@
         <summary>Start and End Points</summary>
         <!--prettier-ignore-->
         {{ form.start_point|as_crispy_field }} {{ form.end_point|as_crispy_field }}
+      <div class="distance-wrapper flex mt-md">
+        <p class="distance" id="distance">Distance: <span></span></p>
+        <p class="Elevation" id="Elevation">Elevation: <span></span></p>
+      </div>
       </details>
       <details>
         <summary>Other Details</summary>
@@ -51,7 +55,7 @@
     <a href="{% url 'route_detail' route.pk %}">Cancel</a>
     {% endif %}
   </div>
-  <div id="map"></div>
+  <div id="map">    <button id="toggle-polylines">Toggle Polylines</button></div>
 </main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>

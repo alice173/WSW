@@ -1,3 +1,5 @@
+console.log("map.js is loaded");
+
 // Initialize Leaflet map
 const baseMap = L.tileLayer(
   "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
@@ -81,10 +83,14 @@ function onMapClick(e) {
     fetchRoute(activeRoute);
 
     // Calculate distance between the two markers
+    const distanceEl = document.querySelector("#distance span");
+    const distanceInput = document.getElementById("id_distance");
+    console.log("element" + distanceEl);
     let distance = map.distance(coords[0], coords[1]);
     console.log("dist calc", distance);
     const distanceMiles = parseFloat((distance / 1609).toFixed(2)); // Convert to string with 2 decimal places - parse float to convert back to number
-    console.log(distanceMiles);
+    distanceEl.innerText = `${distanceMiles} Miles`;
+    distanceInput.value = distanceMiles;
   }
 }
 
@@ -106,7 +112,7 @@ map.on("click", onMapClick);
 
 // Function to add a marker
 const customMarker = L.icon({
-  iconUrl: "/images/location-marker.png",
+  iconUrl: ".../images/location-marker.png",
   iconSize: [20, 25],
 });
 

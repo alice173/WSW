@@ -83,3 +83,14 @@ body {
   height: 100%;
   width: 100%;
 }
+
+.distance-wrapper {
+  justify-content: space-around;
+  // display: none;
+  span {
+    display: block;
+    color: $color-primary-400;
+    font-family: $ff-accent;
+    font-size: $fs-md;
+  }
+}

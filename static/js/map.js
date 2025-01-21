@@ -35,22 +35,68 @@ const layerControl = L.control
   .layers(baseLayers, {}, { collapsed: false, position: "topleft" })
   .addTo(map);
 
-// Initialize Geocoder
-const geocoder = L.Control.Geocoder.nominatim();
-L.Control.geocoder({
-  geocoder: geocoder,
-  placeholder: "Enter location or postcode...",
-  errorMessage: "Nothing found.",
-})
-  .on("markgeocode", function (e) {
-    const coordinates = e.geocode.center;
-    addMarker(coordinates, e.geocode.name);
-  })
-  .addTo(map);
-
 // Arrays to track multiple routes and markers
 const routes = [];
 let coords = [];
+
+// Track the current input being used for search
+let isStartPointSearch = true;
+
+// Function to handle location search for start and end points
+function setupLocationSearch() {
+  const startInput = document.getElementById("id_start_point");
+  const endInput = document.getElementById("id_end_point");
+
+  // Function to perform ORS search
+  function performSearch(query, isStart) {
+    const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
+    const url = `https://api.openrouteservice.org/geocode/search?api_key=${apiKey}&text=${query}`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.features && data.features.length > 0) {
+          const coordinates = data.features[0].geometry.coordinates;
+          const latLng = [coordinates[1], coordinates[0]]; // [latitude, longitude]
+
+          // Simulate a map click with these coordinates
+          onMapClick({ latlng: latLng });
+
+          // Center map on the searched location
+          map.setView(latLng, 13);
+        } else {
+          console.error("No results found");
+          alert("Location not found. Please try a different search term.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error searching for location. Please try again.");
+      });
+  }
+
+  // Event listener for start point input
+  startInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+      isStartPointSearch = true;
+      performSearch(this.value, true);
+      endInput.focus(); // Move focus to end input after search
+    }
+  });
+
+  // Event listener for end point input
+  endInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+      isStartPointSearch = false;
+      performSearch(this.value, false);
+    }
+  });
+}
+
+// Initialize the search functionality
+setupLocationSearch();
 
 // Click event handler function
 function onMapClick(e) {
@@ -123,7 +169,7 @@ map.on("click", onMapClick);
 
 // Function to add a marker
 const customMarker = L.icon({
-  iconUrl: "/images/location-marker.png",
+  iconUrl: "/static/images/location-marker.png",
   iconSize: [20, 25],
 });
 
@@ -254,7 +300,7 @@ function searchLocation() {
     .then((data) => {
       const coordinates = data.features[0].geometry.coordinates;
       const latLng = [coordinates[1], coordinates[0]]; // [latitude, longitude]
-      addMarker(latLng, query);
+      onMapClick({ latlng: latLng });
     })
     .catch((error) => console.error("Error:", error));
 }

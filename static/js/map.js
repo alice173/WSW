@@ -82,17 +82,27 @@ function onMapClick(e) {
 
     // Fetch and draw the route
     fetchRoute(activeRoute);
+  }
+}
 
-    // Calculate distance between the two markers
-    const distanceEl = document.querySelector("#distance span");
-    const distanceInput = document.getElementById("id_distance");
-    let distance = map.distance(coords[0], coords[1]);
-    console.log("dist calc", distance);
-    const distanceMiles = parseFloat((distance / 1609).toFixed(2)); // Convert to string with 2 decimal places - parse float to convert back to number
-    console.log(distanceMiles);
+// Function to calculate and display distance
+function calculateDistance(coordinates) {
+  const startPoint = coordinates[0];
+  const endPoint = coordinates[coordinates.length - 1];
+
+  const distance = map.distance(startPoint, endPoint);
+  const distanceMiles = parseFloat((distance / 1609).toFixed(2));
+
+  // Update UI elements
+  const distanceEl = document.querySelector("#distance span");
+  const distanceInput = document.getElementById("id_distance");
+
+  if (distanceEl && distanceInput) {
     distanceEl.innerText = `${distanceMiles} Miles`;
     distanceInput.value = distanceMiles;
   }
+
+  return distanceMiles;
 }
 
 // Add event listener to the toggle button
@@ -172,9 +182,8 @@ function fetchRoute(route) {
       // Adjust map view to fit the new polyline
       map.fitBounds(route.polyline.getBounds());
 
-      // Extract distance data
-      const distance = data.features[0].properties.segments[0].distance; // Distance in meters
-      console.log("Distance (meters):", distance);
+      // Calculate distance
+      calculateDistance(coordinates);
 
       // Get elevation data for the polyline
       getElevationData(coordinates, endPoint, distance);

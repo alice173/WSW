@@ -292,20 +292,4 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => console.error("Error fetching elevation data:", error));
   }
-
-  // Function to search location using ORS API
-  function searchLocation() {
-    const query = document.getElementById("search-box").value;
-    const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
-    const url = `https://api.openrouteservice.org/geocode/search?api_key=${apiKey}&text=${query}`;
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const coordinates = data.features[0].geometry.coordinates;
-        const latLng = [coordinates[1], coordinates[0]]; // [latitude, longitude]
-        onMapClick({ latlng: latLng });
-      })
-      .catch((error) => console.error("Error:", error));
-  }
 });

@@ -9,8 +9,8 @@ class RouteForm(forms.ModelForm):
         fields = ['title', 'date', 'start_point', 'end_point',  'route_img', 'time_taken', 'comments', 'distance', 'elevation']
         widgets = { 'date': forms.DateInput(attrs={'type': 'date'}),
         'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add a name for your walk'}),
-        'start_point': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter start point or use the map'}),
-        'end_point': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter end point or use the map'}),
+        'start_point': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Search for start point or use the map', 'list': 'start-suggestions'}),
+        'end_point': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Search for end point or use the map', 'list': 'end-suggestions'}),
         'time_taken': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Add time in hours'}),
         'route_img': forms.ClearableFileInput(attrs={'class': 'form-control '}),
         'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter comments'}),

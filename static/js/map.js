@@ -1,5 +1,3 @@
-console.log("map.js is loaded");
-
 // Initialize Leaflet map
 const baseMap = L.tileLayer(
   "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
@@ -85,10 +83,10 @@ function onMapClick(e) {
     // Calculate distance between the two markers
     const distanceEl = document.querySelector("#distance span");
     const distanceInput = document.getElementById("id_distance");
-    console.log("element" + distanceEl);
     let distance = map.distance(coords[0], coords[1]);
     console.log("dist calc", distance);
     const distanceMiles = parseFloat((distance / 1609).toFixed(2)); // Convert to string with 2 decimal places - parse float to convert back to number
+    console.log(distanceMiles);
     distanceEl.innerText = `${distanceMiles} Miles`;
     distanceInput.value = distanceMiles;
   }
@@ -112,7 +110,7 @@ map.on("click", onMapClick);
 
 // Function to add a marker
 const customMarker = L.icon({
-  iconUrl: ".../images/location-marker.png",
+  iconUrl: "/images/location-marker.png",
   iconSize: [20, 25],
 });
 
@@ -146,11 +144,12 @@ function fetchRoute(route) {
 
   console.log("Fetching route for:", route);
   const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
-  const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startPoint.lng},${startPoint.lat}&end=${endPoint.lng},${endPoint.lat}`;
+  const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startPoint.lng},${startPoint.lat}&end=${endPoint.lng},${endPoint.lat}&elevation=true`;
 
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log("API response:", data);
       const coordinates = data.features[0].geometry.coordinates.map((coord) => [
         coord[1],
         coord[0],
@@ -169,8 +168,51 @@ function fetchRoute(route) {
 
       // Adjust map view to fit the new polyline
       map.fitBounds(route.polyline.getBounds());
+
+      // Extract distance data
+      const distance = data.features[0].properties.segments[0].distance; // Distance in meters
+      console.log("Distance (meters):", distance);
+
+      // Get elevation data for the polyline
+      getElevationData(coordinates, endPoint, distance);
     })
     .catch((error) => console.error("Error fetching route:", error));
+}
+
+// Function to get elevation data for the polyline
+function getElevationData(coordinates, endPoint, distance) {
+  const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
+  const url = `https://api.openrouteservice.org/elevation/line?api_key=${apiKey}`;
+  const body = {
+    format_in: "geojson",
+    format_out: "geojson",
+    geometry: {
+      coordinates: coordinates.map((coord) => [coord[1], coord[0]]), // Convert to [longitude, latitude]
+      type: "LineString",
+    },
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Elevation data:", data);
+      if (data.geometry && data.geometry.coordinates) {
+        const elevationData = data.geometry.coordinates.map(
+          (coord) => coord[2]
+        ); // Extract elevation values
+        console.log("Elevation values (meters):", elevationData);
+        console.log(Math.max(...elevationData) - Math.min(...elevationData));
+      } else {
+        console.error("Elevation data not available");
+      }
+    })
+    .catch((error) => console.error("Error fetching elevation data:", error));
 }
 
 // Function to search location using ORS API

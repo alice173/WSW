@@ -1,3 +1,5 @@
+let elevationPoints = [];
+
 // Initialize Leaflet map
 const baseMap = L.tileLayer(
   "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
@@ -66,6 +68,7 @@ function onMapClick(e) {
       polyline: null,
     };
     coords.push(coordinates);
+    elevationPoints = [];
     console.log("diatnce a", coords);
     routes.push(newRoute);
     console.log("Started new route:", newRoute);
@@ -207,7 +210,23 @@ function getElevationData(coordinates, endPoint, distance) {
           (coord) => coord[2]
         ); // Extract elevation values
         console.log("Elevation values (meters):", elevationData);
-        console.log(Math.max(...elevationData) - Math.min(...elevationData));
+
+        // Calculate elevation gain
+        const elevationGain =
+          Math.max(...elevationData) - Math.min(...elevationData);
+        console.log("Elevation gain (meters):", elevationGain);
+
+        // Convert elevation gain to feet and display
+        const elevationGainFeet = parseFloat(
+          (elevationGain * 3.28084).toFixed(2)
+        );
+        const elevationEl = document.querySelector("#elevation span");
+        const elevationInput = document.getElementById("id_elevation");
+
+        if (elevationEl && elevationInput) {
+          elevationEl.innerText = `${elevationGainFeet} ft`;
+          elevationInput.value = elevationGainFeet;
+        }
       } else {
         console.error("Elevation data not available");
       }

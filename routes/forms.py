@@ -36,6 +36,6 @@ class RouteForm(forms.ModelForm):
                 'elevation'  # Hidden field
             ),
             ButtonHolder(
-                Submit('submit', 'Submit', css_class='btn-primary')
+                Submit('submit', 'Submit', css_class='btn')
             )
         )

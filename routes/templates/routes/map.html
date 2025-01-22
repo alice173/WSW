@@ -22,6 +22,7 @@
   <div class="stats scroller">
 
     <h2 class="mb-lg">{% if route %}Edit{% else %}Create{% endif %} Route</h2>
+    <button id="toggle-polylines">Toggle Polylines</button>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -57,10 +58,21 @@
     <a href="{% url 'route_detail' route.pk %}">Cancel</a>
     {% endif %}
   </div>
-  <div id="map">    <button id="toggle-polylines">Toggle Polylines</button></div>
+  <div id="map">    </div>
 </main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+{% if route %}
+<script>
+    const routeData = {
+        id: "{{ route.id }}",
+        startPoint: "{{ route.start_point }}",
+        endPoint: "{{ route.end_point }}",
+        distance: "{{ route.distance|default:'0'}}",
+        elevation: "{{ route.elevation|default:'0' }}",
+    }
+</script>
+{% endif %}
 <script src="{% static 'js/map.js' %}"></script>
 {% endblock %}

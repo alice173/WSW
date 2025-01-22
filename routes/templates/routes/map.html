@@ -63,20 +63,46 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
-{% if route %}
-<script>
-    const routeData = {
-        id: "{{ route.id }}",
-        startPoint: "{{ route.start_point }}",
-        endPoint: "{{ route.end_point }}",
-        distance: "{{ route.distance|default:'0'}}",
-        elevation: "{{ route.elevation|default:'0' }}",
-    }
-</script>
-{% endif %}
 {{ all_routes|json_script:"all-routes-data" }}
 <script>
-  const allRoutes = JSON.parse(document.getElementById('all-routes-data').textContent);
+
+  let routeData = {
+    id: "",
+    startPoint: "",
+    endPoint: "",
+    distance: "0",
+    elevation: "0"
+};
+
+// If we're editing (route exists), update routeData
+
+routeData = {
+        id: "{{ route.id|escapejs }}",
+        startPoint: "{{ route.start_point|escapejs }}",
+        endPoint: "{{ route.end_point|escapejs }}",
+        distance: "{{ route.distance|default:'0'|escapejs }}",
+        elevation: "{{ route.elevation|default:'0'|escapejs }}",
+    };
+    const allRoutes = [
+        {% for r in all_routes %}
+            {
+                id: {{ r.id }},
+                startPoint: "{{ r.start_point }}",
+                endPoint: "{{ r.end_point }}",
+            },
+        {% endfor %}
+    ];
+
+
+
+console.log("Route data:", routeData);
 </script>
+
+
+
+
+
+
+
 <script src="{% static 'js/map.js' %}"></script>
 {% endblock %}

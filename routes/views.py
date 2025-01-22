@@ -30,35 +30,47 @@ class RouteDetail(generic.DetailView):
     template_name = 'routes/route_detail.html'
     context_object_name = 'route'
 
-# Create view for handling the form
+# view for add route page
 class RouteFormPage(generic.View):
     def get(self, request, *args, **kwargs):
         form = RouteForm()
-        # Get all routes for the current user
         all_routes = list(Route.objects.filter(user=request.user).values())
-        return render(request, 'routes/map.html', {'form': form, 'all_routes': all_routes})
+        return render(
+            request, 
+            'routes/map.html', 
+            {
+                'form': form, 
+                'all_routes': all_routes,
+                'route': None  # Explicitly set route to None for create
+            }
+        )
 
     def post(self, request, *args, **kwargs):
         form = RouteForm(request.POST, request.FILES)
+        all_routes = list(Route.objects.filter(user=request.user).values())
         if form.is_valid():
             route = form.save(commit=False)
-            route.user = request.user  # Set the user
+            route.user = request.user
             route.save()
             from django.urls import reverse
             my_walks_url = reverse('my_walks')
             messages.success(request, f'Route saved successfully! Visit <a href="{my_walks_url}"> My Walks</a> to see or edit your routes.')
-            return HttpResponseRedirect(reverse('route_create')) 
+            return HttpResponseRedirect(reverse('route_create'))
         else:
             logger.warning('Form submission failed. Errors: %s', form.errors)
-        return render(request, 'routes/map.html', {'form': form}, )
- 
+        return render(
+            request, 
+            'routes/map.html', 
+            {
+                'form': form,
+                'all_routes': all_routes,
+                'route': None  # Explicitly set route to None for create
+            }
+        )
 
 def route_edit(request, route_id):
-    """
-    View to edit a route
-    """
     route = get_object_or_404(Route, pk=route_id)
-   
+    all_routes = list(Route.objects.filter(user=request.user).values())
 
     if request.method == "POST":
         route_form = RouteForm(data=request.POST, instance=route)
@@ -73,9 +85,16 @@ def route_edit(request, route_id):
 
     else:
         route_form = RouteForm(instance=route)
-    
 
-    return render(request, 'routes/map.html', {'form': route_form, 'route': route, })
+    return render(
+        request, 
+        'routes/map.html', 
+        {
+            'form': route_form, 
+            'route': route,
+            'all_routes': all_routes  # Add all_routes to edit view context
+        }
+    )
 
 def route_delete(request, route_id):
     """

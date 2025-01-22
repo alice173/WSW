@@ -2,6 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let elevationPoints = [];
   let currentRoute = null;
   let coords = [];
+  const routeData = {
+    id: "{{ route.id }}",
+    startPoint: "{{ route.start_point }}",
+    endPoint: "{{ route.end_point }}",
+    distance: "{{ route.distance|default:'0'}}",
+    elevation: "{{ route.elevation|default:'0' }}",
+  };
+  console.log("routeD" + routeData);
 
   // Initialize map
   const baseMap = L.tileLayer(
@@ -29,10 +37,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to parse coordinates from string format
   function parseCoordinates(coordString) {
-    if (!coordString) return null;
+    if (!coordString) {
+      console.error("No coordinate string provided");
+      return null;
+    }
     const [lat, lng] = coordString
       .split(",")
       .map((coord) => parseFloat(coord.trim()));
+    if (isNaN(lat) || isNaN(lng)) {
+      console.error("Parsing failed for coordinate string:", coordString);
+      return null; // Return null if parsing fails
+    }
+    console.log("Parsed coordinates:", { lat, lng });
     return { lat, lng };
   }
 
@@ -114,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Draw the new polyline
         route.polyline = L.polyline(coordinates, {
-          color: "#ffd60a",
+          color: "#48636a",
           weight: 6,
         }).addTo(polylineLayer);
 
@@ -217,32 +233,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to load and display a saved route
   function loadSavedRoute(routeData) {
+    console.log("Loading route:", routeData); // Log the route data being loaded
     const startCoords = parseCoordinates(routeData.startPoint);
     const endCoords = parseCoordinates(routeData.endPoint);
 
-    if (startCoords && endCoords) {
-      const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
-      const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startCoords.lng},${startCoords.lat}&end=${endCoords.lng},${endCoords.lat}`;
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          const coordinates = data.features[0].geometry.coordinates.map(
-            (coord) => [coord[1], coord[0]]
-          );
-
-          // Create polyline with a different color for saved routes
-          const polyline = L.polyline(coordinates, {
-            color: routeData.id === currentRouteId ? "#ffd60a" : "#3388ff",
-            weight: routeData.id === currentRouteId ? 6 : 3,
-            opacity: 0.7,
-          }).addTo(polylineLayer);
-
-          // Store the polyline reference
-          savedRoutePolylines.set(routeData.id, polyline);
-        })
-        .catch((error) => console.error("Error loading saved route:", error));
+    // Validate coordinates
+    if (
+      !startCoords ||
+      !endCoords ||
+      isNaN(startCoords.lat) ||
+      isNaN(startCoords.lng) ||
+      isNaN(endCoords.lat) ||
+      isNaN(endCoords.lng)
+    ) {
+      console.error("Invalid coordinates for route:", routeData);
+      return; // Skip this route
     }
+
+    console.log("Valid coordinates:", startCoords, endCoords); // Log valid coordinates
+
+    const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
+    const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startCoords.lng},${startCoords.lat}&end=${endCoords.lng},${endCoords.lat}`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const coordinates = data.features[0].geometry.coordinates.map(
+          (coord) => [coord[1], coord[0]]
+        );
+
+        console.log("Coordinates for route:", coordinates); // Log the coordinates
+
+        // Create polyline with a different color for saved routes
+        const polyline = L.polyline(coordinates, {
+          color: "#ffd60a", // Different color for saved routes
+          weight: 3,
+          opacity: 0.7,
+        }).addTo(polylineLayer);
+
+        console.log("Polyline added to layer:", polyline); // Log the polyline
+
+        // Store the polyline reference
+        savedRoutePolylines.set(routeData.id, polyline);
+
+        // Adjust map view to fit the route
+        map.fitBounds(polyline.getBounds());
+      })
+      .catch((error) => console.error("Error loading saved route:", error));
   }
 
   // Function to load all saved routes
@@ -274,6 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
         map.off("click", onMapClick);
         clearSavedRoutes();
       } else {
+        console.log("Adding polyline layer to map");
         map.addLayer(polylineLayer);
         map.on("click", onMapClick);
         loadAllSavedRoutes();
@@ -332,4 +370,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add map click handler
   map.on("click", onMapClick);
+
+  loadAllSavedRoutes();
 });

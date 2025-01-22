@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
       elevationDisplay.innerText = `${elevation.toFixed(2)} ft`;
   }
 
-  // Modified fetchRoute function
+  // FetchRoute function
   function fetchRoute(route) {
     const startPoint = route.startMarker.getLatLng();
     const endPoint = route.endMarker.getLatLng();
@@ -211,6 +211,102 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     return marker;
+  }
+
+  let savedRoutePolylines = new Map(); // Store polylines for saved routes
+
+  // Function to load and display a saved route
+  function loadSavedRoute(routeData) {
+    const startCoords = parseCoordinates(routeData.startPoint);
+    const endCoords = parseCoordinates(routeData.endPoint);
+
+    if (startCoords && endCoords) {
+      const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
+      const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startCoords.lng},${startCoords.lat}&end=${endCoords.lng},${endCoords.lat}`;
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const coordinates = data.features[0].geometry.coordinates.map(
+            (coord) => [coord[1], coord[0]]
+          );
+
+          // Create polyline with a different color for saved routes
+          const polyline = L.polyline(coordinates, {
+            color: routeData.id === currentRouteId ? "#ffd60a" : "#3388ff",
+            weight: routeData.id === currentRouteId ? 6 : 3,
+            opacity: 0.7,
+          }).addTo(polylineLayer);
+
+          // Store the polyline reference
+          savedRoutePolylines.set(routeData.id, polyline);
+        })
+        .catch((error) => console.error("Error loading saved route:", error));
+    }
+  }
+
+  // Function to load all saved routes
+  function loadAllSavedRoutes() {
+    if (typeof allRoutes !== "undefined") {
+      allRoutes.forEach((route) => {
+        if (route.id !== currentRouteId) {
+          // Don't double-draw the route being edited
+          loadSavedRoute(route);
+        }
+      });
+    }
+  }
+
+  // Function to clear all saved routes from the map
+  function clearSavedRoutes() {
+    savedRoutePolylines.forEach((polyline) => {
+      polylineLayer.removeLayer(polyline);
+    });
+    savedRoutePolylines.clear();
+  }
+
+  // Modified toggle button event listener
+  document
+    .getElementById("toggle-polylines")
+    .addEventListener("click", function () {
+      if (map.hasLayer(polylineLayer)) {
+        map.removeLayer(polylineLayer);
+        map.off("click", onMapClick);
+        clearSavedRoutes();
+      } else {
+        map.addLayer(polylineLayer);
+        map.on("click", onMapClick);
+        loadAllSavedRoutes();
+
+        // If we're editing a route, redraw it
+        if (currentRoute?.polyline) {
+          currentRoute.polyline.addTo(polylineLayer);
+        }
+      }
+    });
+
+  // Get the current route ID if we're editing
+  const currentRouteId = typeof routeData !== "undefined" ? routeData.id : null;
+
+  // Modified initializeRouteEdit function
+  function initializeRouteEdit() {
+    if (typeof routeData !== "undefined") {
+      const startCoords = parseCoordinates(routeData.startPoint);
+      const endCoords = parseCoordinates(routeData.endPoint);
+
+      if (startCoords && endCoords) {
+        currentRoute = {
+          startMarker: addMarker(startCoords, "Start Point"),
+          endMarker: addMarker(endCoords, "End Point"),
+          polyline: null,
+        };
+
+        fetchRoute(currentRoute);
+
+        // Load all other saved routes
+        loadAllSavedRoutes();
+      }
+    }
   }
 
   // Map click handler

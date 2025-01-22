@@ -74,5 +74,9 @@
     }
 </script>
 {% endif %}
+{{ all_routes|json_script:"all-routes-data" }}
+<script>
+  const allRoutes = JSON.parse(document.getElementById('all-routes-data').textContent);
+</script>
 <script src="{% static 'js/map.js' %}"></script>
 {% endblock %}

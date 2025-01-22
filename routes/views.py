@@ -34,7 +34,9 @@ class RouteDetail(generic.DetailView):
 class RouteFormPage(generic.View):
     def get(self, request, *args, **kwargs):
         form = RouteForm()
-        return render(request, 'routes/map.html', {'form': form})
+        # Get all routes for the current user
+        all_routes = list(Route.objects.filter(user=request.user).values())
+        return render(request, 'routes/map.html', {'form': form, 'all_routes': all_routes})
 
     def post(self, request, *args, **kwargs):
         form = RouteForm(request.POST, request.FILES)
@@ -48,7 +50,7 @@ class RouteFormPage(generic.View):
             return HttpResponseRedirect(reverse('route_create')) 
         else:
             logger.warning('Form submission failed. Errors: %s', form.errors)
-        return render(request, 'routes/map.html', {'form': form})
+        return render(request, 'routes/map.html', {'form': form}, )
  
 
 def route_edit(request, route_id):
@@ -56,6 +58,7 @@ def route_edit(request, route_id):
     View to edit a route
     """
     route = get_object_or_404(Route, pk=route_id)
+   
 
     if request.method == "POST":
         route_form = RouteForm(data=request.POST, instance=route)
@@ -70,8 +73,9 @@ def route_edit(request, route_id):
 
     else:
         route_form = RouteForm(instance=route)
+    
 
-    return render(request, 'routes/map.html', {'form': route_form, 'route': route})
+    return render(request, 'routes/map.html', {'form': route_form, 'route': route, })
 
 def route_delete(request, route_id):
     """

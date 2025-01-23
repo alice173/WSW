@@ -191,3 +191,5 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 
 - Ability to drag paths from all points not just start and end points
 - Ability to navigate using map and save a route that way.
+- Ability to see recommended walks based on location
+- Ability to filter walks based on difficulty level

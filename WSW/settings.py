@@ -61,7 +61,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/#stats-section'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
@@ -117,6 +117,10 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.herokuapp.com"
 ]
 
+ACCOUNT_MESSAGES = {
+    'logged_in': None,  # Disable "Successfully signed in" message
+    'logged_out': None,  # Disable "You have signed out" message
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

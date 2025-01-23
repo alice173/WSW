@@ -7,7 +7,7 @@
     miles of Britain's most breathtaking coastal trail. Every mile is an
     achievement worth celebrating.
   </p>
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated%}
   <div class="button-wrapper">
     <a href="{% url 'my_walks' %}" class="btn">My Walks</a>
     <a href="{% url 'route_create' %}" class="btn btn--outline">Add Route</a>
@@ -20,9 +20,35 @@
   {% endif %}
 </header>
 <main class="home-page">
-  <section class="section">
+  <section class="section" id="stats-section">
     <div class="container stats-section">
-      <div class="stats-section--wrapper flex">
+      {% if user.is_authenticated %}
+      <h2 class="stats-section--heading">Welcome Back {{user}}</h2>
+      <p class="stats-section--intro">
+       You have <span>{{distance_left}} </span>miles left to walk 
+      </p>
+      {% endif %}
+      {% if user.is_authenticated and total_distance %}
+      <div class="stats-section--wrapper">
+        <div class="stats-section--stat">
+          <h3>Distance Walked</h3>
+          <p><span>{{total_distance}} </span>Miles</p>
+          </div>
+          <div class="stats-section--stat">
+            <h3>Elevation Climbed</h3>
+            <p><span>115,000</span> Feet</p>
+          </div>
+          <div class="stats-section--stat">
+            <h3>No of Walks</h3>
+            <p><span>{{route_count}}</span></p>
+          </div>
+        </div>
+        <div class="button-wrapper">
+        <a href="{% url 'route_create' %}" class=>Add a Walk</a>
+        <a href="{% url 'my_walks' %}" class=>View My Walks</a>
+        </div>
+        {% else %}
+        <div class="stats-section--wrapper"></div>
         <div class="stats-section--stat">
           <h3>Distance</h3>
           <p><span>630</span>Miles</p>
@@ -36,6 +62,8 @@
           <p><span>880</span></p>
         </div>
       </div>
+        {% endif %}
+      
     </div>
   </section>
   <section class="section featured-walks">

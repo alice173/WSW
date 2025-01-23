@@ -42,11 +42,49 @@
     @include grid-columns;
   }
 
-  & h3 {
+  &--heading {
     color: $color-secondary-700;
     margin-block-end: $space-md;
   }
 
+  &--intro {
+    text-align: center;
+    font-size: $fs-md;
+    color: $color-secondary-500;
+    margin-block-end: $space-xxl;
+    span {
+      font-family: $ff-accent;
+      color: $color-primary-500;
+      font-size: $fs-lg;
+    }
+  }
+  h3 {
+    color: $color-secondary-700;
+    margin-block-end: $space-md;
+  }
+
+  .button-wrapper {
+    margin-block-start: $space-xxl;
+  }
+
+  a {
+    color: $color-primary-500;
+    font-size: $fs-base;
+    position: relative;
+    padding-inline-start: $space-md;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      // margin-inline-start: 20px;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 80%;
+      background-color: $color-primary-500;
+    }
+  }
   &--stat {
     text-align: center;
     position: relative;

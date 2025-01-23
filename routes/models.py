@@ -29,3 +29,7 @@ class Route(models.Model):
     @staticmethod
     def total_elevation():
         return Route.objects.aggregate(total_elevation=Sum('elevation'))['total_elevation'] or 0
+
+    @staticmethod
+    def route_count():
+        return Route.objects.count() or 0

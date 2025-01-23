@@ -4,18 +4,71 @@
 
 An app to keep track of how much of the South West coastal path the user has walked.
 
+### User Stories
+
+- [Trello Kanban Board](https://trello.com/invite/b/6745eaca0a76ea45ef8826d6/ATTId728c7a61a787b417503eafe40cf68feC19FDF22/wsw)
+
+<details>
+  <summary>User Authentication</summary>
+
+1. **Create Account:** As a user, I want to create an account, so that I can save my progress and access it from different devices.
+2. **Secure Login:** As a user, I want to log in securely, so that only I can view and update my progress.
+3. **Password Reset:** As a user, I want to reset my password, so that I can regain access if I forget it.
+
+</details>
+
+<details>
+  <summary>Tracking Walked Sections</summary>
+
+4. **Mark Sections:** As a user, I want to mark sections of the South West Coastal Path that I have walked, so that I can track my progress.
+5. **Update Sections:** As a user, I want to update sections I’ve walked previously, so that I can correct or refine my records.
+6. **Nearby Suggestions:** As a user, I want the app to suggest nearby sections based on my current location, so that I can plan my walks more easily.
+
+</details>
+
+<details>
+  <summary>Visualizing Progress</summary>
+
+7. **Map Highlighting:** As a user, I want to see a map highlighting the sections of the path I have walked, so that I have a visual reminder of my journey.
+8. **Color Coding:** As a user, I want the map to display different colors for completed and uncompleted sections, so that I can quickly identify my progress.
+9. **Map Zoom:** As a user, I want to zoom in and out on the map, so that I can view specific sections in detail or the entire path at a glance.
+
+</details>
+
+<details>
+  <summary>Statistics and Progress</summary>
+
+10. **Completion Percentage:** As a user, I want to see the percentage of the path I have completed, so that I can track my overall progress.
+11. **Distance Tracking:** As a user, I want to see the total distance I’ve walked and the remaining distance, so that I can plan future walks.
+12. **Progress Over Time:** As a user, I want to view my progress over time (e.g., by month or year), so that I can reflect on my walking habits.
+
+</details>
+
+<details>
+  <summary>Admin Features</summary>
+
+13. **Add Walks:** As an Admin, I want to add walks to the website.
+14. **Featured Walks:** As an admin, I want to mark some walks as featured.
+
+</details>
+
 ## UX Design Process
 
-- **User Stories:**
-  - [Trello Kanban Board](https://trello.com/invite/b/6745eaca0a76ea45ef8826d6/ATTId728c7a61a787b417503eafe40cf68feC19FDF22/wsw)
-- **Wireframes:**
-  - [Attach or link to accessible wireframes used in the design process, ensuring high colour contrast and alt text for visual elements.]
-  - [Explain the rationale behind the layout and design choices, focusing on usability and accessibility for all users, including those using assistive technologies.]
-- **Design Rationale:**
-  #### Colour Pallete
-  The inital colour scheme from an image of the SoutWest coastal path using [coolors.co](https://coolors.co/e84610-009fe3-4a4a4f-445261-d63649-e6ecf0-000000) to generate my colour palette:
+<details>
+  <summary>Wireframes</summary>
 
-![screenshot](assets/images/palette.png)
+- ![homepage](assets/images/homepage-wireframe.png)
+- ![map](assets/images/map-wireframe.png)
+
+</details>
+
+**Design Rationale:**
+
+#### Colour Pallete
+
+The inital colour scheme from an image of the SoutWest coastal path using [coolors.co](https://coolors.co/e84610-009fe3-4a4a4f-445261-d63649-e6ecf0-000000) to generate my colour palette:
+
+![palette](assets/images/palette.png)
 
 Tints and shades generated using a [generator](https://maketintsandshades.com/)
 
@@ -31,23 +84,65 @@ Fonts are from google and hosted locally for performance gains;
 
 I used [FontSquirrel](https://www.fontsquirrel.com/) to convert to web fonts.
 
+## Database Schema
+
+![database](assets/images/database-schema.png)
+
 ## Key Features
 
-- **Feature 1:** [Briefly describe the implemented feature.]
-- **Feature 2:** [Briefly describe the implemented feature.]
-- **Inclusivity Notes:**
-  - [Mention how the features address the needs of diverse users, including those with SEND.]
+### Track Walked Parts of the South West Coastal Path
+
+- User can add their route to the map
+- User can search for their start/end points via form search box
+- User can add comments/images related to their route
+- User can view a table of all walks or a visual representation on a map.
+- User can edit or delete all walks that they have added
+
+### Admin can add walks to website
+
+- Superusers can add walks via the site admin page that will be disaplayed on the [website](https://walk-south-west-50fc52fd9c8d.herokuapp.com/walks/)
+- Walks can be marked as featured to be displayed on home page
+
+## Maps
+
+To integate maps into the app I used [leaflet](https://leafletjs.com/). In order to draw a polyline on the map that traced an actual walking path I needed another layer.
+
+#### GeoJSON
+
+I attempted to use a geojson file of the coastal path found on the plymouth city council [website](https://www.data.gov.uk/dataset/105a4ca6-9b83-42c7-8c08-f0f1a21dec00/south-west-coast-path). However I struggled to get it to work and after investigation relaised taht it uses a coordinate reference system (CRS) that is not the default WGS84 (latitude, longitude) used by Leaflet. The CRS in this file is EPSG:27700, which is the British National Grid.
+
+While it should be possible to convert the data my inital attempts were unsuccessful. This is something I would like to return to.
+
+#### ORS
+
+As an alternative I used the open route service [API](https://openrouteservice.org/).
+
+This combined with the L.Routing.control function from leaflet-routing-machine allowed me to display the route on the map and draw a path between one point and another.
+
+## Technologies Used
+
+### Languages
+
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Sass/Scss](https://sass-lang.com/)
+- [Python](https://www.python.org/)
+
+### Frameworks and Libraries
+
+- [Django](https://www.djangoproject.com/)
 
 ## Deployment
 
 - **Platform:** Heroku
 - **High-Level Deployment Steps:**
-  1. [Step 1]
-  2. [Step 2]
-  3. [Step 3]
+  1. Add a requirements.txt file listing all Python dependencies
+  2. Create a Procfile specifying how to run the application
+  3. Make sure your application is configured to use environment variables for sensitive information
 - **Verification and Validation:**
-  - Steps taken to verify the deployed version matches the development version in functionality.
-  - [Include any additional checks to ensure accessibility of the deployed application.]
+  - Manually test all critical application routes and features after deployment
+  - Check application logs with heroku logs --tail for any deployment or runtime errors
 - **Security Measures:**
   - Use of environment variables for sensitive data.
   - Ensured DEBUG mode is disabled in production.
@@ -90,5 +185,9 @@ I used [FontSquirrel](https://www.fontsquirrel.com/) to convert to web fonts.
 
 ## Future Enhancements
 
-- [List potential improvements or additional features for future development.]
-- Consider enhancements to improve accessibility further, such as voice input capabilities or additional language support.
+- Work on map routing as mentioned earlier - route isn't always in line with the actual SWCP and ocassionaly will take an _unconventional_ route (i.e. through the sea)
+
+![Route through sea](assets/images/route-through-sea.png)
+
+- Ability to drag paths from all points not just start and end points
+- Ability to navigate using map and save a route that way.

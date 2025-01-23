@@ -9,7 +9,14 @@
       <!-- Loop through the featured walks -->
       {% for walk in walks %}
       <div class="walks--walk">
-        <img src="{{ walk.featured_img.url }}" alt="{{ walk.title }}" />
+        <div class="walks--img">
+          <img src="{{ walk.featured_img.url }}" alt="{{ walk.title }}" />
+        </div>
+        <div class="walks--info">
+          <p>{{ walk.distance }} miles</p>
+          <p>|</p>
+          <p>{{ walk.difficulty }}</p>
+        </div>
         <div class="walks--content">
           <h3>{{ walk.title }}</h3>
           <p>{{ walk.content_excerpt }}</p>

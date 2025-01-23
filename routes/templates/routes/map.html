@@ -63,9 +63,20 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
-{{ all_routes|json_script:"all-routes-data" }}
-<script>
 
+{{ all_routes|json_script:"all-routes-data" }}
+<!-- Get the JSON data from the script tag -->
+<script> 
+const allRoutesData = JSON.parse(document.getElementById('all-routes-data').textContent);
+  // Transform the data structure if needed
+const allRoutes = allRoutesData.map(route => ({
+      id: route.id,
+      startPoint: route.start_point,
+      endPoint: route.end_point,
+  }));
+  
+
+  
   let routeData = {
     id: "",
     startPoint: "",
@@ -75,7 +86,7 @@
 };
 
 // If we're editing (route exists), update routeData
-
+{% if route %}
 routeData = {
         id: "{{ route.id|escapejs }}",
         startPoint: "{{ route.start_point|escapejs }}",
@@ -83,18 +94,7 @@ routeData = {
         distance: "{{ route.distance|default:'0'|escapejs }}",
         elevation: "{{ route.elevation|default:'0'|escapejs }}",
     };
-    const allRoutes = [
-        {% for r in all_routes %}
-            {
-                id: {{ r.id }},
-                startPoint: "{{ r.start_point }}",
-                endPoint: "{{ r.end_point }}",
-            },
-        {% endfor %}
-    ];
-
-
-
+ {% endif %}
 console.log("Route data:", routeData);
 </script>
 

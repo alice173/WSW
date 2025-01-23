@@ -3,13 +3,14 @@
 {% block head_title %}Route Details{% endblock %} 
 {%block content %}
 <h2>{{ route.title }}</h2>
+{% if route.route_img %}
+<img src="{{ route.route_img.url }}" alt="{{ route.title }}" />
+{% endif %}
 <p><strong>Date:</strong> {{ route.date }}</p>
 <p><strong>Start Point:</strong> {{ route.start_point }}</p>
 <p><strong>End Point:</strong> {{ route.end_point }}</p>
 <p><strong>Time Taken:</strong> {{ route.time_taken }}</p>
 <p><strong>Comments:</strong> {{ route.comments }}</p>
-{% if route.route_img %}
-<p><strong>Image:</strong></p>
-<img src="{{ route.route_img.url }}" alt="{{ route.title }}" />
+
 <!-- <a href="{% url 'my_walks' %}">Back to My Walks</a> -->
-{% endif %} {% endblock %}
+{% endblock %}

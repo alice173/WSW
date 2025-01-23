@@ -23,13 +23,15 @@ class Route(models.Model):
         return self.title
     
     @staticmethod
-    def total_distance():
-        return Route.objects.aggregate(total_distance=Sum('distance'))['total_distance'] or 0
+    def total_distance(user):
+        return Route.objects.filter(user=user).aggregate(
+            total_distance=Sum('distance'))['total_distance'] or 0
     
     @staticmethod
-    def total_elevation():
-        return Route.objects.aggregate(total_elevation=Sum('elevation'))['total_elevation'] or 0
+    def total_elevation(user):
+        return Route.objects.filter(user=user).aggregate(
+            total_elevation=Sum('elevation'))['total_elevation'] or 0
 
     @staticmethod
-    def route_count():
-        return Route.objects.count() or 0
+    def route_count(user):
+        return Route.objects.filter(user=user).count() or 0

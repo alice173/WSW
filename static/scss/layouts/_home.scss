@@ -68,12 +68,12 @@
   }
 
   a {
-    color: $color-primary-500;
+    color: $color-primary-400;
     font-size: $fs-base;
     position: relative;
     padding-inline-start: $space-md;
 
-    &::after {
+    &:not(:first-child)::after {
       content: "";
       display: block;
       position: absolute;

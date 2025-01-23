@@ -103,6 +103,41 @@ I used [FontSquirrel](https://www.fontsquirrel.com/) to convert to web fonts.
 - Superusers can add walks via the site admin page that will be disaplayed on the [website](https://walk-south-west-50fc52fd9c8d.herokuapp.com/walks/)
 - Walks can be marked as featured to be displayed on home page
 
+### Authenticated Users
+
+<details>
+
+<summary>Navigation</summary>
+
+Logged in users can access the map and my-walks pages via navigation. Un registered/logged out users can log in or register
+
+![logged-out](assets/images/logged-out-nav.png)
+![logged-in](assets/images/user-nav.png)
+
+</details>
+
+<details>
+
+<summary>Home page hero</summary>
+
+Logged in users see buttons to view their walks, unregistered/logged out users see buttons to sign in or register
+
+![logged-out](assets/images/unauth-buttons.png)
+![logged-in](assets/images/user-buttons.png)
+
+</details>
+
+<details>
+
+<summary>Stats section</summary>
+
+Logged in users can see stats relating to the SWCP. Unregistered/logged out users see stats relating to their walking activity
+
+![logged-out](assets/images/unauth-stats.png)
+![logged-in](assets/images/user-stats.png)
+
+</details>
+
 ## Maps
 
 To integate maps into the app I used [leaflet](https://leafletjs.com/). In order to draw a polyline on the map that traced an actual walking path I needed another layer.

@@ -23,7 +23,7 @@
   <section class="section" id="stats-section">
     <div class="container stats-section">
       {% if user.is_authenticated %}
-      <h2 class="stats-section--heading">Welcome Back {{user}}</h2>
+      <h2 class="stats-section--heading">Welcome Back {{user}}!</h2>
       <p class="stats-section--intro">
        You have <span>{{distance_left}} </span>miles left to walk 
       </p>
@@ -36,7 +36,7 @@
           </div>
           <div class="stats-section--stat">
             <h3>Elevation Climbed</h3>
-            <p><span>115,000</span> Feet</p>
+            <p><span>{{total_elevation}}</span> Feet</p>
           </div>
           <div class="stats-section--stat">
             <h3>No of Walks</h3>
@@ -48,19 +48,19 @@
         <a href="{% url 'my_walks' %}" class=>View My Walks</a>
         </div>
         {% else %}
-        <div class="stats-section--wrapper"></div>
-        <div class="stats-section--stat">
-          <h3>Distance</h3>
-          <p><span>630</span>Miles</p>
-        </div>
-        <div class="stats-section--stat">
-          <h3>Total Elevation</h3>
-          <p><span>115,000</span> Feet</p>
-        </div>
-        <div class="stats-section--stat">
-          <h3>No of Gates</h3>
-          <p><span>880</span></p>
-        </div>
+        <div class="stats-section--wrapper">
+          <div class="stats-section--stat">
+            <h3>Distance</h3>
+            <p><span>630</span>Miles</p>
+          </div>
+          <div class="stats-section--stat">
+            <h3>Total Elevation</h3>
+            <p><span>115,000</span> Feet</p>
+          </div>
+          <div class="stats-section--stat">
+            <h3>No of Gates</h3>
+            <p><span>880</span></p>
+          </div>
       </div>
         {% endif %}
       

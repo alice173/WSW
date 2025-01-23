@@ -30,13 +30,26 @@
   }
   &--info {
     position: absolute;
-    padding: 1rem;
+    padding: 0.8rem;
     display: flex;
     color: $color-neutral-200;
     gap: 1rem;
     backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.5);
-    margin: 0.5rem;
+    background-color: $color-primary-trans-300;
+    margin: 1rem;
     border-radius: $border-radius;
+  }
+
+  a {
+    padding-block-end: 0.4rem;
+    border-bottom: 1px solid currentColor;
+    color: $color-primary-500;
+    transition: all 0.3s ease-in-out;
+    align-self: flex-start;
+
+    &:hover {
+      color: $color-secondary-400;
+      padding-block-end: 0.5rem;
+    }
   }
 }

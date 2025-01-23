@@ -73,6 +73,11 @@
       {% for walk in walks %}
       <div class="featured-walks--walk">
         <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" />
+        <div class="walks--info">
+          <p>{{ walk.distance }} miles</p>
+          <p>|</p>
+          <p>{{ walk.difficulty }}</p>
+        </div>
         <div class="featured-walks--content">
           <h3>{{ walk.title }}</h3>
           <p>{{ walk.content_excerpt }}</p>

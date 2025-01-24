@@ -22,7 +22,7 @@
   <div class="stats scroller">
 
     <h2 class="mb-lg">{% if route %}Edit{% else %}Create{% endif %} Route</h2>
-    <button id="toggle-polylines">Toggle Polylines</button>
+   
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -64,26 +64,10 @@
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
 
-{{ all_routes|json_script:"all-routes-data" }}
-<!-- Get the JSON data from the script tag -->
-<script> 
-const allRoutesData = JSON.parse(document.getElementById('all-routes-data').textContent);
-  // Transform the data structure if needed
-const allRoutes = allRoutesData.map(route => ({
-      id: route.id,
-      startPoint: route.start_point,
-      endPoint: route.end_point,
-  }));
-  
 
-  
-  let routeData = {
-    id: "",
-    startPoint: "",
-    endPoint: "",
-    distance: "0",
-    elevation: "0"
-};
+
+<script> 
+
 
 // If we're editing (route exists), update routeData
 {% if route %}

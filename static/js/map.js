@@ -2,13 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let elevationPoints = [];
   let currentRoute = null;
   let coords = [];
-  const routeData = {
-    id: "{{ route.id }}",
-    startPoint: "{{ route.start_point }}",
-    endPoint: "{{ route.end_point }}",
-    distance: "{{ route.distance|default:'0'}}",
-    elevation: "{{ route.elevation|default:'0' }}",
-  };
 
   // Initialize map
   const baseMap = L.tileLayer(
@@ -83,12 +76,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const startPoint = route.startMarker.getLatLng();
     const endPoint = route.endMarker.getLatLng();
 
+    console.log("Fetching route for points:", startPoint, endPoint); // Debug log
+
     const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
     const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startPoint.lng},${startPoint.lat}&end=${endPoint.lng},${endPoint.lat}&elevation=true`;
 
     fetch(url)
-      .then((response) => response.json())
+      .then((response) => {
+        console.log("API Response:", response); // Debug log
+        return response.json();
+      })
       .then((data) => {
+        console.log("Route data:", data); // Debug log
+
         const coordinates = data.features[0].geometry.coordinates.map(
           (coord) => [coord[1], coord[0]]
         );
@@ -195,17 +195,25 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize route editing
 
   function initializeRouteEdit() {
+    console.log("Initializing route edit with data:", routeData); // Debug log
+
     if (routeData && routeData.startPoint && routeData.endPoint) {
       const startCoords = parseCoordinates(routeData.startPoint);
       const endCoords = parseCoordinates(routeData.endPoint);
 
+      console.log("Parsed coordinates:", startCoords, endCoords); // Debug log
+
       if (startCoords && endCoords) {
         currentRoute = {
-          startMarker: addMarker(startCoords, "Start Point"),
-          endMarker: addMarker(endCoords, "End Point"),
+          startMarker: addMarker(
+            [startCoords.lat, startCoords.lng],
+            "Start Point"
+          ),
+          endMarker: addMarker([endCoords.lat, endCoords.lng], "End Point"),
           polyline: null,
         };
 
+        console.log("Created current route:", currentRoute); // Debug log
         fetchRoute(currentRoute);
       }
     }

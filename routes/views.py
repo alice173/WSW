@@ -72,14 +72,6 @@ def route_edit(request, route_id):
     """
     route = get_object_or_404(Route, pk=route_id)
 
-    # Format route data for form
-    route_data = {
-        'id': route.id,
-        'startPoint': route.start_point,
-        'endPoint': route.end_point,
-        'distance': route.distance,
-        'elevation': route.elevation
-    }
 
     if request.method == "POST":
         route_form = RouteForm(data=request.POST, instance=route)
@@ -95,10 +87,10 @@ def route_edit(request, route_id):
     else:
         route_form = RouteForm(instance=route)
 
-    return render(request, 'routes/route_edit.html', {
+    return render(request, 'routes/add-route.html', {
         'form': route_form, 
         'route': route, 
-        'route_data': route_data
+        
     })
 
 # View for route deletion

@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     distance: "{{ route.distance|default:'0'}}",
     elevation: "{{ route.elevation|default:'0' }}",
   };
-  console.log("routeD" + routeData);
 
   // Initialize map
   const baseMap = L.tileLayer(
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const map = L.map("map", mapOptions);
   const polylineLayer = L.layerGroup([]).addTo(map);
 
-  // Function to parse coordinates from string format
+  // Utility functions (parse coordinates, format coordinates, etc.)
   function parseCoordinates(coordString) {
     if (!coordString) {
       console.error("No coordinate string provided");
@@ -46,50 +45,22 @@ document.addEventListener("DOMContentLoaded", function () {
       .map((coord) => parseFloat(coord.trim()));
     if (isNaN(lat) || isNaN(lng)) {
       console.error("Parsing failed for coordinate string:", coordString);
-      return null; // Return null if parsing fails
+      return null;
     }
-    console.log("Parsed coordinates:", { lat, lng });
     return { lat, lng };
   }
 
-  // Function to format coordinates for form input
   function formatCoordinates(latlng) {
     return `${latlng.lat.toFixed(6)}, ${latlng.lng.toFixed(6)}`;
   }
 
-  // Function to initialize editing of existing route
-  function initializeRouteEdit() {
-    // Check if we have route data from Django
-    if (typeof routeData !== "undefined") {
-      const startCoords = parseCoordinates(routeData.startPoint);
-      const endCoords = parseCoordinates(routeData.endPoint);
-
-      if (startCoords && endCoords) {
-        // Create markers for start and end points
-        currentRoute = {
-          startMarker: addMarker(startCoords, "Start Point"),
-          endMarker: addMarker(endCoords, "End Point"),
-          polyline: null,
-        };
-
-        // Fetch and draw the route
-        fetchRoute(currentRoute);
-
-        // Center map on route start point
-        map.setView([startCoords.lat, startCoords.lng], 13);
-      }
-    }
-  }
-
-  // Function to update form fields
+  // Update form fields
   function updateFormFields(startPoint, endPoint, distance, elevation) {
-    // Update hidden distance and elevation fields
     const distanceInput = document.getElementById("id_distance");
     const elevationInput = document.getElementById("id_elevation");
     if (distanceInput) distanceInput.value = distance.toFixed(2);
     if (elevationInput) elevationInput.value = elevation.toFixed(2);
 
-    // Update start and end point fields
     const startInput = document.getElementById("id_start_point");
     const endInput = document.getElementById("id_end_point");
     if (startInput && startPoint) {
@@ -99,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
       endInput.value = formatCoordinates(endPoint);
     }
 
-    // Update display elements if they exist
     const distanceDisplay = document.querySelector("#distance span");
     const elevationDisplay = document.querySelector("#elevation span");
     if (distanceDisplay)
@@ -108,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       elevationDisplay.innerText = `${elevation.toFixed(2)} ft`;
   }
 
-  // FetchRoute function
+  // Fetch route details
   function fetchRoute(route) {
     const startPoint = route.startMarker.getLatLng();
     const endPoint = route.endMarker.getLatLng();
@@ -123,12 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
           (coord) => [coord[1], coord[0]]
         );
 
-        // Remove existing polyline if it exists
         if (route.polyline) {
           polylineLayer.removeLayer(route.polyline);
         }
 
-        // Draw the new polyline
         route.polyline = L.polyline(coordinates, {
           color: "#48636a",
           weight: 6,
@@ -136,16 +104,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         coords = coordinates;
 
-        // Calculate distance in miles
         const distance = calculateDistance(coordinates);
 
-        // Get elevation data
         getElevationData(coordinates, endPoint, distance, function (elevation) {
-          // Update form fields with new values
           updateFormFields(startPoint, endPoint, distance, elevation);
         });
 
-        // Adjust map view to fit the route
         map.fitBounds(route.polyline.getBounds());
       })
       .catch((error) => {
@@ -154,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Calculate distance function
+  // Distance calculation
   function calculateDistance(coordinates) {
     let totalDistance = 0;
     for (let i = 1; i < coordinates.length; i++) {
@@ -162,11 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const point2 = L.latLng(coordinates[i][0], coordinates[i][1]);
       totalDistance += point1.distanceTo(point2);
     }
-    // Convert meters to miles
     return totalDistance / 1609.34;
   }
 
-  // Modified getElevationData function
+  // Elevation data retrieval
   function getElevationData(coordinates, endPoint, distance, callback) {
     const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
     const url = `https://api.openrouteservice.org/elevation/line?api_key=${apiKey}`;
@@ -229,106 +192,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return marker;
   }
 
-  let savedRoutePolylines = new Map(); // Store polylines for saved routes
+  // Initialize route editing
 
-  // Function to load and display a saved route
-  function loadSavedRoute(routeData) {
-    console.log("Loading route:", routeData); // Log the route data being loaded
-    const startCoords = parseCoordinates(routeData.startPoint);
-    const endCoords = parseCoordinates(routeData.endPoint);
-
-    // Validate coordinates
-    if (
-      !startCoords ||
-      !endCoords ||
-      isNaN(startCoords.lat) ||
-      isNaN(startCoords.lng) ||
-      isNaN(endCoords.lat) ||
-      isNaN(endCoords.lng)
-    ) {
-      console.error("Invalid coordinates for route:", routeData);
-      return; // Skip this route
-    }
-
-    console.log("Valid coordinates:", startCoords, endCoords); // Log valid coordinates
-
-    const apiKey = "5b3ce3597851110001cf6248019e60e78b254057a4a19879ff29e229";
-    const url = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${apiKey}&start=${startCoords.lng},${startCoords.lat}&end=${endCoords.lng},${endCoords.lat}`;
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const coordinates = data.features[0].geometry.coordinates.map(
-          (coord) => [coord[1], coord[0]]
-        );
-
-        console.log("Coordinates for route:", coordinates); // Log the coordinates
-
-        // Create polyline with a different color for saved routes
-        const polyline = L.polyline(coordinates, {
-          color: "#ffd60a", // Different color for saved routes
-          weight: 3,
-          opacity: 0.7,
-        }).addTo(polylineLayer);
-
-        console.log("Polyline added to layer:", polyline); // Log the polyline
-
-        // Store the polyline reference
-        savedRoutePolylines.set(routeData.id, polyline);
-
-        // Adjust map view to fit the route
-        map.fitBounds(polyline.getBounds());
-      })
-      .catch((error) => console.error("Error loading saved route:", error));
-  }
-
-  // Function to load all saved routes
-  function loadAllSavedRoutes() {
-    if (typeof allRoutes !== "undefined") {
-      allRoutes.forEach((route) => {
-        if (route.id !== currentRouteId) {
-          // Don't double-draw the route being edited
-          loadSavedRoute(route);
-        }
-      });
-    }
-  }
-
-  // Function to clear all saved routes from the map
-  function clearSavedRoutes() {
-    savedRoutePolylines.forEach((polyline) => {
-      polylineLayer.removeLayer(polyline);
-    });
-    savedRoutePolylines.clear();
-  }
-
-  // Modified toggle button event listener
-  document
-    .getElementById("toggle-polylines")
-    .addEventListener("click", function () {
-      if (map.hasLayer(polylineLayer)) {
-        map.removeLayer(polylineLayer);
-        map.off("click", onMapClick);
-        clearSavedRoutes();
-      } else {
-        console.log("Adding polyline layer to map");
-        map.addLayer(polylineLayer);
-        map.on("click", onMapClick);
-        loadAllSavedRoutes();
-
-        // If we're editing a route, redraw it
-        if (currentRoute?.polyline) {
-          currentRoute.polyline.addTo(polylineLayer);
-        }
-      }
-    });
-
-  // Get the current route ID if we're editing
-  const currentRouteId = typeof routeData !== "undefined" ? routeData.id : null;
-
-  // Modified initializeRouteEdit function
   function initializeRouteEdit() {
-    if (typeof routeData !== "undefined") {
+    if (routeData && routeData.startPoint && routeData.endPoint) {
       const startCoords = parseCoordinates(routeData.startPoint);
       const endCoords = parseCoordinates(routeData.endPoint);
 
@@ -340,9 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         fetchRoute(currentRoute);
-
-        // Load all other saved routes
-        loadAllSavedRoutes();
       }
     }
   }
@@ -370,6 +234,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add map click handler
   map.on("click", onMapClick);
-
-  loadAllSavedRoutes();
 });

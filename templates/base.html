@@ -96,4 +96,74 @@
     </nav>
     {% block content %}{% endblock %}
   </body>
+  <footer class="main-footer">
+    <nav class="footer-nav flex">
+      <ul class="nav__list flex">
+        <li class="nav-item">
+          <a
+            href="{% url 'walks' %}"
+            class="nav-link {% if request.path == walks_url %}active{% endif %}"
+            >Walks</a
+          >
+        </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a
+            href="{% url 'route_create' %}"
+            class="nav-link {% if request.path == route_create_url %}active{% endif %}"
+            >Add Route</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href="{% url 'my_walks' %}"
+            class="nav-link {% if request.path == my_walks_url %}active{% endif %}"
+            >My Walks</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href="{% url 'routes_map' %}"
+            class="nav-link {% if request.path == routes_map %}active{% endif %}"
+            >Map</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.path == logout_url %}active{% endif %}"
+            aria-current="page"
+            href="{% url 'account_logout' %}"
+            >Logout</a
+          >
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.path == signup_url %}active{% endif %}"
+            aria-current="page"
+            href="{% url 'account_signup' %}"
+            >Register</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link {% if request.path == login_url %}active{% endif %}"
+            aria-current="page"
+            href="{% url 'account_login' %}"
+            >Login</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <p>
+      &copy;
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      Walk South West
+    </p>
+  </footer>
 </html>

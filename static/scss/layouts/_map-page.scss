@@ -80,7 +80,6 @@ body {
 }
 
 #map,
-#route-map,
 .route-map {
   height: 100%;
   width: 100%;
@@ -95,4 +94,23 @@ body {
     font-family: $ff-accent;
     font-size: $fs-md;
   }
+}
+
+#route-map {
+  height: 75%;
+  width: 100%;
+}
+
+.map-footer {
+  height: 25%;
+  place-content: center;
+  border-top: $border-primary;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+
+  // .stats-section--wrapper {
+  //   height: 100%;
+  // }
 }

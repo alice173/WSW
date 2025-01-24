@@ -19,6 +19,22 @@
 
 <main class="route-map">
   <div id="route-map"></div>
+  <footer class="map-footer">
+    <div class="stats-section--wrapper">
+      <div class="stats-section--stat">
+        <h3>Total distance</h3>
+        <p><span>{{total_distance}} </span>Miles</p>
+      </div>
+      <div class="stats-section--stat">
+        <h3>Total Elevation</h3>
+        <p><span>{{total_elevation}}</span> Feet</p>
+      </div>
+      <div class="stats-section--stat">
+        <h3>No of Walks</h3>
+        <p><span>{{route_count}}</span></p>
+      </div>
+    </div>
+  </footer>
 </main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>

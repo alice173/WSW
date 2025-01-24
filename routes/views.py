@@ -110,27 +110,38 @@ def route_delete(request, route_id):
             return redirect('my_walks')
     return redirect('my_walks')
 
-# New view for displaying all routes on a map
+# View for displaying all routes on a map
 def routes_map_view(request):
-    """
-    View to display all user's routes on a map
-    """
+    """View to display all routes on a map"""
     routes = Route.objects.filter(user=request.user)
     all_routes = []
+    total_distance = 0
+    total_elevation = 0
+    route_count = 0
+
+    if request.user.is_authenticated:
+        total_distance = Route.total_distance(request.user)
+        total_elevation = Route.total_elevation(request.user)
+        route_count = routes.count()
+        
+        # Format numbers
+        total_distance = f"{total_distance:.2f}"
+        total_elevation = f"{total_elevation:.2f}"
+        
+        # Format routes for map
+        for route in routes:
+            route_dict = {
+                'id': route.id,
+                'start_point': route.start_point,
+                'end_point': route.end_point,
+            }
+            all_routes.append(route_dict)
     
-    for route in routes:
-        route_dict = {
-            'id': route.id,
-            'title': route.title,
-            'start_point': route.start_point,
-            'end_point': route.end_point,
-            'distance': route.distance,
-            'elevation': route.elevation,
-            # Convert CloudinaryField to URL string
-            'route_img': str(route.route_img.url) if route.route_img else None
-        }
-        all_routes.append(route_dict)
+    context = {
+        'all_routes': all_routes,
+        'total_distance': total_distance,
+        'total_elevation': total_elevation,
+        'route_count': route_count,
+    }
     
-    return render(request, 'routes/routes_map.html', {
-        'all_routes': all_routes
-    })
+    return render(request, 'routes/routes_map.html', context)

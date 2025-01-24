@@ -2,15 +2,31 @@
 {% extends "base.html" %} 
 {% block head_title %}Route Details{% endblock %} 
 {%block content %}
-<h2>{{ route.title }}</h2>
-{% if route.route_img %}
-<img src="{{ route.route_img.url }}" alt="{{ route.title }}" />
-{% endif %}
-<p><strong>Date:</strong> {{ route.date }}</p>
-<p><strong>Start Point:</strong> {{ route.start_point }}</p>
-<p><strong>End Point:</strong> {{ route.end_point }}</p>
-<p><strong>Time Taken:</strong> {{ route.time_taken }}</p>
-<p><strong>Comments:</strong> {{ route.comments }}</p>
-
-<!-- <a href="{% url 'my_walks' %}">Back to My Walks</a> -->
+<main class="route-detail">
+  <div class="container">
+    <h1>{{ route.title }}</h1>
+    <div class="route-detail--img">
+      <img src="{{ route.route_img.url }}" alt="{{ route.title }}" />
+    </div>
+    <div class="route-detail--details">
+      <p><strong>Date: </strong> {{ route.date }}</p>
+      <p><strong>Start Point: </strong> {{ route.start_point }}</p>
+      <p><strong>End Point: </strong> {{ route.end_point }}</p>
+      <p><strong>Time Taken: </strong> {{ route.time_taken }}</p>
+      <p><strong>Comments: </strong> {{ route.comments }}</p>
+      <p><strong>Distance: </strong> {{ route.distance }}</p>
+      <p><strong>Elevation Gain: </strong> {{ route.elevation }}</p>
+    </div>
+    <div class="links-wrapper">
+      <a href="{% url 'my_walks' %}">Back to My Walks</a>
+      <p>|</p>
+      <a
+        href="{% url 'route_edit' route.pk %}"
+        aria-label="click to edit route"
+      >
+        Edit Walk</a
+      >
+    </div>
+  </div>
+</main>
 {% endblock %}

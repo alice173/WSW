@@ -1,4 +1,5 @@
-.walk-detail {
+.walk-detail,
+.route-detail {
   padding-block: $section-padding-block;
 
   h1 {
@@ -27,5 +28,25 @@
     font-size: $fs-md;
     margin-block-start: $space-sm;
     margin-block-end: $space-md;
+  }
+}
+
+.route-detail {
+  &--img {
+    margin-block-end: $space-md;
+  }
+
+  strong {
+    font-family: $ff-accent;
+    font-size: $fs-md;
+  }
+
+  &--details {
+    margin-block-end: $space-md;
+  }
+
+  .links-wrapper {
+    display: flex;
+    gap: 1rem;
   }
 }

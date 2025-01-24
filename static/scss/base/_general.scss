@@ -7,6 +7,9 @@ body {
   font-weight: $fw-default;
   background-color: $color-secondary-100;
   color: $color-secondary-800;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,

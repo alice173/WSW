@@ -10,7 +10,6 @@ from .forms import RouteForm
 logger = logging.getLogger(__name__)
 
 # List view for displaying routes
-
 class RouteList(generic.ListView):
     queryset = Route.objects.all()
     template_name = 'routes/my-walks.html'
@@ -30,96 +29,57 @@ class RouteDetail(generic.DetailView):
     template_name = 'routes/route_detail.html'
     context_object_name = 'route'
 
-# view for add route page
+# View for route creation page
 class RouteFormPage(generic.View):
     def get(self, request, *args, **kwargs):
         form = RouteForm()
-        routes = Route.objects.filter(user=request.user)
-        all_routes = []
-    
-        for route in routes:
-            route_dict = {
-                'id': route.id,
-                'title': route.title,
-                'start_point': route.start_point,
-                'end_point': route.end_point,
-                'distance': route.distance,
-                'elevation': route.elevation,
-                # Convert CloudinaryField to URL string
-                'route_img': str(route.route_img.url) if route.route_img else None
-            }
-            all_routes.append(route_dict)
-            
         return render(
             request, 
-            'routes/map.html', 
+            'routes/add-route.html', 
             {
-                'form': form, 
-                'all_routes': all_routes,
+                'form': form,
                 'route': None  # Explicitly set route to None for create
             }
         )
 
-        def post(self, request, *args, **kwargs):
-            form = RouteForm(request.POST, request.FILES)
-            if form.is_valid():
-                route = form.save(commit=False)
-                route.user = request.user
-                route.save()
-                
-                # Prepare response data
-                response_data = {
-                    'success': True,
-                    'message': 'Route saved successfully!',
-                    'redirect_url': reverse('my_walks')
+    def post(self, request, *args, **kwargs):
+        form = RouteForm(request.POST, request.FILES)
+        if form.is_valid():
+            route = form.save(commit=False)
+            route.user = request.user
+            route.save()
+            
+            messages.success(
+                request, 
+                f'Route saved successfully! Visit <a href="{reverse("my_walks")}">My Walks</a> to see or edit your routes.'
+            )
+            return HttpResponseRedirect(reverse('route_create'))
+        else:
+            logger.warning('Form submission failed. Errors: %s', form.errors)
+            return render(
+                request, 
+                'routes/route_create.html', 
+                {
+                    'form': form,
+                    'route': None
                 }
-                
-                messages.success(
-                    request, 
-                    f'Route saved successfully! Visit <a href="{reverse("my_walks")}">My Walks</a> to see or edit your routes.'
-                )
-                return HttpResponseRedirect(reverse('route_create'))
-            else:
-                logger.warning('Form submission failed. Errors: %s', form.errors)
-                all_routes = Route.objects.filter(user=request.user).values(
-                    'id', 'start_point', 'end_point', 'distance', 'elevation'
-                )
-                return render(
-                    request, 
-                    'routes/map.html', 
-                    {
-                        'form': form,
-                        'all_routes': list(all_routes),
-                        'route': None
-                    }
             )
 
+# View for route edit page
 def route_edit(request, route_id):
+    """
+    View to edit a route
+    """
     route = get_object_or_404(Route, pk=route_id)
-    all_routes = list(Route.objects.filter(user=request.user).values())
 
-        # Serialize route for template
-    route_dict = {
+    # Format route data for form
+    route_data = {
         'id': route.id,
-        'start_point': route.start_point,
-        'end_point': route.end_point,
+        'startPoint': route.start_point,
+        'endPoint': route.end_point,
         'distance': route.distance,
-        'elevation': route.elevation,
-        'time_taken': route.time_taken,
-        'route_img': str(route.route_img.url) if route.route_img else None
+        'elevation': route.elevation
     }
-    
-    # Serialize all routes
-    all_routes = []
-    for route_obj in routes:
-        route_dict = {
-            'id': route_obj.id,
-            'start_point': route_obj.start_point,
-            'end_point': route_obj.end_point,
-            'distance': route_obj.distance,
-            'elevation': route_obj.elevation,
-        }
-        all_routes.append(route_dict)
 
     if request.method == "POST":
         route_form = RouteForm(data=request.POST, instance=route)
@@ -135,16 +95,13 @@ def route_edit(request, route_id):
     else:
         route_form = RouteForm(instance=route)
 
-    return render(
-        request, 
-        'routes/map.html', 
-        {
-            'form': route_form, 
-            'route': route,
-            'all_routes': all_routes  # Add all_routes to edit view context
-        }
-    )
+    return render(request, 'routes/route_edit.html', {
+        'form': route_form, 
+        'route': route, 
+        'route_data': route_data
+    })
 
+# View for route deletion
 def route_delete(request, route_id):
     """
     View to delete a route
@@ -160,3 +117,28 @@ def route_delete(request, route_id):
             messages.add_message(request, messages.ERROR, 'Error deleting route!')
             return redirect('my_walks')
     return redirect('my_walks')
+
+# New view for displaying all routes on a map
+def routes_map_view(request):
+    """
+    View to display all user's routes on a map
+    """
+    routes = Route.objects.filter(user=request.user)
+    all_routes = []
+    
+    for route in routes:
+        route_dict = {
+            'id': route.id,
+            'title': route.title,
+            'start_point': route.start_point,
+            'end_point': route.end_point,
+            'distance': route.distance,
+            'elevation': route.elevation,
+            # Convert CloudinaryField to URL string
+            'route_img': str(route.route_img.url) if route.route_img else None
+        }
+        all_routes.append(route_dict)
+    
+    return render(request, 'routes/routes_map.html', {
+        'all_routes': all_routes
+    })

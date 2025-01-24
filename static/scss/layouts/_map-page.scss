@@ -79,7 +79,9 @@ body {
   }
 }
 
-#map {
+#map,
+#route-map,
+.route-map {
   height: 100%;
   width: 100%;
 }

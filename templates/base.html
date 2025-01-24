@@ -48,7 +48,7 @@
           <a
             href="{% url 'route_create' %}"
             class="nav-link {% if request.path == route_create_url %}active{% endif %}"
-            >Map</a
+            >Add Route</a
           >
         </li>
         <li class="nav-item">
@@ -56,6 +56,13 @@
             href="{% url 'my_walks' %}"
             class="nav-link {% if request.path == my_walks_url %}active{% endif %}"
             >My Walks</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href="{% url 'routes_map' %}"
+            class="nav-link {% if request.path == routes_map %}active{% endif %}"
+            >Map</a
           >
         </li>
 

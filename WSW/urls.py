@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
-from routes.views import  RouteList, RouteFormPage, RouteDetail, route_edit, route_delete
+from routes.views import  RouteList, RouteFormPage, RouteDetail, route_edit, route_delete, routes_map_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -26,8 +26,9 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('walks/', include("walks.urls"), name="walks"),
     path('my-walks/', include("routes.urls"), name="my-walks"),
+    path('map/', routes_map_view, name='routes_map'),
     path('login/', auth_views.LoginView.as_view(), name='login'),  
-    path('map/', RouteFormPage.as_view(), name='route_create'),
+    path('add-route/', RouteFormPage.as_view(), name='route_create'),
     path('route/<int:pk>/', RouteDetail.as_view(), name='route_detail'),
     path('route/<int:route_id>/delete/', route_delete, name='route_delete'),
   

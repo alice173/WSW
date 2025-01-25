@@ -74,57 +74,88 @@ document.addEventListener("DOMContentLoaded", function () {
   ["id_start_point", "id_end_point"].forEach((inputId) => {
     const input = document.getElementById(inputId);
     if (input) {
-      input.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-          event.preventDefault(); // Prevent form submission
-          const placeName = this.value;
+      const geocoder = L.Control.Geocoder.nominatim({
+        geocodingQueryParams: {
+          limit: 5, // Number of suggestions
+        },
+      });
 
-          // Use Nominatim geocoder
-          const geocoder = L.Control.Geocoder.nominatim();
+      input.addEventListener("input", function () {
+        const placeName = this.value;
+        if (placeName.length > 2) {
+          // Minimum characters to trigger suggestions
           geocoder.geocode(placeName, (results) => {
-            if (results && results.length > 0) {
-              const location = results[0].center;
-              const marker = addMarker([location.lat, location.lng], placeName);
-
-              if (inputId === "id_start_point") {
-                if (currentRoute && currentRoute.startMarker) {
-                  map.removeLayer(currentRoute.startMarker);
-                }
-                currentRoute = {
-                  startMarker: marker,
-                  endMarker: currentRoute?.endMarker || null,
-                  polyline: currentRoute?.polyline || null,
-                };
-
-                // Update start point input
-                this.value = formatCoordinates({
-                  lat: location.lat,
-                  lng: location.lng,
-                });
-              } else {
-                if (currentRoute && currentRoute.endMarker) {
-                  map.removeLayer(currentRoute.endMarker);
-                }
-                currentRoute = {
-                  startMarker: currentRoute?.startMarker || null,
-                  endMarker: marker,
-                  polyline: currentRoute?.polyline || null,
-                };
-
-                // Update end point input
-                this.value = formatCoordinates({
-                  lat: location.lat,
-                  lng: location.lng,
-                });
-              }
-
-              if (currentRoute.startMarker && currentRoute.endMarker) {
-                fetchRoute(currentRoute);
-              }
-            } else {
-              console.error("No results found for:", placeName);
-              alert("Location not found. Please try again.");
+            // Clear previous suggestions
+            const existingSuggestions = document.getElementById(
+              "location-suggestions"
+            );
+            if (existingSuggestions) {
+              existingSuggestions.remove();
             }
+
+            // Create suggestions dropdown
+            const suggestionContainer = document.createElement("div");
+            suggestionContainer.id = "location-suggestions";
+            suggestionContainer.style.position = "absolute";
+            suggestionContainer.style.zIndex = "1000";
+            suggestionContainer.style.backgroundColor = "white";
+            suggestionContainer.style.border = "1px solid #ddd";
+            suggestionContainer.style.maxWidth = `${input.offsetWidth}px`;
+
+            results.forEach((result) => {
+              const suggestionItem = document.createElement("div");
+              suggestionItem.textContent = result.name;
+              suggestionItem.style.padding = "10px";
+              suggestionItem.style.cursor = "pointer";
+              suggestionItem.addEventListener("mouseover", () => {
+                suggestionItem.style.backgroundColor = "#f0f0f0";
+              });
+              suggestionItem.addEventListener("mouseout", () => {
+                suggestionItem.style.backgroundColor = "white";
+              });
+              suggestionItem.addEventListener("click", () => {
+                input.value = result.name;
+                suggestionContainer.remove();
+
+                // Trigger geocoding and marker placement
+                const marker = addMarker(
+                  [result.center.lat, result.center.lng],
+                  result.name
+                );
+
+                if (inputId === "id_start_point") {
+                  if (currentRoute && currentRoute.startMarker) {
+                    map.removeLayer(currentRoute.startMarker);
+                  }
+                  currentRoute = {
+                    startMarker: marker,
+                    endMarker: currentRoute?.endMarker || null,
+                    polyline: currentRoute?.polyline || null,
+                  };
+                } else {
+                  if (currentRoute && currentRoute.endMarker) {
+                    map.removeLayer(currentRoute.endMarker);
+                  }
+                  currentRoute = {
+                    startMarker: currentRoute?.startMarker || null,
+                    endMarker: marker,
+                    polyline: currentRoute?.polyline || null,
+                  };
+                }
+
+                if (currentRoute.startMarker && currentRoute.endMarker) {
+                  fetchRoute(currentRoute);
+                }
+              });
+              suggestionContainer.appendChild(suggestionItem);
+            });
+
+            // Position the suggestions near the input
+            suggestionContainer.style.top = `${
+              input.offsetTop + input.offsetHeight
+            }px`;
+            suggestionContainer.style.left = `${input.offsetLeft}px`;
+            input.parentNode.appendChild(suggestionContainer);
           });
         }
       });

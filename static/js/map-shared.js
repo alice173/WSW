@@ -290,6 +290,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  initializeRouteEdit();
+
   // Allow search via input
   geocoder.on("markgeocode", function (e) {
     const { center, name } = e.geocode;

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("hello");
   let elevationPoints = [];
   let currentRoute = null;
   let coords = [];
@@ -70,128 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (elevationDisplay)
       elevationDisplay.innerText = `${elevation.toFixed(2)} ft`;
   }
-
-  ["id_start_point", "id_end_point"].forEach((inputId) => {
-    const input = document.getElementById(inputId);
-    if (input) {
-      const geocoder = L.Control.Geocoder.nominatim({
-        geocodingQueryParams: {
-          limit: 5, // Number of suggestions
-          countrycodes: "gb",
-          viewbox: "-6.4,49.96,0.35,51.4", // Southwest England bounding box
-          bounded: 1,
-        },
-      });
-
-      input.addEventListener("input", function () {
-        const placeName = this.value;
-        if (placeName.length > 2) {
-          // Minimum characters to trigger suggestions
-          geocoder.geocode(placeName, (results) => {
-            // Clear previous suggestions
-            const existingSuggestions = document.getElementById(
-              "location-suggestions"
-            );
-            if (existingSuggestions) {
-              existingSuggestions.remove();
-            }
-
-            // Create suggestions dropdown
-            const suggestionContainer = document.createElement("div");
-            suggestionContainer.id = "location-suggestions";
-            suggestionContainer.style.position = "absolute";
-            suggestionContainer.style.zIndex = "1000";
-            suggestionContainer.style.backgroundColor = "white";
-            suggestionContainer.style.border = "1px solid #ddd";
-            suggestionContainer.style.maxWidth = `${input.offsetWidth}px`;
-
-            results.forEach((result) => {
-              const suggestionItem = document.createElement("div");
-              suggestionItem.textContent = result.name;
-              suggestionItem.style.padding = "10px";
-              suggestionItem.style.cursor = "pointer";
-              suggestionItem.addEventListener("mouseover", () => {
-                suggestionItem.style.backgroundColor = "#f0f0f0";
-              });
-              suggestionItem.addEventListener("mouseout", () => {
-                suggestionItem.style.backgroundColor = "white";
-              });
-              suggestionItem.addEventListener("click", () => {
-                input.value = result.name;
-                suggestionContainer.remove();
-
-                // Trigger geocoding and marker placement
-                const marker = addMarker(
-                  [result.center.lat, result.center.lng],
-                  result.name
-                );
-
-                if (inputId === "id_start_point") {
-                  if (currentRoute && currentRoute.startMarker) {
-                    map.removeLayer(currentRoute.startMarker);
-                  }
-                  currentRoute = {
-                    startMarker: marker,
-                    endMarker: currentRoute?.endMarker || null,
-                    polyline: currentRoute?.polyline || null,
-                  };
-                } else {
-                  if (currentRoute && currentRoute.endMarker) {
-                    map.removeLayer(currentRoute.endMarker);
-                  }
-                  currentRoute = {
-                    startMarker: currentRoute?.startMarker || null,
-                    endMarker: marker,
-                    polyline: currentRoute?.polyline || null,
-                  };
-                }
-
-                if (currentRoute.startMarker && currentRoute.endMarker) {
-                  fetchRoute(currentRoute);
-                }
-              });
-              suggestionContainer.appendChild(suggestionItem);
-            });
-
-            // Position the suggestions near the input
-            suggestionContainer.style.top = `${
-              input.offsetTop + input.offsetHeight
-            }px`;
-            suggestionContainer.style.left = `${input.offsetLeft}px`;
-            input.parentNode.appendChild(suggestionContainer);
-          });
-        }
-      });
-    }
-  });
-
-  // Allow search via input
-  geocoder.on("markgeocode", function (e) {
-    const { center, name } = e.geocode;
-    const coordinates = { lat: center.lat, lng: center.lng };
-
-    // If no current route, create start marker
-    if (!currentRoute) {
-      currentRoute = {
-        startMarker: addMarker(coordinates, name),
-        endMarker: null,
-        polyline: null,
-      };
-
-      // Update start point input
-      const startInput = document.getElementById("id_start_point");
-      if (startInput) startInput.value = formatCoordinates(coordinates);
-    }
-    // If start exists but no end, create end marker
-    else if (!currentRoute.endMarker) {
-      currentRoute.endMarker = addMarker(coordinates, name);
-      fetchRoute(currentRoute);
-
-      // Update end point input
-      const endInput = document.getElementById("id_end_point");
-      if (endInput) endInput.value = formatCoordinates(coordinates);
-    }
-  });
 
   // Fetch route details
   function fetchRoute(route) {
@@ -411,6 +290,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  initializeRouteEdit();
+
   // Allow search via input
   geocoder.on("markgeocode", function (e) {
     const { center, name } = e.geocode;
@@ -483,10 +364,6 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchRoute(currentRoute);
     }
   }
-
-  // Add map click handler
-
-  map.on("click", onMapClick);
 
   // Initialize the map for editing if we have route data
   initializeRouteEdit();

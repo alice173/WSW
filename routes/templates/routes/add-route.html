@@ -30,7 +30,7 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
+    <form class="mb-lg" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <details open>
         <summary>Start and End Points</summary>
@@ -55,7 +55,7 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     {% if route %}
-    <a href="{% url 'route_detail' route.pk %}">Cancel</a>
+    <a class="ml-lg uppercase"href="{% url 'route_detail' route.pk %}">Cancel</a>
     {% endif %}
   </div>
   <div id="map">    </div>
@@ -82,11 +82,7 @@ routeData = {
 console.log("Route data:", routeData);
 </script>
 
-
-
-
-
-
-
-<script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'js/map-shared.js' %}"></script>
 {% endblock %}
+
+

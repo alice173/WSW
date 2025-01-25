@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 
   & > * {
     height: 100vh;
@@ -29,7 +30,7 @@
   a {
     --link-color: $color-neutral-200;
     color: var(--link-color);
-    padding-block-end: 5px;
+
     transition: all ease 0.3s;
     &:hover,
     &:focus {
@@ -43,6 +44,9 @@
     background-image: url("../images/cliff-view.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    @media screen and (max-width: 630px) {
+      display: none;
+    }
   }
 
   form {
@@ -96,7 +100,7 @@
     }
     .btn {
       margin-block-start: var(--space-sm);
-
+      white-space: nowrap;
       align-self: flex-start;
       font-weight: 600;
     }

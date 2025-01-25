@@ -237,9 +237,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Initialize the map for editing if we have route data
-  initializeRouteEdit();
-
   // Add map click handler
   map.on("click", onMapClick);
+  // Initialize the map for editing if we have route data
+  initializeRouteEdit();
 });

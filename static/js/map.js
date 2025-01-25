@@ -77,6 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const geocoder = L.Control.Geocoder.nominatim({
         geocodingQueryParams: {
           limit: 5, // Number of suggestions
+          countrycodes: "gb",
+          viewbox: "-6.4,49.96,0.35,51.4", // Southwest England bounding box
+          bounded: 1,
         },
       });
 

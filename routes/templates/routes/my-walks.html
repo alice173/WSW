@@ -23,8 +23,6 @@
       <thead>
           <tr>
           <th>Title</th>
-          <th>Start Point</th>
-          <th>End Point</th>
           <th>Date</th>
           <th>Time Taken</th>
           <th>Distance</th>
@@ -38,8 +36,6 @@
     {% for route in routes %}
       <tr>
         <td>{{ route.title }}</td>
-        <td>{{ route.start_point }}</td>
-        <td>{{ route.end_point }}</td>
         <td>{{ route.date }}</td>
         <td>{{ route.time_taken }} hrs</td>
         <td>{{ route.distance }}</td>

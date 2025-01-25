@@ -71,6 +71,94 @@ document.addEventListener("DOMContentLoaded", function () {
       elevationDisplay.innerText = `${elevation.toFixed(2)} ft`;
   }
 
+  ["id_start_point", "id_end_point"].forEach((inputId) => {
+    const input = document.getElementById(inputId);
+    if (input) {
+      input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault(); // Prevent form submission
+          const placeName = this.value;
+
+          // Use Nominatim geocoder
+          const geocoder = L.Control.Geocoder.nominatim();
+          geocoder.geocode(placeName, (results) => {
+            if (results && results.length > 0) {
+              const location = results[0].center;
+              const marker = addMarker([location.lat, location.lng], placeName);
+
+              if (inputId === "id_start_point") {
+                if (currentRoute && currentRoute.startMarker) {
+                  map.removeLayer(currentRoute.startMarker);
+                }
+                currentRoute = {
+                  startMarker: marker,
+                  endMarker: currentRoute?.endMarker || null,
+                  polyline: currentRoute?.polyline || null,
+                };
+
+                // Update start point input
+                this.value = formatCoordinates({
+                  lat: location.lat,
+                  lng: location.lng,
+                });
+              } else {
+                if (currentRoute && currentRoute.endMarker) {
+                  map.removeLayer(currentRoute.endMarker);
+                }
+                currentRoute = {
+                  startMarker: currentRoute?.startMarker || null,
+                  endMarker: marker,
+                  polyline: currentRoute?.polyline || null,
+                };
+
+                // Update end point input
+                this.value = formatCoordinates({
+                  lat: location.lat,
+                  lng: location.lng,
+                });
+              }
+
+              if (currentRoute.startMarker && currentRoute.endMarker) {
+                fetchRoute(currentRoute);
+              }
+            } else {
+              console.error("No results found for:", placeName);
+              alert("Location not found. Please try again.");
+            }
+          });
+        }
+      });
+    }
+  });
+
+  // Allow search via input
+  geocoder.on("markgeocode", function (e) {
+    const { center, name } = e.geocode;
+    const coordinates = { lat: center.lat, lng: center.lng };
+
+    // If no current route, create start marker
+    if (!currentRoute) {
+      currentRoute = {
+        startMarker: addMarker(coordinates, name),
+        endMarker: null,
+        polyline: null,
+      };
+
+      // Update start point input
+      const startInput = document.getElementById("id_start_point");
+      if (startInput) startInput.value = formatCoordinates(coordinates);
+    }
+    // If start exists but no end, create end marker
+    else if (!currentRoute.endMarker) {
+      currentRoute.endMarker = addMarker(coordinates, name);
+      fetchRoute(currentRoute);
+
+      // Update end point input
+      const endInput = document.getElementById("id_end_point");
+      if (endInput) endInput.value = formatCoordinates(coordinates);
+    }
+  });
+
   // Fetch route details
   function fetchRoute(route) {
     const startPoint = route.startMarker.getLatLng();

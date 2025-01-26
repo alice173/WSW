@@ -1,11 +1,12 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
 <header class="hero">
   <h1>Walk South West</h1>
   <p>
     Explore the South West Coast Path your way. Perfect for weekend wanderers
     and day-trippers, track your progress as you gradually discover all 630
-    miles of Britain's most breathtaking coastal trail. Every mile is an
-    achievement worth celebrating.
+    miles of Britain's most breathtaking coastal trail. 
   </p>
   {% if user.is_authenticated%}
   <div class="button-wrapper">
@@ -20,6 +21,33 @@
   {% endif %}
 </header>
 <main class="home-page">
+  <section class="section intro-section ">
+    <div class="container container-wide">
+      <h2 class="intro-section--heading mb-xxl">Discover the South West Coast Path</h2>
+      <div class="intro-section--wrapper flex">
+        <div class="intro-section--img box-shadow">
+      <img
+        src="{% static 'images/coast-path-sign.webp' %}"
+        alt="A hiker on the South West Coast Path"
+        class="intro-section--img"/></div>
+      <div class="intro-section--content">
+        <p class="intro-section--intro">
+          Welcome to Walk Sout West - your companion for exploring the magnificent South West Coastal Path.
+        </p>
+        <p class="intro-section--intro">
+          Stretching 630 miles from Minehead in Somerset to Poole Harbour in Dorset, the South West Coast Path is Britain's longest National Trail. This spectacular route winds through four counties, offering breathtaking views of rugged cliffs, hidden coves, charming fishing villages, and wild moorland.
+        </p>
+        <p class="intro-section--intro">
+          We understand that tackling the entire path in one go isn't practical for most people – it typically takes 7-8 weeks to complete the full trail. That's why Walk South West helps you break down your coastal adventure into manageable sections, allowing you to track your progress over multiple visits and seasons.
+        </p>
+        <p class="intro-section--intro">
+          Whether you're planning a weekend escape, a series of day walks, or working towards completing the entire path piece by piece, our tools help you plan, record, and celebrate every mile of your journey along this stunning coastline.
+        </p>
+    </div>
+  </div>
+  </div>
+    </div>
+  </section>
   <section class="section" id="stats-section">
     <div class="container stats-section">
       {% if user.is_authenticated %}
@@ -71,7 +99,7 @@
     <div class="featured-walks--grid container container-wide">
       <!-- Loop through the featured walks -->
       {% for walk in walks %}
-      <div class="featured-walks--walk">
+      <div class="featured-walks--walk box-shadow--small">
         <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" />
         <div class="walks--info">
           <p>{{ walk.distance }} miles</p>

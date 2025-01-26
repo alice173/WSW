@@ -100,3 +100,12 @@ a:is(:hover, :focus) {
     }
   }
 }
+
+.box-shadow {
+  box-shadow: rgba(109, 131, 136, 0.4) 0px 8px 24px;
+}
+
+.box-shadow--sm {
+  box-shadow: rgba(109, 131, 136, 0.1) 0px 4px 6px -1px,
+    rgba(109, 131, 136, 0.6) 0px 2px 4px -1px;
+}

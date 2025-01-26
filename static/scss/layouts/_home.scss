@@ -127,6 +127,37 @@
   }
 }
 
+.intro-section {
+  &--wrapper {
+    align-items: center;
+    & > * {
+      flex: 1;
+    }
+    @media screen and (max-width: 1084px) {
+      flex-direction: column;
+    }
+  }
+
+  &--img {
+    border-radius: $border-radius;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  &--content {
+    padding-inline: $space-xl;
+    padding-block: $space-xl;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: $fs-md;
+
+    p:has(+ p) {
+      margin-block-end: $space-md;
+    }
+  }
+}
+
 .featured-walks {
   text-align: center;
   &--grid {

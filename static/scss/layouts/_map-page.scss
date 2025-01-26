@@ -1,10 +1,7 @@
 @use "../abstracts/colours" as *;
 
-// body {
-//   height: 100vh;
-// }
 .main-map {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 6fr;

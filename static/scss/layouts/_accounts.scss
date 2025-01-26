@@ -11,6 +11,11 @@
   & > * {
     height: 100vh;
   }
+  h1 {
+    color: $color-secondary-100;
+
+    margin-block-end: var(--space-md);
+  }
 
   main {
     background-color: $color-secondary-700;
@@ -98,6 +103,11 @@
     h2 {
       color: $color-secondary-100;
     }
+
+    p {
+      font-size: $fs-md;
+    }
+
     .btn {
       margin-block-start: var(--space-sm);
       white-space: nowrap;

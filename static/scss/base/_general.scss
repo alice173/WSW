@@ -83,3 +83,20 @@ a:is(:hover, :focus) {
   padding: 0;
   margin: 0;
 }
+
+.link-underline {
+  padding-block-end: 0.4rem;
+  border-bottom: 1px solid currentColor;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    padding-block-end: 0.5rem;
+  }
+
+  &--secondary {
+    color: $color-secondary-500;
+    &:hover {
+      color: $color-primary-400;
+    }
+  }
+}

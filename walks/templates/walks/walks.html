@@ -20,7 +20,11 @@
         <div class="walks--content">
           <h3>{{ walk.title }}</h3>
           <p>{{ walk.content_excerpt }}</p>
-          <a href="{% url 'walk_detail' walk.slug %}">View Walk</a>
+          <a
+            class="link-underline link-underline--secondary"
+            href="{% url 'walk_detail' walk.slug %}"
+            >View Walk</a
+          >
         </div>
       </div>
       {% endfor %}

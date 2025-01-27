@@ -19,12 +19,14 @@ class RouteForm(forms.ModelForm):
             'start_point': forms.TextInput(attrs={
                 'class': 'form-control', 
                 'placeholder': 'Search for start point or use the map', 
-                'list': 'start-suggestions'
+                'list': 'start-suggestions',
+                'autocomplete': 'off'
             }),
             'end_point': forms.TextInput(attrs={
                 'class': 'form-control', 
                 'placeholder': 'Search for end point or use the map', 
-                'list': 'end-suggestions'
+                'list': 'end-suggestions',
+                'autocomplete': 'off'
             }),
             'time_taken': forms.NumberInput(attrs={
                 'class': 'form-control', 

@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const startInput = document.getElementById("id_start_point");
     const endInput = document.getElementById("id_end_point");
+
     if (startInput && startPoint) {
       startInput.value = formatCoordinates(startPoint);
     }
@@ -224,25 +225,24 @@ document.addEventListener("DOMContentLoaded", function () {
             // Create suggestions dropdown
             const suggestionContainer = document.createElement("div");
             suggestionContainer.id = "location-suggestions";
-            suggestionContainer.style.position = "absolute";
-            suggestionContainer.style.zIndex = "1000";
-            suggestionContainer.style.backgroundColor = "var(--neutral-200)";
-            suggestionContainer.style.border = "1px solid #ddd";
+
             suggestionContainer.style.maxWidth = `${input.offsetWidth}px`;
 
             results.forEach((result) => {
               const suggestionItem = document.createElement("div");
+              suggestionItem.className = "location-suggestions--item";
               suggestionItem.textContent = result.name;
               suggestionItem.style.padding = "10px";
               suggestionItem.style.cursor = "pointer";
               suggestionItem.addEventListener("mouseover", () => {
-                suggestionItem.style.backgroundColor = "#f0f0f0";
+                suggestionItem.style.backgroundColor = "var(--primary-200)";
               });
               suggestionItem.addEventListener("mouseout", () => {
-                suggestionItem.style.backgroundColor = "var(--neutral-200)";
+                suggestionItem.style.backgroundColor = "var(--secondary-200)";
               });
               suggestionItem.addEventListener("click", () => {
-                input.value = result.name;
+                const coordinates = `${result.center.lat}, ${result.center.lng}`;
+                input.value = coordinates;
                 suggestionContainer.remove();
 
                 // Trigger geocoding and marker placement
@@ -323,8 +323,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize route editing
 
   function initializeRouteEdit() {
-    console.log("Initializing route edit with data:", routeData); // Debug log
-
     if (routeData && routeData.startPoint && routeData.endPoint) {
       const startCoords = parseCoordinates(routeData.startPoint);
       const endCoords = parseCoordinates(routeData.endPoint);
@@ -364,7 +362,4 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchRoute(currentRoute);
     }
   }
-
-  // Initialize the map for editing if we have route data
-  initializeRouteEdit();
 });

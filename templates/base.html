@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %} 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'icons/favicon-32x32.png' %}" type="image/x-icon" />
     <title>{% block head_title %}Walk South West{% endblock %}</title>
 
     <!--prettier-ignore-->
 
     {% load compress %} 
-    {% load static %} 
+   
     {% compress css %}
 
     {% url 'walks' as walks_url %}

@@ -1,32 +1,214 @@
 @use "sass:color";
 @use "../abstracts" as *;
+.home-page {
+  background-color: $color-secondary-100;
+  h2,
+  h3 {
+    text-align: center;
+  }
+}
 
 .hero {
   background: linear-gradient(
       to right,
-      $color-primary-trans-300,
-      $color-primary-trans-300
+      $color-primary-trans-800,
+      $color-primary-trans-800
     ),
     url("../images/coastal-path.jpg") no-repeat center center;
   background-size: cover;
   height: 90vh;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: $color-neutral-200;
   text-align: center;
+  & h1 {
+    color: $color-neutral-200;
+  }
 
-  & > * {
+  & p {
+    font-size: $fs-md;
     max-width: 40ch;
     padding: var(--space-md);
     margin-inline: auto;
+    line-height: 1.7;
   }
 }
 
 .stats-section {
+  color: $color-secondary-500;
   &--wrapper {
-    @include grid-columns;
+    @include grid-columns($gap: $space-lg);
   }
 
+  &--heading {
+    color: $color-secondary-700;
+    margin-block-end: $space-md;
+  }
+
+  &--intro {
+    text-align: center;
+    font-size: $fs-md;
+    color: $color-secondary-500;
+    margin-block-end: $space-xxl;
+    span {
+      font-family: $ff-accent;
+      color: $color-primary-500;
+      font-size: $fs-lg;
+    }
+  }
+  h3 {
+    color: $color-secondary-700;
+    margin-block-end: $space-md;
+  }
+
+  .button-wrapper {
+    margin-block-start: $space-xxl;
+  }
+
+  a {
+    color: $color-primary-400;
+    font-size: $fs-base;
+    position: relative;
+    padding-inline-start: $space-md;
+
+    &:not(:first-child)::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 80%;
+      background-color: $color-primary-500;
+    }
+  }
   &--stat {
     text-align: center;
+    display: block;
+    position: relative;
+
+    box-sizing: border-box;
+    padding-inline-start: $space-lg;
+
+    & p {
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    & span {
+      font-family: $ff-accent;
+      font-size: $fs-lg;
+      display: block;
+    }
+
+    &:not(:first-child)::after {
+      content: "";
+      display: block;
+      height: 70%;
+      width: 1px;
+      background-color: $color-secondary-500;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      transform: translateY(20%);
+
+      @media screen and (max-width: 768px) {
+        height: 70%;
+        width: 1px;
+        top: auto;
+        bottom: -10px;
+        left: 15%;
+        display: none;
+      }
+    }
+  }
+}
+
+.intro-section {
+  &--wrapper {
+    align-items: center;
+    & > * {
+      flex: 1;
+    }
+    @media screen and (max-width: 1084px) {
+      flex-direction: column;
+    }
+  }
+
+  &--img {
+    border-radius: $border-radius;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  &--content {
+    padding-inline: $space-xl;
+    padding-block: $space-xl;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: $fs-md;
+
+    p:has(+ p) {
+      margin-block-end: $space-md;
+    }
+  }
+}
+
+.featured-walks {
+  text-align: center;
+  &--grid {
+    @include grid-columns(330px, $space-xl);
+  }
+
+  &--walk {
+    border-radius: $border-radius;
+    border: 1px solid $color-neutral-200;
+    overflow: hidden;
+    display: grid;
+
+    img {
+      object-fit: cover;
+      aspect-ratio: 3/2;
+      display: relative;
+    }
+  }
+
+  &--content {
+    padding-inline: $space-md;
+    padding-block: $space-xl;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $space-sm;
+
+    a {
+      align-self: flex-start;
+    }
+    p {
+      text-align: left;
+    }
+  }
+
+  &--info {
+    position: absolute;
+    padding: 0.8rem;
+    display: flex;
+    color: $color-neutral-200;
+    gap: 1rem;
+    backdrop-filter: blur(5px);
+    background-color: $color-primary-trans-300;
+    margin: 1rem;
+    border-radius: $border-radius;
+  }
+
+  &--link {
+    display: inline-block;
+    margin-block-start: $space-xxl;
+
+    text-transform: uppercase;
   }
 }

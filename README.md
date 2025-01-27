@@ -225,6 +225,14 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 ![Route through sea](assets/images/route-through-sea.png)
 
 - Ability to drag paths from all points not just start and end points
-- Ability to navigate using map and save a route that way.
+- Ability to live navigate using map and save a route that way.
 - Ability to see recommended walks based on location
 - Ability to filter walks based on difficulty level
+- Add geodjango so maps can be created for both admin (Walks) and user (routes) detail pages
+- Allow multiple image uploads to clouidnary via user form
+- User profile page and avatar
+- Ability for user to comment on admin added walks
+
+## Bugs
+
+- Map loading - first route brings up an 'error fetching route' message. On refresh everything is fine

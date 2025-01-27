@@ -1,20 +1,142 @@
 @use "../abstracts/colours" as *;
 
-body {
-  height: 100vh;
-}
 .main-map {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 6fr;
+  @media screen and (max-width: 1240px) {
+    grid-template-columns: 3fr 5fr;
+    @media screen and (max-width: 630px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 4fr;
+    }
+  }
 }
 
 .stats {
-  background-color: white;
+  padding-block: $space-xl;
+  border-inline-end: $border-primary;
+  overflow-x: auto;
+  @media screen and (max-width: 630px) {
+    border: 0;
+  }
+
+  details {
+    margin-block-end: $space-lg;
+    margin-inline: $space-md;
+    border-bottom: $border-primary;
+    padding-block-end: $space-lg;
+
+    &[open] > summary::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  summary {
+    margin-block-end: $space-md;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "";
+      width: 32px;
+      height: 32px;
+      background: url("../icons/chevron-down.svg");
+      background-size: cover;
+      margin-left: 0.75em;
+      transition: 0.2s;
+    }
+  }
+
+  label {
+    display: block;
+    margin-block-end: 0.5rem;
+  }
+
+  input,
+  textarea {
+    margin-block-end: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: $border-radius-lg;
+    background-color: transparent;
+    padding: 0.6rem;
+
+    &:focus {
+      box-shadow: 0 0 10px $color-primary-trans-300;
+    }
+  }
+  button[type="submit"] {
+    display: block;
+    margin-inline: auto;
+    background-color: $color-primary-400;
+    color: $color-neutral-200;
+    &:hover {
+      background-color: $color-secondary-200;
+      color: $color-secondary-700;
+    }
+  }
 }
 
 #map {
   height: 100%;
   width: 100%;
+  @media screen and (max-width: 630px) {
+    grid-row: 1;
+  }
+}
+
+.route-map {
+  height: 100vh;
+  width: 100%;
+}
+
+.distance-wrapper {
+  justify-content: space-around;
+  // display: none;
+  span {
+    display: block;
+    color: $color-primary-400;
+    font-family: $ff-accent;
+    font-size: $fs-md;
+  }
+}
+
+#route-map {
+  height: 75%;
+  width: 100%;
+}
+
+.map-footer {
+  height: 25%;
+  place-content: center;
+  border-top: $border-primary;
+}
+
+#location-suggestions {
+  position: absolute;
+  z-index: 1000;
+  background-color: $color-neutral-200;
+  border-radius: $border-radius-lg;
+
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.location-suggestions--item {
+  padding: $space-lg;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-primary-400;
+    color: $color-neutral-200;
+  }
 }

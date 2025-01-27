@@ -29,6 +29,7 @@ $link-color-hover: $color-text-interactive-hover;
 $link-color-visited: $color-text-interactive-visited;
 
 $border-radius: 5px;
+$border-radius-lg: 1.2rem;
 
 /* body */
 $body-font-family: $ff-base;
@@ -45,10 +46,4 @@ $body-background-color: $color-background-default;
 // $button-border: 0;
 // $button-border-radius: $border-radius;
 
-.section {
-  padding-block: $section-padding-block;
-}
-
-.mx-auto {
-  margin-inline: auto;
-}
+$border-primary: 1px solid $color-primary-500;

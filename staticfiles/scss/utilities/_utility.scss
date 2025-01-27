@@ -24,3 +24,11 @@
   white-space: nowrap; /* added line */
   border: 0;
 }
+
+.section {
+  padding-block: $section-padding-block;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}

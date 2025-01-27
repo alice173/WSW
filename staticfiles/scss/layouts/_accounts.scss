@@ -6,9 +6,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 
   & > * {
     height: 100vh;
+  }
+  h1 {
+    color: $color-secondary-100;
+
+    margin-block-end: var(--space-md);
   }
 
   main {
@@ -17,26 +23,24 @@
     display: grid;
     place-content: center;
     color: $color-secondary-100;
-    font-weight: 400;
   }
 
   .logo {
     position: fixed;
     top: 0;
     margin: var(--space-md);
-    width: 42px;
     color: $color-secondary-200;
   }
 
   a {
-    // color: color-mix(in hsl, hsl(var(--clr-primary)), white 50%);
+    --link-color: $color-neutral-200;
+    color: var(--link-color);
 
-    padding-block-end: 5px;
     transition: all ease 0.3s;
     &:hover,
     &:focus {
-      color: gray;
-      border-bottom: 1px solid gray;
+      color: $color-accent-100;
+      border-bottom: 1px solid $color-accent-100;
     }
   }
 
@@ -45,6 +49,9 @@
     background-image: url("../images/cliff-view.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    @media screen and (max-width: 630px) {
+      display: none;
+    }
   }
 
   form {
@@ -91,16 +98,27 @@
   }
 
   .log-in--wrapper {
-    // color: var(--clr-light);
-    font-size: var(--fs-sm);
     padding-inline: 6rem;
     transform: translateY(-2%);
+    h2 {
+      color: $color-secondary-100;
+    }
+
+    p {
+      font-size: $fs-md;
+    }
+
     .btn {
       margin-block-start: var(--space-sm);
-      background-color: $color-secondary-200;
+      white-space: nowrap;
       align-self: flex-start;
       font-weight: 600;
-      color: $color-secondary-700;
+    }
+    .btn--outline {
+      &:hover,
+      &:focus {
+        color: $color-secondary-700;
+      }
     }
   }
   ul {

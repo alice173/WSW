@@ -47,14 +47,9 @@ a {
   text-decoration: none;
 }
 
-button {
-  border: 0;
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  color: currentColor;
+button,
+input[type="submit"] {
+  margin: 0;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -62,7 +57,6 @@ h1,
 h2,
 h3,
 h4,
-button,
 input,
 label {
   line-height: 1.1;

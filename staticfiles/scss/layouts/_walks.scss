@@ -1,0 +1,55 @@
+.walks {
+  &--grid {
+    @include grid-columns(350px, $space-md);
+  }
+
+  &--walk {
+    border-radius: $border-radius;
+    border: 1px solid $color-neutral-200;
+    overflow: hidden;
+    display: grid;
+
+    img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+    }
+  }
+
+  &--content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $space-sm;
+  }
+
+  &--img {
+    position: relative;
+    height: 100%;
+  }
+  &--info {
+    position: absolute;
+    padding: 0.8rem;
+    display: flex;
+    color: $color-neutral-200;
+    gap: 1rem;
+    backdrop-filter: blur(5px);
+    background-color: $color-primary-trans-300;
+    margin: 1rem;
+    border-radius: $border-radius;
+  }
+
+  a {
+    padding-block-end: 0.4rem;
+    border-bottom: 1px solid currentColor;
+    color: $color-primary-500;
+    transition: all 0.3s ease-in-out;
+    align-self: flex-start;
+
+    &:hover {
+      color: $color-secondary-400;
+      padding-block-end: 0.5rem;
+    }
+  }
+}

@@ -5,8 +5,11 @@ body {
   font-size: $fs-base;
   line-height: 1.5;
   font-weight: $fw-default;
-  // $body-text-color: $color-text-default;
-  // $body-background-color: $color-background-default;
+  background-color: $color-secondary-100;
+  color: $color-secondary-800;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
@@ -15,18 +18,94 @@ h3,
 h4,
 h5 {
   font-family: $ff-accent;
+  color: $color-secondary-800;
+  text-align: center;
 }
 
-// a {
-//   color: $link-color;
-// }
-// a:is(:hover, :focus) {
-//   color: $link-color-hover;
-// }
+h1 {
+  font-size: $fs-xxl;
+}
+
+h2 {
+  font-size: $fs-xl;
+}
+
+h3 {
+  font-size: $fs-lg;
+}
+
+h4 {
+  font-size: $fs-md;
+}
+
+a {
+  color: $color-secondary-700;
+}
+
+a:is(:hover, :focus) {
+  color: $color-primary-400;
+}
 // a:visited {
-//   color: $link-color-visited;
+//   color: $color-primary-400;
 // }
+
+.active {
+  color: $color-primary-400;
+}
 
 .section {
   padding-block: $section-padding-block;
+}
+
+.logo {
+  font-size: $fs-lg;
+  color: $color-secondary-800;
+  font-family: $ff-accent;
+  letter-spacing: 4.5px;
+}
+
+.button-wrapper {
+  display: flex;
+
+  gap: $space-md;
+  justify-self: center;
+}
+
+/* style the scrollbar */
+
+/* Modern browsers with `scrollbar-*` support */
+
+.scroller {
+  scrollbar-color: $color-primary-300 $color-accent-400;
+}
+
+.messages li {
+  padding: 0;
+  margin: 0;
+}
+
+.link-underline {
+  padding-block-end: 0.4rem;
+  border-bottom: 1px solid currentColor;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    padding-block-end: 0.5rem;
+  }
+
+  &--secondary {
+    color: $color-secondary-500;
+    &:hover {
+      color: $color-primary-400;
+    }
+  }
+}
+
+.box-shadow {
+  box-shadow: rgba(109, 131, 136, 0.4) 0px 8px 24px;
+}
+
+.box-shadow--sm {
+  box-shadow: rgba(109, 131, 136, 0.1) 0px 4px 6px -1px,
+    rgba(109, 131, 136, 0.6) 0px 2px 4px -1px;
 }

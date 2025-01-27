@@ -4,6 +4,28 @@ from django.contrib.auth.models import User
 from .models import Route
 from .forms import RouteForm
 
+"""
+      TestRouteViews is a test case class for testing the route views in the application.
+
+      Methods
+      -------
+      setUp():
+        Sets up the test client, creates a test user, and a test route. Also defines URLs for route creation and editing.
+
+      test_route_create_view_get():
+        Tests the GET request to the route creation view. Verifies that the response status is 200, the correct template is used, and the context contains a RouteForm instance.
+
+      test_route_create_view_post():
+        Tests the POST request to the route creation view. Verifies that the response status is 302 (redirect), and a new route is created in the database.
+
+      test_route_edit_view_get():
+        Tests the GET request to the route editing view. Verifies that the response status is 200, the correct template is used, the context contains a RouteForm instance, and the form instance is the route being edited.
+
+      test_route_edit_view_post():
+        Tests the POST request to the route editing view. Verifies that the response status is 302 (redirect), and the route is updated in the database with the new data.
+      """
+ 
+
 class TestRouteViews(TestCase):
 
     def setUp(self):

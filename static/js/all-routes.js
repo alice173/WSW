@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
           opacity: 0.7,
         }).addTo(routeMap);
 
-        // Adjust map view to include all routes
-        routeMap.fitBounds(polyline.getBounds());
+        // // Adjust map view to include all routes
+        // routeMap.fitBounds(polyline.getBounds());
       })
       .catch((error) => console.error("Error loading saved route:", error));
   }

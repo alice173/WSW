@@ -15,5 +15,4 @@ class WalkDetail(generic.DetailView):
     template_name = 'walks/walk_detail.html'
     context_object_name = 'walk'
 
-    # def get_object(self):
-    #     return get_object_or_404(Walk, pk=self.kwargs.get('pk'))
+

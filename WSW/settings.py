@@ -184,6 +184,9 @@ STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
 
+if 'test' in sys.argv:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )

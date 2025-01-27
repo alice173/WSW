@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
             suggestionContainer.id = "location-suggestions";
             suggestionContainer.style.position = "absolute";
             suggestionContainer.style.zIndex = "1000";
-            suggestionContainer.style.backgroundColor = "white";
+            suggestionContainer.style.backgroundColor = "var(--neutral-200)";
             suggestionContainer.style.border = "1px solid #ddd";
             suggestionContainer.style.maxWidth = `${input.offsetWidth}px`;
 
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 suggestionItem.style.backgroundColor = "#f0f0f0";
               });
               suggestionItem.addEventListener("mouseout", () => {
-                suggestionItem.style.backgroundColor = "white";
+                suggestionItem.style.backgroundColor = "var(--neutral-200)";
               });
               suggestionItem.addEventListener("click", () => {
                 input.value = result.name;

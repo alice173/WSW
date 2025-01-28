@@ -232,7 +232,10 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 - Allow multiple image uploads to clouidnary via user form
 - User profile page and avatar
 - Ability for user to comment on admin added walks
+- Custom 404 page
+- Instructions for the user on using the map
 
 ## Bugs
 
 - Map loading - first route brings up an 'error fetching route' message. On refresh everything is fine
+- Leaflet geocoder suggestions are very slow, taking up to 10 seconds to show suggestions

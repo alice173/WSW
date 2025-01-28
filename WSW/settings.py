@@ -184,8 +184,8 @@ STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
 
-if 'test' in sys.argv:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# if 'test' in sys.argv:
+#     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
@@ -195,9 +195,9 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.rCSSMinFilter',
 ]
-# COMPRESS_JS_FILTERS = [
-#     'compressor.filters.jsmin.JSMinFilter',
-# ]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
 
 
 LIBSASS_OUTPUT_STYLE = 'compressed'

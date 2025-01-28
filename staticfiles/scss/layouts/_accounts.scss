@@ -33,9 +33,7 @@
   }
 
   a {
-    --link-color: $color-neutral-200;
-    color: var(--link-color);
-
+    color: $color-neutral-200;
     transition: all ease 0.3s;
     &:hover,
     &:focus {

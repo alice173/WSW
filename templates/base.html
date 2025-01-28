@@ -4,6 +4,10 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Walk South West - Your companion for exploring the South West Coast Path."
+    />
     <link
       rel="icon"
       href="{% static 'icons/favicon-32x32.png' %}"
@@ -26,9 +30,9 @@
     {% url 'account_logout' as logout_url %}
 
     <link
+      rel="stylesheet"
       type="text/x-scss"
       href="{% static 'scss/styles.scss' %}"
-      rel="stylesheet"
     />
     {% endcompress %}
     <link
@@ -109,6 +113,7 @@
     {% block content %}{% endblock %}
 
     <footer class="main-footer">
+      <a class="logo" href="{% url 'home' %}">WSW</a>
       <nav class="footer-nav flex">
         <ul class="nav__list flex">
           <li class="nav-item">

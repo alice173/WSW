@@ -186,8 +186,6 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 
 ### Use Cases and Reflections:
 
-(Highlight how prompts, such as reverse, question-and-answer or multi-step, were used to support learners with SEND or ALN where relevant.)
-
 - **Aministration/Repetitive tasks:**
 - Reflection: Strategic use of AI allowed me to perform admin tasks quicky and efficiently
 - Examples: I used AI to assist with creation of user stories and then to convert them to a CSV file. AI assisted with writing a python script using Trello's Rest API that created a populated a trello card with description and checklist for each user story
@@ -195,7 +193,7 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
   - Reflection: Strategic use of AI allowed for rapid prototyping, with minor adjustments for alignment with project goals.
   - Examples: Reverse prompts for alternative code solutions and question-answer prompts for resolving specific challenges.
 - **Debugging:**
-  - Reflection: Key interventions included resolving logic errors and enhancing maintainability, with a focus on simplifying complex logic to make it accessible.
+  - Reflection: Key interventions included resolving logic errors and enhancing maintainability.
 - **Performance and UX Optimization:**
   - Reflection: Minimal manual adjustments were needed to apply AI-driven improvements, which enhanced application speed and user experience for all users.
 - **Automated Unit Testing:**
@@ -210,13 +208,12 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 ## Testing Summary
 
 - **Manual Testing:**
-  - **Devices and Browsers Tested:** [List devices and browsers, ensuring testing was conducted with assistive technologies such as screen readers or keyboard-only navigation.]
-  - **Features Tested:** [Summarise features tested manually, e.g., CRUD operations, navigation.]
-  - **Results:** [Summarise testing results, e.g., "All critical features worked as expected, including accessibility checks."]
+  - **Devices and Browsers Tested:** Chrome, Safari and Firefox. Css was edited for safari as some modern css does not work.
+  - **Features Tested:** Crud functionality (view, edit and delete walks), drawing route on map and editing start and end points.
+  - **Results:** Most critical features work as expected - thse that don't are listed under bugs
 - **Automated Testing:**
-  - Tools Used: [Mention any testing frameworks or tools, e.g., Django TestCase.]
-  - Features Covered: [Briefly list features covered by automated tests.]
-  - Adjustments Made: [Describe any manual corrections to AI-generated test cases, particularly for accessibility.]
+  - Tools Used: Django Testcases of forms and views
+  - Features Covered: Forms, get and post requests
 
 ## Future Enhancements
 
@@ -239,3 +236,4 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 
 - Map loading - first route brings up an 'error fetching route' message. On refresh everything is fine
 - Leaflet geocoder suggestions are very slow, taking up to 10 seconds to show suggestions
+- uploading images in edit view results in cloudinary errors

@@ -1,12 +1,55 @@
 # Walk South West
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Project Management](#project-management)
+- [User Stories](#user-stories)
+- [UX Design Process](#ux-design-process)
+- [Database Schema](#database-schema)
+- [Key Features](#key-features)
+  - [Track Walked Parts of the South West Coastal Path](#track-walked-parts-of-the-south-west-coastal-path)
+  - [Admin can add walks to website](#admin-can-add-walks-to-website)
+  - [Authenticated Users](#authenticated-users)
+- [Maps](#maps)
+  - [GeoJSON](#geojson)
+  - [ORS](#ors)
+- [Technologies Used](#technologies-used)
+  - [Languages](#languages)
+  - [Frameworks and Libraries](#frameworks-and-libraries)
+- [Deployment](#deployment)
+- [AI Implementation and Orchestration](#ai-implementation-and-orchestration)
+- [Testing Summary](#testing-summary)
+- [Future Enhancements](#future-enhancements)
+- [Bugs](#bugs)
+
 ## Overview
 
 An app to keep track of how much of the South West coastal path the user has walked.
 
-### User Stories
+### Project Management
 
 - [Trello Kanban Board](https://trello.com/invite/b/6745eaca0a76ea45ef8826d6/ATTId728c7a61a787b417503eafe40cf68feC19FDF22/wsw)
+
+In this project, I used the MoSCoW prioritization method to categorize and prioritize the features and requirements. MoSCoW stands for Must have, Should have, Could have, and Won't have. This method helps in managing the scope of the project by clearly defining the priority of each feature. Here is a brief description of each label:
+
+- **Must have:**
+
+These are the critical features that are essential for the project to be successful. Without these features, the project would be considered incomplete or a failure. They are non-negotiable and must be included in the final product.
+
+- **Should have:**
+
+These features are important but not critical. They add significant value to the project and should be included if possible. However, the project can still be considered successful without them.
+
+- **Could have:**
+
+These are desirable features that could enhance the project but are not essential. They are often considered as nice-to-have features and can be included if time and resources permit.
+
+- **Won't have:**
+
+These features are agreed to be out of scope for the current project. They might be considered for future releases but are not included in the current development cycle
+
+### User Stories
 
 <details>
   <summary>User Authentication</summary>
@@ -63,6 +106,8 @@ An app to keep track of how much of the South West coastal path the user has wal
 </details>
 
 **Design Rationale:**
+
+I designed the site to be clean and minimal with a clear user journey.
 
 #### Colour Pallete
 
@@ -138,13 +183,30 @@ Logged in users can see stats relating to the SWCP. Unregistered/logged out user
 
 </details>
 
+### Add a walk to a map
+
+Users can use a map or search via the form to add their walks. Typing in 3 letters will bring up Leaflet geocode suggestions which will convert to coordinates.
+
+The markers are draggable and can be changed. Currently they are only draggable at the start and end points, dragging from any part of the polyline is a feature I would like to add.
+
+![form](assets/images/create-route.png)
+![suggestions](assets/images/suggestions.png)
+
+### Keep track of walked parts of SWCP
+
+Users can see a list of all the routes they have entered and edit/delete them
+![walks](assets/images/my%20walks.png)
+
+Users can also see a visual representation of how much of the path they have walked on a map(marked in yellow)
+![map](assets/images/map.png)
+
 ## Maps
 
 To integate maps into the app I used [leaflet](https://leafletjs.com/). In order to draw a polyline on the map that traced an actual walking path I needed another layer.
 
 #### GeoJSON
 
-I attempted to use a geojson file of the coastal path found on the plymouth city council [website](https://www.data.gov.uk/dataset/105a4ca6-9b83-42c7-8c08-f0f1a21dec00/south-west-coast-path). However I struggled to get it to work and after investigation relaised taht it uses a coordinate reference system (CRS) that is not the default WGS84 (latitude, longitude) used by Leaflet. The CRS in this file is EPSG:27700, which is the British National Grid.
+I attempted to use a geojson file of the coastal path found on the plymouth city council [website](https://www.data.gov.uk/dataset/105a4ca6-9b83-42c7-8c08-f0f1a21dec00/south-west-coast-path). However, I encountered difficulties getting it to work. Upon investigation, I realised that the file uses a coordinate reference system (CRS) different from the default WGS84 (latitude, longitude) used by Leaflet. The CRS in this file is EPSG:27700, which corresponds to the British National Grid.
 
 While it should be possible to convert the data my inital attempts were unsuccessful. This is something I would like to return to.
 
@@ -174,7 +236,7 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 - **High-Level Deployment Steps:**
   1. Add a requirements.txt file listing all Python dependencies
   2. Create a Procfile specifying how to run the application
-  3. Make sure your application is configured to use environment variables for sensitive information
+  3. Make sure application is configured to use environment variables for sensitive information
 - **Verification and Validation:**
   - Manually test all critical application routes and features after deployment
   - Check application logs with heroku logs --tail for any deployment or runtime errors
@@ -193,12 +255,15 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
   - Reflection: Strategic use of AI allowed for rapid prototyping, with minor adjustments for alignment with project goals.
   - Examples: Reverse prompts for alternative code solutions and question-answer prompts for resolving specific challenges.
 - **Debugging:**
-  - Reflection: Key interventions included resolving logic errors and enhancing maintainability.
+  - Reflection: I ran all error messages through copilot in order to solve them.
+  - Used extensively for javascript debugging but had to check the code carefully as some other feature would often break as a result of the intevention
 - **Performance and UX Optimization:**
-  - Reflection: Minimal manual adjustments were needed to apply AI-driven improvements, which enhanced application speed and user experience for all users.
-- **Automated Unit Testing:**
 
-  - Reflection: Adjustments were made to improve test coverage and ensure alignment with functionality. Prompts were used to generate inclusive test cases that considered edge cases for accessibility.
+  - Used AI to bulk add attributes to images (ie lezy loading)
+
+- **Testing:**
+
+  - AI Allowed me to easily and quickly write test for forms and views. While it sometimes used the wrong model within the test it still saved ma huge amount of time and deepend my understanding of Django testing.
 
 - **Overall Impact:**
   - AI tools streamlined repetitive tasks, enabling focus on high-level development.
@@ -231,9 +296,11 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 - Ability for user to comment on admin added walks
 - Custom 404 page
 - Instructions for the user on using the map
+- Improve perfomance
+- Log in using google
 
 ## Bugs
 
 - Map loading - first route brings up an 'error fetching route' message. On refresh everything is fine
 - Leaflet geocoder suggestions are very slow, taking up to 10 seconds to show suggestions
-- uploading images in edit view results in cloudinary errors
+- Uploading images in edit view results in cloudinary errors

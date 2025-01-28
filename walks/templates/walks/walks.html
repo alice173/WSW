@@ -11,6 +11,7 @@
       <div class="walks--walk">
         <div class="walks--img">
           <img
+            aria-label="featured image of walk"
             loading="lazy"
             src="{{ walk.featured_img.url }}"
             alt="{{ walk.title }}"
@@ -26,6 +27,7 @@
           <p>{{ walk.content_excerpt }}</p>
           <a
             class="link-underline link-underline--secondary"
+            aria-label="click to view walk"
             href="{% url 'walk_detail' walk.slug %}"
             >View Walk</a
           >

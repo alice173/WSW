@@ -53,10 +53,6 @@ a:is(:hover, :focus) {
   color: $color-primary-400;
 }
 
-.section {
-  padding-block: $section-padding-block;
-}
-
 .logo {
   font-size: $fs-lg;
   color: $color-secondary-800;
@@ -108,4 +104,32 @@ a:is(:hover, :focus) {
 .box-shadow--sm {
   box-shadow: rgba(109, 131, 136, 0.1) 0px 4px 6px -1px,
     rgba(109, 131, 136, 0.6) 0px 2px 4px -1px;
+}
+
+//layout
+$grid-gap: $space-md;
+$flex-group-gap: $space-sm;
+
+$hero-padding-block: clamp(15rem, 15vh, 20rem);
+$section-padding-block: clamp(3rem, 10vh, 7rem);
+$card-body-padding: clamp(2rem, 3.5vw, 5rem);
+
+$container-inline-margin: $space-sm;
+$container-max-width: 60rem;
+$container-max-width-narrow: 40rem;
+$container-max-width-wide: 75rem;
+
+/* contextual colours */
+
+$border-radius: 5px;
+$border-radius-lg: 1.2rem;
+
+/* body */
+$body-font-family: $ff-base;
+$body-font-size: $fs-base;
+
+$border-primary: 1px solid $color-primary-500;
+
+.section {
+  padding-block: $section-padding-block;
 }

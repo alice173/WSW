@@ -31,6 +31,8 @@ An app to keep track of how much of the South West coastal path the user has wal
 
 - [Trello Kanban Board](https://trello.com/invite/b/6745eaca0a76ea45ef8826d6/ATTId728c7a61a787b417503eafe40cf68feC19FDF22/wsw)
 
+![Trello Board](assets/images/trello.png)
+
 In this project, I used the MoSCoW prioritization method to categorize and prioritize the features and requirements. MoSCoW stands for Must have, Should have, Could have, and Won't have. This method helps in managing the scope of the project by clearly defining the priority of each feature. Here is a brief description of each label:
 
 - **Must have:**
@@ -263,7 +265,7 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
 
 - **Testing:**
 
-  - AI Allowed me to easily and quickly write test for forms and views. While it sometimes used the wrong model within the test it still saved ma huge amount of time and deepend my understanding of Django testing.
+  - AI Allowed me to easily and quickly write test for forms and views. While it sometimes used the wrong model within the test it still saved ma huge amount of time and deepened my understanding of Django testing.
 
 - **Overall Impact:**
   - AI tools streamlined repetitive tasks, enabling focus on high-level development.
@@ -277,8 +279,13 @@ This combined with the L.Routing.control function from leaflet-routing-machine a
   - **Features Tested:** Crud functionality (view, edit and delete walks), drawing route on map and editing start and end points.
   - **Results:** Most critical features work as expected - thse that don't are listed under bugs
 - **Automated Testing:**
+
   - Tools Used: Django Testcases of forms and views
   - Features Covered: Forms, get and post requests
+
+- **Html testing**
+  Site was run through W3C HTMl checker and adjustments made:
+  ![html](assets/images/html-validation.png)
 
 ## Future Enhancements
 

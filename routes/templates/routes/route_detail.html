@@ -5,9 +5,11 @@
 <main class="route-detail">
   <div class="container">
     <h1>{{ route.title }}</h1>
+    {% if route.route_img %}
     <div class="route-detail--img">
       <img src="{{ route.route_img.url }}" alt="{{ route.title }}" />
     </div>
+    {% endif %}
     <div class="route-detail--details">
       <p><strong>Date: </strong> {{ route.date }}</p>
       <p><strong>Start Point: </strong> {{ route.start_point }}</p>

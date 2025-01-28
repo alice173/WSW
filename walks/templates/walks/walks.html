@@ -10,7 +10,11 @@
       {% for walk in walks %}
       <div class="walks--walk">
         <div class="walks--img">
-          <img src="{{ walk.featured_img.url }}" alt="{{ walk.title }}" />
+          <img
+            loading="lazy"
+            src="{{ walk.featured_img.url }}"
+            alt="{{ walk.title }}"
+          />
         </div>
         <div class="walks--info">
           <p>{{ walk.distance }} miles</p>

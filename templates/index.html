@@ -29,7 +29,8 @@
       <img
         src="{% static 'images/coast-path-sign.webp' %}"
         alt="A hiker on the South West Coast Path"
-        class="intro-section--img"/></div>
+        class="intro-section--img"
+        loading="lazy"/></div>
       <div class="intro-section--content">
         <p class="intro-section--intro">
           Welcome to Walk Sout West - your companion for exploring the magnificent South West Coastal Path.
@@ -100,7 +101,7 @@
       <!-- Loop through the featured walks -->
       {% for walk in walks %}
       <div class="featured-walks--walk box-shadow--small">
-        <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" />
+        <img src="{{ walk.featured_img }}" alt="{{ walk.title }}" loading="lazy" />
         <div class="walks--info">
           <p>{{ walk.distance }} miles</p>
           <p>|</p>

@@ -200,9 +200,9 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.rCSSMinFilter',
 ]
-# COMPRESS_JS_FILTERS = [
-#     'compressor.filters.jsmin.JSMinFilter',
-# ]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
 
 
 LIBSASS_OUTPUT_STYLE = 'compressed'

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% load static %} 
+    {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="{% static 'icons/favicon-32x32.png' %}" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="{% static 'icons/favicon-32x32.png' %}"
+      type="image/x-icon"
+    />
     <title>{% block head_title %}Walk South West{% endblock %}</title>
 
     <!--prettier-ignore-->
@@ -39,12 +43,10 @@
       <button class="nav-toggle" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
-      <ul class="nav__list  flex">
-        <li class="nav-item"></li>
-          <button class="nav-close" aria-label="Close navigation">
-            <i class="fas fa-times"></i>
-          </button>
-        </li>
+      <button class="nav-close" aria-label="Close navigation">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="nav__list flex">
         <li class="nav-item">
           <a
             href="{% url 'walks' %}"
@@ -176,7 +178,6 @@
         Walk South West
       </p>
     </footer>
-    
   </body>
   <script src="{% static 'js/navigation.js' %}"></script>
 </html>

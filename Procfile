@@ -1,1 +1,1 @@
-web: gunicorn WSW.wsgi
+web: python manage.py collectstatic --noinput && python manage.py compress && gunicorn WSW.wsgi
